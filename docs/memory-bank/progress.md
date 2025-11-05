@@ -97,6 +97,49 @@
 
 ## What's Left to Build
 
+### ✅ Block B, PR #6: Context Composition Engine (COMPLETED)
+
+1. **Context Assembler** (`src/context/assembler.py`)
+   - Dynamic token allocation (new chat: all to memory; grows to 60% history cap)
+   - Hybrid retrieval (FAISS + recency + FTS) with configurable weights
+   - MMR (Maximal Marginal Relevance) for diversity
+   - Retrieval decision logging for auditability
+
+2. **Context Filters** (`src/context/filters.py`)
+   - Recency decay with exponential decay (tau = 7 days)
+   - Hybrid score computation (FAISS 0.6, recency 0.3, FTS 0.1)
+   - Filtering by score threshold, topic overlap, max per event/topic
+
+3. **Integration** (`src/interface/tutor_chat.py`)
+   - Integrated assembler into chat flow
+   - Extracts session topics for filtering
+   - Composes context before each tutor reply
+
+4. **ChunkRecord Model** (`src/models/base.py`)
+   - Added ChunkRecord Pydantic model for chunk storage
+
+5. **Testing** (`tests/`)
+   - Unit tests for filters (13 tests)
+   - Unit tests for assembler (6 tests)
+   - All tests passing
+
+### ✅ Block B, PR #5: Tutor Chat Interface (TUI) (COMPLETED)
+
+1. **Chat Interface** (`src/interface/tutor_chat.py`)
+   - Interactive TUI with typer + rich
+   - Session management (start, resume, list)
+   - Upload handling with immediate summarization
+   - LLM-suggested session titles
+
+2. **Chat Utilities** (`src/interface/utils.py`)
+   - History building with token budgeting
+   - Transcript stitching for summarization
+
+3. **CLI** (`src/cli/chat.py`)
+   - `chat start` - Start new session
+   - `chat resume` - Resume existing session
+   - `chat list` - List recent sessions
+
 ### ✅ Block B, PR #4: AI Orchestration Layer (COMPLETED)
 
 1. **Model Router** (`src/services/ai/router.py`)
@@ -197,15 +240,15 @@
 
 ### Overall Progress
 - **Block A**: 3/3 PRs complete (100%)
-- **Block B**: 1/3 PRs complete (33%)
+- **Block B**: 3/3 PRs complete (100%)
 - **Block C**: 0/2 PRs complete (0%)
 - **Block D**: 0/2 PRs complete (0%)
-- **Total**: 4/10 PRs complete (40%)
+- **Total**: 6/10 PRs complete (60%)
 
 ### Timeline
 - **Block A**: ~30/30 hours complete (100%)
-- **Block B**: ~12/40 hours complete (30%)
-- **Total**: ~42/140 hours complete (30%)
+- **Block B**: ~40/40 hours complete (100%)
+- **Total**: ~70/140 hours complete (50%)
 
 ## Known Issues
 

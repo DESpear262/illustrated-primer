@@ -231,3 +231,37 @@ class NudgeLog(BaseModel):
     # Metadata
     metadata: dict = Field(default_factory=dict, description="Additional JSON metadata")
 
+
+class ChunkRecord(BaseModel):
+    """
+    Represents a text chunk derived from an Event, with its embedding.
+    
+    Chunks are stored separately to allow for fine-grained retrieval and
+    to manage embeddings for potentially large events.
+    """
+    model_config = ConfigDict(
+        json_encoders={datetime: lambda v: v.isoformat()},
+        from_attributes=True,
+    )
+    
+    # Core identifiers
+    id: Optional[int] = Field(None, description="Database primary key")
+    chunk_id: str = Field(..., description="Unique chunk identifier (UUID)")
+    event_id: str = Field(..., description="Foreign key to the parent Event")
+    chunk_index: int = Field(..., description="Order of the chunk within its parent event")
+    
+    # Content
+    text: str = Field(..., description="The text content of the chunk")
+    topics: List[str] = Field(default_factory=list, description="List of topic identifiers for this chunk")
+    skills: List[str] = Field(default_factory=list, description="List of skill identifiers for this chunk")
+    
+    # Embedding and retrieval
+    embedding: Optional[bytes] = Field(None, description="Serialized embedding vector (FAISS format)")
+    embedding_id: Optional[int] = Field(None, description="FAISS index ID for this embedding")
+    
+    # Timestamps
+    created_at: Optional[datetime] = Field(None, description="Chunk creation timestamp")
+    
+    # Metadata
+    metadata: dict = Field(default_factory=dict, description="Additional JSON metadata")
+

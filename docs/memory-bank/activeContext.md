@@ -2,9 +2,27 @@
 
 ## Current Work Focus
 
-**Block B: AI Tutor Chat System - PR #4: AI Orchestration Layer** ✅ **COMPLETED**
+**Block B: AI Tutor Chat System - PR #6: Context Composition Engine** ✅ **COMPLETED**
 
 ## Recent Changes
+
+### Completed (PR #6)
+1. ✅ Created ContextAssembler with dynamic token allocation (new chat: all to memory; grows to 60% history cap)
+2. ✅ Implemented hybrid retrieval (FAISS + recency + FTS) with configurable weights
+3. ✅ Added recency decay with exponential decay (tau = 7 days, configurable)
+4. ✅ Implemented MMR (Maximal Marginal Relevance) for diversity (lambda = 0.7, configurable)
+5. ✅ Added filtering by score threshold, topic overlap, max per event/topic
+6. ✅ Integrated assembler into chat flow for context composition
+7. ✅ Added ChunkRecord model to base.py
+8. ✅ Created comprehensive unit tests for filters and assembler (19 new tests, all passing)
+
+### Completed (PR #5)
+1. ✅ Implemented text-based TUI using typer + rich (`src/cli/chat.py`, `src/interface/tutor_chat.py`)
+2. ✅ Added conversational history buffer with token budgeting (`src/interface/utils.py`)
+3. ✅ Logged each turn as `Event` with `metadata.session_id` and `turn_index`
+4. ✅ Displayed loading indicators and summaries; summarize on exit and on upload
+5. ✅ Implemented session list and resume
+6. ✅ LLM-suggested session title based on first interaction
 
 ### Completed (PR #4)
 1. ✅ Created ModelRouter with task-based routing (SUMMARIZE_EVENT, CLASSIFY_TOPICS, UPDATE_SKILL, CHAT_REPLY)
@@ -56,16 +74,13 @@
 
 ## Next Steps
 
-### Immediate Next Task: Block B, PR #5 - Tutor Chat Interface (TUI)
-**Prerequisites**: PR #4 complete ✅  
-**Impact**: Creates interactive session layer for student dialogue and logging
-
-#### Tasks:
-- [ ] Implement text-based TUI using typer + rich
-- [ ] Add conversational history buffer
-- [ ] Log each turn as Event
-- [ ] Display loading indicators and summaries
-- [ ] Implement session save/resume
+### Completed (PR #5)
+1. ✅ Implemented text-based TUI using typer + rich (`src/cli/chat.py`, `src/interface/tutor_chat.py`)
+2. ✅ Added conversational history buffer with token budgeting (`src/interface/utils.py`)
+3. ✅ Logged each turn as `Event` with `metadata.session_id` and `turn_index`
+4. ✅ Displayed loading indicators and summaries; summarize on exit and on upload
+5. ✅ Implemented session list and resume
+6. ✅ LLM-suggested session title based on first interaction
 
 ## Active Decisions
 
@@ -89,8 +104,8 @@ None - Block A complete; proceeding to Block B
 
 ### Block B: AI Tutor Chat System
 - ✅ PR #4: AI Orchestration Layer (COMPLETED)
-- ⏳ PR #5: Tutor Chat Interface (TUI) (NEXT)
-- ⏳ PR #6: Context Composition Engine
+- ✅ PR #5: Tutor Chat Interface (TUI) (COMPLETED)
+- ✅ PR #6: Context Composition Engine (COMPLETED)
 
 ### Block C: Transcript Ingestion Pipeline
 - ⏳ PR #7: Transcript Importer

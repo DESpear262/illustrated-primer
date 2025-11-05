@@ -1,0 +1,2 @@
+"""Context composition package for AI Tutor Proof of Concept."""
+

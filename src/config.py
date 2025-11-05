@@ -76,3 +76,25 @@ DEFAULT_CONTEXT_BUDGET: int = 32000  # Conservative default
 MAX_RETRIES: int = 3
 REQUEST_TIMEOUT: int = 60  # seconds
 
+# Chat configuration
+CHAT_HISTORY_TOKENS: int = int(os.getenv("AI_TUTOR_CHAT_HISTORY_TOKENS", "4000"))
+CHAT_MAX_TURNS: int = int(os.getenv("AI_TUTOR_CHAT_MAX_TURNS", "200"))
+CHAT_AUTOSUMMARIZE: bool = os.getenv("AI_TUTOR_CHAT_AUTOSUMMARIZE", "1") not in ("0", "false", "False")
+CHAT_STREAM: bool = os.getenv("AI_TUTOR_CHAT_STREAM", "1") not in ("0", "false", "False")
+CHAT_SPINNER_STYLE: str = os.getenv("AI_TUTOR_CHAT_SPINNER_STYLE", "dots")
+CHAT_AUTOSAVE_INTERVAL_S: int = int(os.getenv("AI_TUTOR_CHAT_AUTOSAVE_INTERVAL_S", "30"))
+
+# Context composition configuration
+CONTEXT_MAX_HISTORY_SHARE: float = float(os.getenv("AI_TUTOR_CONTEXT_MAX_HISTORY_SHARE", "0.60"))
+CONTEXT_MIN_MEMORY_TOKENS: int = int(os.getenv("AI_TUTOR_CONTEXT_MIN_MEMORY_TOKENS", "3000"))
+CONTEXT_TOP_K: int = int(os.getenv("AI_TUTOR_CONTEXT_TOP_K", "24"))
+CONTEXT_MAX_CHUNKS_PER_EVENT: int = int(os.getenv("AI_TUTOR_CONTEXT_MAX_CHUNKS_PER_EVENT", "3"))
+CONTEXT_MMR_LAMBDA: float = float(os.getenv("AI_TUTOR_CONTEXT_MMR_LAMBDA", "0.7"))
+CONTEXT_RECENCY_TAU_DAYS: float = float(os.getenv("AI_TUTOR_RECENCY_TAU_DAYS", "7.0"))
+CONTEXT_HYBRID_WEIGHT_FAISS: float = float(os.getenv("AI_TUTOR_HYBRID_WEIGHT_FAISS", "0.6"))
+CONTEXT_HYBRID_WEIGHT_RECENCY: float = float(os.getenv("AI_TUTOR_HYBRID_WEIGHT_RECENCY", "0.3"))
+CONTEXT_HYBRID_WEIGHT_FTS: float = float(os.getenv("AI_TUTOR_HYBRID_WEIGHT_FTS", "0.1"))
+CONTEXT_MIN_SCORE_THRESHOLD: float = float(os.getenv("AI_TUTOR_CONTEXT_MIN_SCORE_THRESHOLD", "0.25"))
+CONTEXT_RERANK: bool = os.getenv("AI_TUTOR_RERANK", "0") not in ("0", "false", "False")
+CONTEXT_REDACT: bool = os.getenv("AI_TUTOR_REDACT", "0") not in ("0", "false", "False")
+
