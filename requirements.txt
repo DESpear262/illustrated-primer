@@ -1,0 +1,9 @@
+pydantic
+openai
+faiss-cpu
+networkx
+typer
+rich
+apscheduler
+pytest
+
