@@ -241,8 +241,8 @@ def test_fts_search():
         cursor.execute("""
             SELECT e.event_id, e.content
             FROM events e
-            JOIN events_fts fts ON e.id = fts.rowid
-            WHERE fts MATCH 'derivatives'
+            JOIN events_fts ON e.id = events_fts.rowid
+            WHERE events_fts MATCH 'derivatives'
         """)
         rows = cursor.fetchall()
         

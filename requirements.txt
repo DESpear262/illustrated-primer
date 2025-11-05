@@ -1,9 +1,11 @@
 pydantic
 openai
 faiss-cpu
+numpy
 networkx
 typer
 rich
 apscheduler
 pytest
+tiktoken
 

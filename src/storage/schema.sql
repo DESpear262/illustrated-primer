@@ -165,3 +165,24 @@ CREATE TRIGGER IF NOT EXISTS topics_update_timestamp AFTER UPDATE ON topics BEGI
     UPDATE topics SET updated_at = CURRENT_TIMESTAMP WHERE id = new.id;
 END;
 
+-- Event chunks table: stores chunked text and embeddings per event
+CREATE TABLE IF NOT EXISTS event_chunks (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    chunk_id TEXT UNIQUE NOT NULL,
+    event_id TEXT NOT NULL,
+    chunk_index INTEGER NOT NULL,
+    text TEXT NOT NULL,
+    topics TEXT NOT NULL DEFAULT '[]',  -- JSON array of topic identifiers
+    skills TEXT NOT NULL DEFAULT '[]',  -- JSON array of skill identifiers
+    embedding BLOB,                    -- Serialized embedding vector
+    embedding_id INTEGER,              -- FAISS index ID for this chunk
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE
+);
+
+-- Indexes for event_chunks
+CREATE INDEX IF NOT EXISTS idx_event_chunks_event_id ON event_chunks(event_id);
+CREATE INDEX IF NOT EXISTS idx_event_chunks_chunk_index ON event_chunks(chunk_index);
+CREATE INDEX IF NOT EXISTS idx_event_chunks_embedding_id ON event_chunks(embedding_id);
+CREATE INDEX IF NOT EXISTS idx_event_chunks_topics ON event_chunks(topics);
+

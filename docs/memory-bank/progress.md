@@ -6,6 +6,31 @@
 
 ### ✅ Block A, PR #2: Database I/O Layer (COMPLETED)
 
+### ✅ Block A, PR #3: Vector Store & Embedding Pipeline (COMPLETED)
+
+1. **Schema Update** (`src/storage/schema.sql`)
+   - Added `event_chunks` table for multi-chunk events and embeddings
+
+2. **FAISS Index** (`src/retrieval/faiss_index.py`)
+   - Flat IP index with cosine via normalization
+   - Add/search/persist utilities
+
+3. **Embedding Pipeline** (`src/retrieval/pipeline.py`)
+   - Token-aware (tiktoken) or char-heuristic chunking with overlap
+   - Batched embedding pipeline and SQLite upsert for chunks
+   - Index persistence to disk
+
+4. **CLI** (`src/cli/index.py`, `src/cli/main.py`)
+   - `index build`, `index status`, `index search`
+
+5. **Config** (`src/config.py`)
+   - Added CHUNK_TOKENS/OVERLAP, BATCH_EMBED_SIZE, USE_TIKTOKEN flags
+
+6. **Tests** (`tests/`)
+   - Unit tests for FAISS and chunking
+   - Integration tests for pipeline and hybrid retrieval
+   - All tests passing
+
 1. **Database I/O Layer** (`src/storage/db.py`)
    - Database context manager with transaction safety
    - CRUD operations for all entities
@@ -72,15 +97,7 @@
 
 ## What's Left to Build
 
-### 🔴 Block A: Core Data Infrastructure (IN PROGRESS)
-
-#### PR #3: Vector Store & Embedding Pipeline (NEXT)
-- [ ] FAISS index integration
-- [ ] Embedding generation pipeline
-- [ ] Batch embed/update operations
-- [ ] Nearest-neighbor search API
-- [ ] Hybrid retriever (FAISS + SQL filters)
-- [ ] Unit and integration tests
+### 🔴 Block A: Core Data Infrastructure (COMPLETED)
 
 ### 🟢 Block B: AI Tutor Chat System
 
@@ -146,15 +163,15 @@
 ## Current Status
 
 ### Overall Progress
-- **Block A**: 2/3 PRs complete (67%)
+- **Block A**: 3/3 PRs complete (100%)
 - **Block B**: 0/3 PRs complete (0%)
 - **Block C**: 0/2 PRs complete (0%)
 - **Block D**: 0/2 PRs complete (0%)
-- **Total**: 2/10 PRs complete (20%)
+- **Total**: 3/10 PRs complete (30%)
 
 ### Timeline
-- **Block A**: ~18/30 hours complete (60%)
-- **Total**: ~18/140 hours complete (13%)
+- **Block A**: ~30/30 hours complete (100%)
+- **Total**: ~30/140 hours complete (21%)
 
 ## Known Issues
 

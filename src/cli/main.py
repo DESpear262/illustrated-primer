@@ -8,12 +8,14 @@ import typer
 from rich.console import Console
 
 from src.cli import db as db_cli
+from src.cli import index as index_cli
 
 app = typer.Typer(help="AI Tutor Proof of Concept CLI")
 console = Console()
 
 # Add subcommands
 app.add_typer(db_cli.app, name="db", help="Database management commands")
+app.add_typer(index_cli.app, name="index", help="Index management commands")
 
 
 @app.command()

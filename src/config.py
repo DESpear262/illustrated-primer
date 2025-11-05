@@ -62,7 +62,11 @@ DB_PATH: Path = get_database_path()
 FAISS_INDEX_PATH: Path = get_faiss_index_path()
 
 # Embedding configuration
-EMBEDDING_DIMENSION: int = 1536  # text-embedding-3-small dimension
+EMBEDDING_DIMENSION: int = int(os.getenv("AI_TUTOR_EMBED_DIM", "1536"))  # default matches text-embedding-3-small
+USE_TIKTOKEN: bool = os.getenv("AI_TUTOR_USE_TIKTOKEN", "1") not in ("0", "false", "False")
+CHUNK_TOKENS: int = int(os.getenv("AI_TUTOR_CHUNK_TOKENS", "200"))
+CHUNK_OVERLAP_TOKENS: int = int(os.getenv("AI_TUTOR_CHUNK_OVERLAP", "50"))
+BATCH_EMBED_SIZE: int = int(os.getenv("AI_TUTOR_BATCH_EMBED_SIZE", "64"))
 
 # Context window configuration
 MAX_CONTEXT_TOKENS: int = 128000  # gpt-4o context window

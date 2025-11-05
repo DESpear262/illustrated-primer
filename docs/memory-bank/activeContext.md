@@ -2,19 +2,18 @@
 
 ## Current Work Focus
 
-**Block A: Core Data Infrastructure - PR #2: Database I/O Layer** ✅ **COMPLETED**
+**Block A: Core Data Infrastructure - PR #3: Vector Store & Embedding Pipeline** ✅ **COMPLETED**
 
 ## Recent Changes
 
-### Completed (PR #2)
-1. ✅ Created Database context manager with connection management
-2. ✅ Implemented CRUD operations for all entities (Event, SkillState, TopicSummary, Goal, Commitment, NudgeLog)
-3. ✅ Created query wrappers for filtering by topic, time, skill, and event type
-4. ✅ Implemented FTS5 full-text search API
-5. ✅ Created persistence helpers for SkillState updates with evidence
-6. ✅ Implemented database health check utilities
-7. ✅ Created minimal CLI structure with `db check` command
-8. ✅ Created comprehensive unit and integration tests
+### Completed (PR #3)
+1. ✅ Added `event_chunks` table for chunk storage and embeddings
+2. ✅ Implemented FAISS index ops (build/search/persist) with cosine similarity
+3. ✅ Implemented chunking and embedding pipeline with batching and overlap
+4. ✅ Added CLI commands: `index build`, `index status`, `index search`
+5. ✅ Added tiktoken support and config flags; sensible defaults applied
+6. ✅ Added unit/integration tests for FAISS, pipeline, and hybrid retrieval
+7. ✅ Adjusted validation and FTS query aliasing for test reliability
 
 ### Completed (PR #1)
 1. ✅ Created Pydantic schemas for all entities:
@@ -48,24 +47,15 @@
 
 ## Next Steps
 
-### Immediate Next Task: Block A, PR #3 - Vector Store & Embedding Pipeline
-**Prerequisites**: PR #2 complete ✅  
-**Time**: 12 hours  
-**Impact**: Enables semantic retrieval and context windowing for LLM interactions
+### Immediate Next Task: Block B, PR #4 - AI Orchestration Layer
+**Prerequisites**: Block A complete ✅  
+**Impact**: Creates modular LLM routing and orchestration layer
 
 #### Tasks:
-- [ ] Integrate FAISS index
-- [ ] Store chunk embeddings for sessions and transcripts
-- [ ] Add batch embed/update pipeline using OpenAI embeddings
-- [ ] Implement nearest-neighbor search API
-- [ ] Build hybrid retriever (FAISS + SQL filters)
-
-#### Files to Create:
-- `src/retrieval/faiss_index.py` - FAISS index operations
-- `src/retrieval/pipeline.py` - Embedding pipeline
-
-#### Files to Modify:
-- `src/storage/db.py` - Add embedding metadata field (if needed)
+- [ ] Implement model routing registry (nano/classifier/4o)
+- [ ] Standardized prompt interface
+- [ ] Retry, rate limiting, and error handling
+- [ ] Summarization and classification tool functions
 
 ## Active Decisions
 
@@ -78,14 +68,14 @@
 
 ## Current Blockers
 
-None - PR #1 is complete and ready for PR #2
+None - Block A complete; proceeding to Block B
 
 ## Implementation Status
 
 ### Block A: Core Data Infrastructure
 - ✅ PR #1: Define Data Models and Schemas (COMPLETED)
-- ⏳ PR #2: Database I/O Layer (NEXT)
-- ⏳ PR #3: Vector Store & Embedding Pipeline
+- ✅ PR #2: Database I/O Layer (COMPLETED)
+- ✅ PR #3: Vector Store & Embedding Pipeline (COMPLETED)
 
 ### Block B: AI Tutor Chat System
 - ⏳ PR #4: AI Orchestration Layer
