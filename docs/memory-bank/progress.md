@@ -97,6 +97,39 @@
 
 ## What's Left to Build
 
+### ✅ Block B, PR #4: AI Orchestration Layer (COMPLETED)
+
+1. **Model Router** (`src/services/ai/router.py`)
+   - Task-based routing (SUMMARIZE_EVENT, CLASSIFY_TOPICS, UPDATE_SKILL, CHAT_REPLY)
+   - Configurable routes with fallback chains
+   - ModelRoute with token budgets and capabilities
+
+2. **AI Client** (`src/services/ai/client.py`)
+   - OpenAI API integration with retry and rate limiting
+   - Token counting and truncation
+   - Error categorization and handling
+   - Structured output parsing
+
+3. **Prompt Templates** (`src/services/ai/prompts.py`)
+   - System prompts for all tasks
+   - Prompt building functions
+   - JSON response parsing with schema validation
+
+4. **Utilities** (`src/services/ai/utils.py`)
+   - Retry with exponential backoff
+   - Rate limiter (token bucket)
+   - Token counting (tiktoken or heuristic)
+   - Context truncation utilities
+
+5. **CLI** (`src/cli/ai.py`)
+   - `ai routes` - Show routing configuration
+   - `ai test` - Test AI functionality (summarize, classify, chat)
+
+6. **Testing** (`tests/`)
+   - Unit tests for router, prompts, utils (35 tests)
+   - Integration tests with mocked API (7 tests)
+   - All tests passing
+
 ### 🔴 Block A: Core Data Infrastructure (COMPLETED)
 
 ### 🟢 Block B: AI Tutor Chat System
@@ -164,14 +197,15 @@
 
 ### Overall Progress
 - **Block A**: 3/3 PRs complete (100%)
-- **Block B**: 0/3 PRs complete (0%)
+- **Block B**: 1/3 PRs complete (33%)
 - **Block C**: 0/2 PRs complete (0%)
 - **Block D**: 0/2 PRs complete (0%)
-- **Total**: 3/10 PRs complete (30%)
+- **Total**: 4/10 PRs complete (40%)
 
 ### Timeline
 - **Block A**: ~30/30 hours complete (100%)
-- **Total**: ~30/140 hours complete (21%)
+- **Block B**: ~12/40 hours complete (30%)
+- **Total**: ~42/140 hours complete (30%)
 
 ## Known Issues
 

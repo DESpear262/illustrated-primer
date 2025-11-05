@@ -2,9 +2,18 @@
 
 ## Current Work Focus
 
-**Block A: Core Data Infrastructure - PR #3: Vector Store & Embedding Pipeline** ✅ **COMPLETED**
+**Block B: AI Tutor Chat System - PR #4: AI Orchestration Layer** ✅ **COMPLETED**
 
 ## Recent Changes
+
+### Completed (PR #4)
+1. ✅ Created ModelRouter with task-based routing (SUMMARIZE_EVENT, CLASSIFY_TOPICS, UPDATE_SKILL, CHAT_REPLY)
+2. ✅ Implemented AIClient with retry, rate limiting, token counting, and error handling
+3. ✅ Created prompt templates and structured output schemas (SummaryOutput, ClassificationOutput, SkillUpdateOutput)
+4. ✅ Implemented summarization, classification, and skill update functions
+5. ✅ Added error categorization (AIClientError, AIServerError, AITimeoutError) with retry logic
+6. ✅ Added CLI commands: `ai routes` and `ai test` for testing and configuration
+7. ✅ Created comprehensive unit and integration tests (49 new tests, all passing)
 
 ### Completed (PR #3)
 1. ✅ Added `event_chunks` table for chunk storage and embeddings
@@ -47,15 +56,16 @@
 
 ## Next Steps
 
-### Immediate Next Task: Block B, PR #4 - AI Orchestration Layer
-**Prerequisites**: Block A complete ✅  
-**Impact**: Creates modular LLM routing and orchestration layer
+### Immediate Next Task: Block B, PR #5 - Tutor Chat Interface (TUI)
+**Prerequisites**: PR #4 complete ✅  
+**Impact**: Creates interactive session layer for student dialogue and logging
 
 #### Tasks:
-- [ ] Implement model routing registry (nano/classifier/4o)
-- [ ] Standardized prompt interface
-- [ ] Retry, rate limiting, and error handling
-- [ ] Summarization and classification tool functions
+- [ ] Implement text-based TUI using typer + rich
+- [ ] Add conversational history buffer
+- [ ] Log each turn as Event
+- [ ] Display loading indicators and summaries
+- [ ] Implement session save/resume
 
 ## Active Decisions
 
@@ -78,8 +88,8 @@ None - Block A complete; proceeding to Block B
 - ✅ PR #3: Vector Store & Embedding Pipeline (COMPLETED)
 
 ### Block B: AI Tutor Chat System
-- ⏳ PR #4: AI Orchestration Layer
-- ⏳ PR #5: Tutor Chat Interface (TUI)
+- ✅ PR #4: AI Orchestration Layer (COMPLETED)
+- ⏳ PR #5: Tutor Chat Interface (TUI) (NEXT)
 - ⏳ PR #6: Context Composition Engine
 
 ### Block C: Transcript Ingestion Pipeline
