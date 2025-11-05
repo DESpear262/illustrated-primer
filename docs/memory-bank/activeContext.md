@@ -2,9 +2,19 @@
 
 ## Current Work Focus
 
-**Block A: Core Data Infrastructure - PR #1: Define Data Models and Schemas** ✅ **COMPLETED**
+**Block A: Core Data Infrastructure - PR #2: Database I/O Layer** ✅ **COMPLETED**
 
 ## Recent Changes
+
+### Completed (PR #2)
+1. ✅ Created Database context manager with connection management
+2. ✅ Implemented CRUD operations for all entities (Event, SkillState, TopicSummary, Goal, Commitment, NudgeLog)
+3. ✅ Created query wrappers for filtering by topic, time, skill, and event type
+4. ✅ Implemented FTS5 full-text search API
+5. ✅ Created persistence helpers for SkillState updates with evidence
+6. ✅ Implemented database health check utilities
+7. ✅ Created minimal CLI structure with `db check` command
+8. ✅ Created comprehensive unit and integration tests
 
 ### Completed (PR #1)
 1. ✅ Created Pydantic schemas for all entities:
@@ -38,24 +48,24 @@
 
 ## Next Steps
 
-### Immediate Next Task: Block A, PR #2 - Database I/O Layer
-**Prerequisites**: PR #1 complete ✅  
-**Time**: 10 hours  
-**Impact**: Enables CRUD access to events, states, and summaries
+### Immediate Next Task: Block A, PR #3 - Vector Store & Embedding Pipeline
+**Prerequisites**: PR #2 complete ✅  
+**Time**: 12 hours  
+**Impact**: Enables semantic retrieval and context windowing for LLM interactions
 
 #### Tasks:
-- [ ] Implement insert/update methods for all entities
-- [ ] Add query wrappers for topic/time/skill-based filtering
-- [ ] Create persistence helpers for `SkillState` updates
-- [ ] Add SQLite FTS5 search table for transcript retrieval (already in schema, need API)
-- [ ] Implement DB health check utilities
+- [ ] Integrate FAISS index
+- [ ] Store chunk embeddings for sessions and transcripts
+- [ ] Add batch embed/update pipeline using OpenAI embeddings
+- [ ] Implement nearest-neighbor search API
+- [ ] Build hybrid retriever (FAISS + SQL filters)
 
 #### Files to Create:
-- `src/storage/db.py` - Database I/O operations
-- `src/storage/queries.py` - Query wrappers
+- `src/retrieval/faiss_index.py` - FAISS index operations
+- `src/retrieval/pipeline.py` - Embedding pipeline
 
 #### Files to Modify:
-- `src/models/base.py` - Add table bindings (if needed)
+- `src/storage/db.py` - Add embedding metadata field (if needed)
 
 ## Active Decisions
 

@@ -4,6 +4,34 @@
 
 ### ✅ Block A, PR #1: Define Data Models and Schemas (COMPLETED)
 
+### ✅ Block A, PR #2: Database I/O Layer (COMPLETED)
+
+1. **Database I/O Layer** (`src/storage/db.py`)
+   - Database context manager with transaction safety
+   - CRUD operations for all entities
+   - Custom exception classes (DatabaseError, ConstraintViolationError)
+   - Database initialization function
+   - Health check utilities
+
+2. **Query Wrappers** (`src/storage/queries.py`)
+   - Event filtering by topic, time, skill, and event type
+   - FTS5 full-text search API
+   - Skill filtering by topic and mastery range
+   - Topic hierarchy queries
+   - SkillState persistence helpers with evidence updates
+
+3. **CLI Structure** (`src/cli/`)
+   - Minimal CLI with typer and rich
+   - `db check` command for health checks
+   - `db init` command for database initialization
+
+4. **Testing** (`tests/`)
+   - Unit tests for database I/O operations
+   - Integration tests for query operations
+   - All tests passing
+
+### ✅ Block A, PR #1: Define Data Models and Schemas (COMPLETED)
+
 1. **Pydantic Models** (`src/models/base.py`)
    - All 6 core models implemented and validated
    - Proper type hints and validation rules
@@ -46,15 +74,7 @@
 
 ### 🔴 Block A: Core Data Infrastructure (IN PROGRESS)
 
-#### PR #2: Database I/O Layer (NEXT)
-- [ ] Database connection management
-- [ ] Insert/update methods for all entities
-- [ ] Query wrappers for filtering (topic/time/skill)
-- [ ] FTS5 search API
-- [ ] DB health check utilities
-- [ ] Unit and integration tests
-
-#### PR #3: Vector Store & Embedding Pipeline
+#### PR #3: Vector Store & Embedding Pipeline (NEXT)
 - [ ] FAISS index integration
 - [ ] Embedding generation pipeline
 - [ ] Batch embed/update operations
@@ -126,15 +146,15 @@
 ## Current Status
 
 ### Overall Progress
-- **Block A**: 1/3 PRs complete (33%)
+- **Block A**: 2/3 PRs complete (67%)
 - **Block B**: 0/3 PRs complete (0%)
 - **Block C**: 0/2 PRs complete (0%)
 - **Block D**: 0/2 PRs complete (0%)
-- **Total**: 1/10 PRs complete (10%)
+- **Total**: 2/10 PRs complete (20%)
 
 ### Timeline
-- **Block A**: ~8/30 hours complete (27%)
-- **Total**: ~8/140 hours complete (6%)
+- **Block A**: ~18/30 hours complete (60%)
+- **Total**: ~18/140 hours complete (13%)
 
 ## Known Issues
 
