@@ -2,9 +2,22 @@
 
 ## Current Work Focus
 
-**Interface Development - Block A: Backend Integration Layer - PR #1: Unified GUI–Backend Facade** ✅ **COMPLETED**
+**Interface Development - Block A: Backend Integration Layer - PR #2: Graph + Hover Providers** ✅ **COMPLETED**
 
 ## Recent Changes
+
+### Completed (Interface Development - PR #2)
+1. ✅ Created `graph_provider.py` to return DAG JSON from database
+2. ✅ Implemented `hover_provider.py` for per-node summaries and statistics
+3. ✅ Integrated `networkx` DAG traversal utilities
+4. ✅ Added query filters for `scope`, `depth`, and `relation`
+5. ✅ Implemented caching for hover payloads with TTL (5 minutes)
+6. ✅ Graph JSON format matches Cytoscape.js schema (nodes/edges)
+7. ✅ Hover payload includes title, mastery, and last evidence
+8. ✅ Depth filtering correctly truncates output
+9. ✅ Created comprehensive unit tests (35+ tests) for graph and hover providers
+10. ✅ Created integration tests (10+ tests) for FAISS + SQLite queries and hover latency
+11. ✅ Updated file index documentation
 
 ### Completed (Interface Development - PR #1)
 1. ✅ Created `interface_common` module with unified GUI-backend facade
@@ -129,13 +142,6 @@
 ## Next Steps
 
 ### Interface Development - Block A: Backend Integration Layer
-- ⏳ PR #2: Graph + Hover Providers (12 hours)
-  - Implement graph_provider.py to return DAG JSON from database
-  - Implement hover_provider.py for per-node summaries and statistics
-  - Integrate networkx DAG traversal utilities
-  - Add query filters for scope, depth, and relation
-  - Cache hover payloads to minimize repeated lookups
-
 - ⏳ PR #3: UI Model Definitions (8 hours)
   - Create shared Pydantic models for GraphNode, GraphEdge, HoverPayload, ChatMessage, CommandResult
   - Define schema contracts used by both GUI front-ends
@@ -152,7 +158,7 @@
 
 ## Current Blockers
 
-None - Interface Development PR #1 complete; proceeding to PR #2: Graph + Hover Providers
+None - Interface Development PR #2 complete; proceeding to PR #3: UI Model Definitions
 
 ## Implementation Status
 
@@ -176,7 +182,7 @@ None - Interface Development PR #1 complete; proceeding to PR #2: Graph + Hover 
 
 ### Interface Development - Block A: Backend Integration Layer
 - ✅ PR #1: Unified GUI–Backend Facade (COMPLETED)
-- ⏳ PR #2: Graph + Hover Providers
+- ✅ PR #2: Graph + Hover Providers (COMPLETED)
 - ⏳ PR #3: UI Model Definitions
 
 ## Notes
@@ -188,5 +194,6 @@ None - Interface Development PR #1 complete; proceeding to PR #2: Graph + Hover 
 - Write-time summarization fully functional with APScheduler background jobs and audit logging
 - Review scheduler fully functional with decay-based mastery model and priority computation
 - GUI-backend facade complete with async wrappers, error handling, timeout guards, and logging hooks
-- Ready to proceed with Interface Development PR #2: Graph + Hover Providers
+- Graph and hover providers complete with networkx DAG traversal, filtering, and caching
+- Ready to proceed with Interface Development PR #3: UI Model Definitions
 

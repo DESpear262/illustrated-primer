@@ -26,6 +26,32 @@
    - Tests for error handling, timeout guards, and validation
    - All tests passing
 
+### ✅ Interface Development - Block A, PR #2: Graph + Hover Providers (COMPLETED)
+
+1. **Graph Provider** (`src/context/graph_provider.py`)
+   - get_graph() function returns DAG JSON in Cytoscape.js format
+   - Networkx DAG traversal utilities for building graph structure
+   - Scope filtering: "all", "root", "topic:<id>" for graph scope
+   - Depth filtering: limits traversal depth from scope root
+   - Relation filtering: "all", "parent-child" (topic→topic), "topic-skill" (topic→skill)
+   - Includes both topics and skills as nodes
+   - Topic→topic edges (parent-child relationships)
+   - Topic→skill edges (belongs-to relationships)
+
+2. **Hover Provider** (`src/context/hover_provider.py`)
+   - get_hover_payload() function returns per-node summaries and statistics
+   - Topic payload: title, summary, event_count, last_event_at, average_mastery, child_skills_count, open_questions
+   - Skill payload: title, p_mastery, last_evidence_at, evidence_count, topic_id, recent_event_snippet
+   - Caching with TTL (5 minutes) to minimize repeated lookups
+   - Cache management: clear_cache(), get_cache_stats()
+
+3. **Testing** (`tests/test_graph_provider.py`, `tests/test_hover_provider.py`, `tests/test_graph_hover_integration.py`)
+   - Unit tests for graph provider (20+ tests)
+   - Unit tests for hover provider (15+ tests)
+   - Integration tests for performance and real-world scenarios (10+ tests)
+   - Performance test: hover latency <200ms for 500 nodes
+   - All tests passing
+
 ### ✅ Block D, PR #10: Performance Tracking (COMPLETED)
 
 1. **Performance Analysis** (`src/analysis/performance.py`)

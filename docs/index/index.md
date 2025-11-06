@@ -73,6 +73,8 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **src/context/__init__.py** - Package initialization for context module
 - **src/context/filters.py** - Hybrid scoring, recency decay, and filtering utilities
 - **src/context/assembler.py** - Context assembler with dynamic token allocation, hybrid retrieval, and MMR diversity
+- **src/context/graph_provider.py** - DAG JSON generation from database for knowledge tree visualization using networkx
+- **src/context/hover_provider.py** - Per-node summaries and statistics for knowledge tree visualization with caching
 
 ### Scheduler Module (`src/scheduler/`)
 - **src/scheduler/__init__.py** - Package initialization for scheduler module
@@ -106,6 +108,9 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **tests/test_integration.py** - Integration tests for database operations, topic hierarchy, and FTS search
 - **tests/test_app_facade.py** - Unit tests for GUI-backend facade (async wrappers, error handling, timeout guards, logging hooks)
 - **tests/test_app_facade_integration.py** - Integration tests for facade with real backend components (async operations, session persistence, error serialization)
+- **tests/test_graph_provider.py** - Unit tests for graph provider (DAG JSON generation, networkx traversal, filtering)
+- **tests/test_hover_provider.py** - Unit tests for hover provider (per-node summaries, statistics, caching)
+- **tests/test_graph_hover_integration.py** - Integration tests for graph and hover providers (FAISS + SQLite queries, hover latency, performance)
 
 ## Documentation (`docs/`)
 
