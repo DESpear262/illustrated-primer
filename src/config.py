@@ -98,3 +98,8 @@ CONTEXT_MIN_SCORE_THRESHOLD: float = float(os.getenv("AI_TUTOR_CONTEXT_MIN_SCORE
 CONTEXT_RERANK: bool = os.getenv("AI_TUTOR_RERANK", "0") not in ("0", "false", "False")
 CONTEXT_REDACT: bool = os.getenv("AI_TUTOR_REDACT", "0") not in ("0", "false", "False")
 
+# Review scheduler configuration
+REVIEW_DECAY_TAU_DAYS: float = float(os.getenv("AI_TUTOR_REVIEW_DECAY_TAU_DAYS", "30.0"))
+REVIEW_GRACE_PERIOD_DAYS: float = float(os.getenv("AI_TUTOR_REVIEW_GRACE_PERIOD_DAYS", "7.0"))
+REVIEW_DEFAULT_LIMIT: int = int(os.getenv("AI_TUTOR_REVIEW_DEFAULT_LIMIT", "10"))
+
