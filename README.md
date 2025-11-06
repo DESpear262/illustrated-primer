@@ -150,11 +150,128 @@ The database uses SQLite with the following key features:
 
 ### Database Initialization
 
-The database is automatically created when first accessed. To initialize with stub data:
+The database is automatically created when first accessed. To initialize explicitly:
+
+```bash
+python -m src.cli.main db init
+```
+
+To check database health:
+
+```bash
+python -m src.cli.main db check
+```
+
+To initialize with stub data:
 
 ```bash
 python scripts/generate_stub_data.py
 ```
+
+## Usage
+
+### CLI Commands
+
+All commands use the main CLI entry point:
+
+```bash
+python -m src.cli.main <command> [options]
+```
+
+Or if you have a virtual environment activated:
+
+```bash
+# Windows
+venv\Scripts\python.exe -m src.cli.main <command> [options]
+
+# Linux/Mac
+venv/bin/python -m src.cli.main <command> [options]
+```
+
+#### Database Commands (`db`)
+
+- **Check database health:**
+  ```bash
+  python -m src.cli.main db check [--db-path PATH]
+  ```
+
+- **Initialize database:**
+  ```bash
+  python -m src.cli.main db init [--db-path PATH]
+  ```
+
+#### Index Commands (`index`)
+
+- **Build FAISS index from all chunks:**
+  ```bash
+  python -m src.cli.main index build [--db-path PATH] [--faiss-path PATH] [--batch-size SIZE]
+  ```
+
+- **Check index status:**
+  ```bash
+  python -m src.cli.main index status [--faiss-path PATH]
+  ```
+
+- **Search index semantically:**
+  ```bash
+  python -m src.cli.main index search "query text" [--top-k K] [--faiss-path PATH] [--db-path PATH]
+  ```
+
+#### AI Service Commands (`ai`)
+
+- **View model routing configuration:**
+  ```bash
+  python -m src.cli.main ai routes
+  ```
+
+- **Test AI functionality:**
+  ```bash
+  # Summarize text
+  python -m src.cli.main ai test summarize --text "Your text here"
+  
+  # Summarize an event by ID
+  python -m src.cli.main ai test summarize --event-id EVENT_ID [--db PATH]
+  
+  # Classify topics
+  python -m src.cli.main ai test classify --text "Learning about derivatives"
+  
+  # Chat reply
+  python -m src.cli.main ai test chat --text "What is a derivative?"
+  
+  # Override model
+  python -m src.cli.main ai test chat --text "Hello" --model gpt-4o-mini
+  ```
+
+#### Chat Commands (`chat`)
+
+- **Start a new chat session:**
+  ```bash
+  python -m src.cli.main chat start [--title "Session Title"] [--db PATH]
+  ```
+
+- **Resume an existing session:**
+  ```bash
+  python -m src.cli.main chat resume <session-id> [--db PATH]
+  ```
+
+- **List recent sessions:**
+  ```bash
+  python -m src.cli.main chat list [--limit N] [--db PATH]
+  ```
+
+#### Chat Session Commands
+
+While in a chat session, you can use these commands:
+
+- `/help` - Show available commands
+- `/end` - End the session (triggers summarization)
+- `/upload <path>` - Upload and summarize a document file
+
+**Features:**
+- First user message automatically generates a session title via LLM
+- Session is automatically summarized when you exit
+- Uploaded documents are immediately summarized
+- All turns are logged as `Event` objects with `metadata.session_id`
 
 ## Testing
 
@@ -206,20 +323,22 @@ pytest tests/
 
 ## Development Status
 
-### Block A: Core Data Infrastructure (PR #1) ✅
+### Block A: Core Data Infrastructure ✅
 
-- [x] Pydantic schemas for all entities
-- [x] SQLite tables and schema migrations
-- [x] Indexes for timestamps, topics, and embeddings
-- [x] JSON serialization/deserialization utilities
-- [x] Stub data generation script
-- [x] Unit and integration tests
+- [x] **PR #1**: Define Data Models and Schemas
+- [x] **PR #2**: Database I/O Layer
+- [x] **PR #3**: Vector Store & Embedding Pipeline
+
+### Block B: AI Tutor Chat System
+
+- [x] **PR #4**: AI Orchestration Layer
+- [x] **PR #5**: Tutor Chat Interface (TUI)
+- [ ] **PR #6**: Context Composition Engine
 
 ### Next Steps
 
-- **Block A, PR #2**: Database I/O Layer
-- **Block A, PR #3**: Vector Store & Embedding Pipeline
-- **Block B**: AI Tutor Chat System
+- **Block C**: Transcript Ingestion Pipeline
+- **Block D**: Spaced Repetition & Mastery Tracking
 
 ## License
 
