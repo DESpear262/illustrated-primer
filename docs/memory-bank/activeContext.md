@@ -2,9 +2,53 @@
 
 ## Current Work Focus
 
-**Block C: Transcript Ingestion Pipeline - PR #8: Update Propagation & Summarization** ✅ **COMPLETED**
+**Block A (Interface): Backend Integration Layer - PR #2: Graph + Hover Providers** ✅ **COMPLETED**
 
 ## Recent Changes
+
+### Completed (PR #2 - Interface Block A)
+1. ✅ Created `src/context/graph_provider.py` with DAG JSON generation from database
+2. ✅ Implemented `get_graph_json()` function with:
+   - Cytoscape.js format output (nodes/edges)
+   - Networkx DAG traversal utilities
+   - Filtering by scope (topic ID), depth (hierarchy level), and relation type
+   - Support for topics, skills, and optional event nodes
+   - Parent-child, belongs-to, and evidence edge types
+3. ✅ Created `src/context/hover_provider.py` with:
+   - `get_hover_payload()` function for per-node summaries and statistics
+   - Support for topic, skill, and event node types
+   - Hover payload includes: title, mastery (for skills), last evidence, summary, statistics, event snippets
+   - LRU cache with TTL (5 minutes) for performance optimization
+   - Cache invalidation support via `invalidate_hover_cache()`
+4. ✅ Updated `src/context/__init__.py` to export graph and hover provider functions
+5. ✅ Created comprehensive unit tests (`tests/test_graph_provider.py`) - 17 tests, all passing
+6. ✅ Created comprehensive unit tests (`tests/test_hover_provider.py`) - 15 tests, all passing
+7. ✅ Created integration tests (`tests/test_graph_hover_integration.py`) - 6 tests, all passing
+   - Tests combined FAISS + SQLite queries
+   - Validates <200ms hover latency requirement for 500 nodes
+   - Tests graph JSON schema validation
+8. ✅ Updated file index documentation
+
+### Completed (PR #1 - Interface Block A)
+1. ✅ Created `src/interface_common/` module with `__init__.py`, `exceptions.py`, and `app_facade.py`
+2. ✅ Implemented custom exception classes (FacadeError, FacadeTimeoutError, FacadeDatabaseError, FacadeIndexError, FacadeAIError, FacadeChatError) with JSON serialization
+3. ✅ Created AppFacade class with async wrappers for all CLI commands:
+   - Database: `db_check()`, `db_init()`
+   - Index: `index_build()`, `index_status()`, `index_search()`
+   - AI: `ai_routes()`, `ai_test()`
+   - Chat: `chat_start()`, `chat_resume()`, `chat_list()`, `chat_turn()`
+   - Review: `review_next()`
+   - Import: `import_transcript()`
+   - Refresh: `refresh_summaries()`
+   - Progress: `progress_summary()`
+4. ✅ Implemented error handling with timeout guards (LLM: 60s, FAISS/DB: 30s)
+5. ✅ Added logging hooks for all GUI-initiated operations with structured logging
+6. ✅ Created `run_command(name, args)` dispatcher for GUI use
+7. ✅ Added missing summarization configuration constants to `src/config.py`
+8. ✅ Fixed missing `FAISS_INDEX_PATH` import in `src/retrieval/pipeline.py`
+9. ✅ Created comprehensive unit and integration tests (`tests/test_facade.py`) - 36 tests, all passing
+10. ✅ Updated file index documentation
+11. ✅ Added pytest-asyncio to requirements.txt and pytest.ini configuration
 
 ### Completed (PR #8)
 1. ✅ Created summarizers module with update.py for batch processing and aggregation
@@ -112,13 +156,11 @@
 
 ## Next Steps
 
-### Block D: PR #10 - Performance Tracking
-1. Implement delta calculator comparing p_mastery between timestamps
-2. Create CLI command: `cli progress summary`
-3. Generate JSON and markdown reports
-4. Add plotting option using rich charts
-5. Link reports to student profile
-6. Create unit and integration tests
+### Block A (Interface): PR #3 - Context Inspector API
+1. Implement context inspector API endpoints
+2. Add query parameters for filtering and pagination
+3. Integrate with graph and hover providers
+4. Create unit and integration tests
 
 ## Active Decisions
 
@@ -151,7 +193,11 @@ None - Block C PR #8 complete; proceeding to Block D PR #10
 
 ### Block D: Spaced Repetition & Mastery Tracking
 - ✅ PR #9: Review Scheduler (COMPLETED)
-- ⏳ PR #10: Performance Tracking
+- ✅ PR #10: Performance Tracking (COMPLETED)
+
+### Block A (Interface): Backend Integration Layer
+- ✅ PR #1: Unified GUI–Backend Facade (COMPLETED)
+- ✅ PR #2: Graph + Hover Providers (COMPLETED)
 
 ## Notes
 

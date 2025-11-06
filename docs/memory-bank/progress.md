@@ -2,6 +2,97 @@
 
 ## What Works
 
+### ✅ Block A (Interface), PR #1: Unified GUI–Backend Facade (COMPLETED)
+
+1. **Interface Common Module** (`src/interface_common/`)
+   - `exceptions.py` - Custom exception classes with JSON serialization (FacadeError, FacadeTimeoutError, FacadeDatabaseError, FacadeIndexError, FacadeAIError, FacadeChatError)
+   - `app_facade.py` - Unified facade with async wrappers for all CLI commands
+   - `__init__.py` - Package initialization and exports
+
+2. **AppFacade Class** (`src/interface_common/app_facade.py`)
+   - Async wrappers for all CLI commands:
+     - Database: `db_check()`, `db_init()`
+     - Index: `index_build()`, `index_status()`, `index_search()`
+     - AI: `ai_routes()`, `ai_test()`
+     - Chat: `chat_start()`, `chat_resume()`, `chat_list()`, `chat_turn()`
+     - Review: `review_next()`
+     - Import: `import_transcript()`
+     - Refresh: `refresh_summaries()`
+     - Progress: `progress_summary()`
+   - Error handling with timeout guards (LLM: 60s, FAISS/DB: 30s)
+   - Logging hooks for all GUI-initiated operations with structured logging
+   - `run_command(name, args)` dispatcher for GUI use
+
+3. **Configuration Updates** (`src/config.py`)
+   - Added summarization configuration constants (SUMMARIZATION_BATCH_SIZE, SUMMARIZATION_INTERVAL_SECONDS, SUMMARIZATION_MAX_CONCURRENT_TOPICS, SUMMARIZATION_ENABLED)
+
+4. **Testing** (`tests/test_facade.py`)
+   - Unit tests for exception classes (8 tests)
+   - Unit tests for database commands (4 tests)
+   - Unit tests for index commands (3 tests)
+   - Unit tests for AI commands (4 tests)
+   - Unit tests for chat commands (5 tests)
+   - Unit tests for review, import, refresh, and progress commands (4 tests)
+   - Unit tests for command dispatcher (4 tests)
+   - Unit tests for error handling (2 tests)
+   - Integration tests (2 tests)
+   - All 36 tests passing
+
+5. **Documentation**
+   - Updated `docs/index/index.md` with new interface_common module files
+   - Added pytest-asyncio to requirements.txt and pytest.ini
+
+### ✅ Block A (Interface), PR #2: Graph + Hover Providers (COMPLETED)
+
+1. **Graph Provider** (`src/context/graph_provider.py`)
+   - `get_graph_json()` function for DAG JSON generation from database
+   - Cytoscape.js format output (nodes/edges)
+   - Networkx DAG traversal utilities for topic hierarchy
+   - Filtering by scope (topic ID), depth (hierarchy level), and relation type
+   - Support for topics, skills, and optional event nodes
+   - Edge types: parent-child, belongs-to, evidence
+   - Node IDs use unified format: "type:id" (e.g., "topic:math", "skill:derivative")
+
+2. **Hover Provider** (`src/context/hover_provider.py`)
+   - `get_hover_payload()` function for per-node summaries and statistics
+   - Support for topic, skill, and event node types
+   - Hover payload includes:
+     - Topics: title, summary, event_count, last_event_at, open_questions, event_snippet, statistics
+     - Skills: title, mastery, evidence_count, last_evidence_at, topic_id, event_snippet, statistics
+     - Events: title, content, event_type, actor, topics, skills, created_at, recorded_at, statistics
+   - LRU cache with TTL (5 minutes) for performance optimization
+   - Cache invalidation support via `invalidate_hover_cache()`
+   - Cache trimming to max size (1000 entries)
+
+3. **Context Module Updates** (`src/context/__init__.py`)
+   - Exported `get_graph_json`, `get_hover_payload`, and `invalidate_hover_cache`
+
+4. **Testing**
+   - Unit tests (`tests/test_graph_provider.py`) - 17 tests, all passing
+     - Graph JSON format validation
+     - Node and edge format validation
+     - Depth filtering (0, 1, 2 levels)
+     - Scope filtering (topic ID)
+     - Relation filtering (parent-child, belongs-to)
+     - Content accuracy (summaries, mastery, edges)
+     - Edge cases (empty database, invalid scope, depth zero)
+   - Unit tests (`tests/test_hover_provider.py`) - 15 tests, all passing
+     - Hover payload structure validation
+     - Caching (cache hit, invalidation, clear all)
+     - Content accuracy (event snippets, truncation, statistics)
+     - Error handling (invalid node ID, unknown type, nonexistent entities)
+     - Performance (single node, multiple nodes)
+   - Integration tests (`tests/test_graph_hover_integration.py`) - 6 tests, all passing
+     - Combined graph and hover operations
+     - Hover latency requirement validation (<200ms for 500 nodes)
+     - Graph with events integration
+     - Filtered graph and hover
+     - Cache performance improvement
+     - Graph JSON schema validation
+
+5. **Documentation**
+   - Updated `docs/index/index.md` with new graph and hover provider files
+
 ### ✅ Block D, PR #10: Performance Tracking (COMPLETED)
 
 1. **Performance Analysis** (`src/analysis/performance.py`)
@@ -230,6 +321,33 @@
 
 ## What's Left to Build
 
+### 🔴 Block A (Interface): Backend Integration Layer
+
+#### PR #1: Unified GUI–Backend Facade ✅
+- [x] Implement `app_facade.py` with async wrappers for CLI-equivalent commands
+- [x] Wrap DB, Index, AI, and Chat functions from CLI
+- [x] Add error handling and timeout guards for LLM and FAISS operations
+- [x] Expose async `run_command(name, args)` dispatcher for GUI use
+- [x] Add logging hooks for all GUI-initiated operations
+- [x] Unit tests - all facade methods execute CLI-equivalent functions
+- [x] Unit tests - exceptions correctly caught and serialized for UI display
+- [x] Integration tests - GUI prototype can call `app_facade.chat_turn()` successfully
+- [x] Integration tests - LLM calls run asynchronously without blocking
+
+#### PR #2: Graph + Hover Providers
+- [ ] Implement `graph_provider.py` to return DAG JSON from database
+- [ ] Implement `hover_provider.py` for per-node summaries and statistics
+- [ ] Integrate `networkx` DAG traversal utilities
+- [ ] Add query filters for `scope`, `depth`, and `relation`
+- [ ] Cache hover payloads to minimize repeated lookups
+- [ ] Unit and integration tests
+
+#### PR #3: UI Model Definitions
+- [ ] Create shared Pydantic models for `GraphNode`, `GraphEdge`, `HoverPayload`, `ChatMessage`, and `CommandResult`
+- [ ] Define schema contracts used by both GUI front-ends
+- [ ] Add JSON serialization helpers
+- [ ] Unit tests
+
 ### ✅ Block B, PR #6: Context Composition Engine (COMPLETED)
 
 1. **Context Assembler** (`src/context/assembler.py`)
@@ -372,11 +490,12 @@
 ## Current Status
 
 ### Overall Progress
-- **Block A**: 3/3 PRs complete (100%)
+- **Block A (Core)**: 3/3 PRs complete (100%)
 - **Block B**: 3/3 PRs complete (100%)
 - **Block C**: 2/2 PRs complete (100%)
 - **Block D**: 2/2 PRs complete (100%)
-- **Total**: 10/10 PRs complete (100%)
+- **Block A (Interface)**: 1/3 PRs complete (33%)
+- **Total**: 11/13 PRs complete (85%)
 
 ### Timeline
 - **Block A**: ~30/30 hours complete (100%)

@@ -73,6 +73,8 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **src/context/__init__.py** - Package initialization for context module
 - **src/context/filters.py** - Hybrid scoring, recency decay, and filtering utilities
 - **src/context/assembler.py** - Context assembler with dynamic token allocation, hybrid retrieval, and MMR diversity
+- **src/context/graph_provider.py** - Graph provider for DAG JSON generation from database for knowledge tree visualization with filtering by scope, depth, and relation type
+- **src/context/hover_provider.py** - Hover provider for per-node summaries and statistics with caching to minimize repeated lookups and ensure <200ms latency
 
 ### Scheduler Module (`src/scheduler/`)
 - **src/scheduler/__init__.py** - Package initialization for scheduler module
@@ -104,6 +106,10 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **tests/test_transcript_import.py** - Unit and integration tests for transcript import (parsing, actor inference, timestamp parsing, AI classification, event creation, summarization, embedding, topic/skill updates)
 - **tests/test_summarizers.py** - Unit and integration tests for summarization (audit logging, versioning, batch processing, scheduler, refresh functions)
 - **tests/test_integration.py** - Integration tests for database operations, topic hierarchy, and FTS search
+- **tests/test_facade.py** - Unit and integration tests for GUI–backend facade (async wrappers, error handling, timeout guards, command dispatcher)
+- **tests/test_graph_provider.py** - Unit tests for graph provider (JSON format validation, depth filtering, scope filtering, relation filtering)
+- **tests/test_hover_provider.py** - Unit tests for hover provider (payload structure validation, caching, performance, error handling)
+- **tests/test_graph_hover_integration.py** - Integration tests for graph and hover providers (combined FAISS + SQLite queries, performance requirements, large dataset testing)
 
 ## Documentation (`docs/`)
 
