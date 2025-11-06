@@ -2,9 +2,18 @@
 
 ## Current Work Focus
 
-**Interface Development - Block A: Backend Integration Layer - PR #2: Graph + Hover Providers** ✅ **COMPLETED**
+**Interface Development - Block A: Backend Integration Layer - PR #3: UI Model Definitions** ✅ **COMPLETED**
 
 ## Recent Changes
+
+### Completed (Interface Development - PR #3)
+1. ✅ Created shared Pydantic models for `GraphNode`, `GraphEdge`, `HoverPayload`, `ChatMessage`, and `CommandResult`
+2. ✅ Defined schema contracts used by both GUI front-ends
+3. ✅ Added JSON serialization helpers using existing utilities
+4. ✅ Models validate CLI outputs and GUI responses
+5. ✅ Serialization is round-trip safe
+6. ✅ Created comprehensive unit tests (30+ tests) for all models
+7. ✅ Updated file index documentation
 
 ### Completed (Interface Development - PR #2)
 1. ✅ Created `graph_provider.py` to return DAG JSON from database
@@ -141,11 +150,12 @@
 
 ## Next Steps
 
-### Interface Development - Block A: Backend Integration Layer
-- ⏳ PR #3: UI Model Definitions (8 hours)
-  - Create shared Pydantic models for GraphNode, GraphEdge, HoverPayload, ChatMessage, CommandResult
-  - Define schema contracts used by both GUI front-ends
-  - Add JSON serialization helpers
+### Interface Development - Block B: GUI Framework
+- ⏳ PR #4: GUI Skeleton and Navigation (12 hours)
+  - Create MainWindow with tabs for Tutor Chat, Command Console, Review Queue, Knowledge Tree, Context Inspector
+  - Implement status bar and top menu actions
+  - Integrate qasync for non-blocking tasks
+  - Add startup checks for DB and FAISS health
 
 ## Active Decisions
 
@@ -158,7 +168,7 @@
 
 ## Current Blockers
 
-None - Interface Development PR #2 complete; proceeding to PR #3: UI Model Definitions
+None - Interface Development Block A complete; proceeding to Block B: GUI Framework
 
 ## Implementation Status
 
@@ -183,7 +193,10 @@ None - Interface Development PR #2 complete; proceeding to PR #3: UI Model Defin
 ### Interface Development - Block A: Backend Integration Layer
 - ✅ PR #1: Unified GUI–Backend Facade (COMPLETED)
 - ✅ PR #2: Graph + Hover Providers (COMPLETED)
-- ⏳ PR #3: UI Model Definitions
+- ✅ PR #3: UI Model Definitions (COMPLETED)
+
+### Interface Development - Block B: GUI Framework
+- ⏳ PR #4: GUI Skeleton and Navigation
 
 ## Notes
 
@@ -195,5 +208,6 @@ None - Interface Development PR #2 complete; proceeding to PR #3: UI Model Defin
 - Review scheduler fully functional with decay-based mastery model and priority computation
 - GUI-backend facade complete with async wrappers, error handling, timeout guards, and logging hooks
 - Graph and hover providers complete with networkx DAG traversal, filtering, and caching
-- Ready to proceed with Interface Development PR #3: UI Model Definitions
+- UI model definitions complete with shared Pydantic models and JSON serialization helpers
+- Ready to proceed with Interface Development Block B: GUI Framework
 

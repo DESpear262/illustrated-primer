@@ -11,6 +11,13 @@ from src.interface_common.exceptions import (
     FacadeTimeoutError,
     FacadeValidationError,
 )
+from src.interface_common.models import (
+    GraphNode,
+    GraphEdge,
+    HoverPayload,
+    ChatMessage,
+    CommandResult,
+)
 
 __all__ = [
     "AppFacade",
@@ -18,5 +25,10 @@ __all__ = [
     "FacadeError",
     "FacadeTimeoutError",
     "FacadeValidationError",
+    "GraphNode",
+    "GraphEdge",
+    "HoverPayload",
+    "ChatMessage",
+    "CommandResult",
 ]
 

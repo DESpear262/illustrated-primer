@@ -58,6 +58,7 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **src/interface_common/__init__.py** - Package initialization for interface_common module
 - **src/interface_common/app_facade.py** - Unified GUI-backend facade with async wrappers for all backend operations, error handling, timeout guards, and logging hooks
 - **src/interface_common/exceptions.py** - Custom exceptions for facade operations (FacadeError, FacadeTimeoutError, FacadeValidationError)
+- **src/interface_common/models.py** - Shared Pydantic models for GUI interfaces (GraphNode, GraphEdge, HoverPayload, ChatMessage, CommandResult) with JSON serialization helpers
 
 ### Ingestion Module (`src/ingestion/`)
 - **src/ingestion/__init__.py** - Package initialization for ingestion module
@@ -111,6 +112,7 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **tests/test_graph_provider.py** - Unit tests for graph provider (DAG JSON generation, networkx traversal, filtering)
 - **tests/test_hover_provider.py** - Unit tests for hover provider (per-node summaries, statistics, caching)
 - **tests/test_graph_hover_integration.py** - Integration tests for graph and hover providers (FAISS + SQLite queries, hover latency, performance)
+- **tests/test_interface_models.py** - Unit tests for interface common models (GraphNode, GraphEdge, HoverPayload, ChatMessage, CommandResult) with serialization round-trip tests
 
 ## Documentation (`docs/`)
 

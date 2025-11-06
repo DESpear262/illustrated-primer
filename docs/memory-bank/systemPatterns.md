@@ -16,6 +16,9 @@ Interface Layer → AI Layer → Retrieval Layer → Data Layer
 - **Tutor Chat TUI**: Conversational LLM interface for study sessions
 - **Command Chat TUI**: Structured command input for administrative operations
 - **GUI-Backend Facade**: Unified async API layer between GUI and all backend services
+- **Graph Provider**: DAG JSON generation from database for knowledge tree visualization
+- **Hover Provider**: Per-node summaries and statistics with caching for knowledge tree visualization
+- **UI Models**: Shared Pydantic models (GraphNode, GraphEdge, HoverPayload, ChatMessage, CommandResult) for consistent data structures
 
 ### AI Layer
 - **AI Orchestration**: Coordinates LLM calls and context management
