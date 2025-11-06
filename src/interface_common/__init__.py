@@ -14,6 +14,18 @@ from src.interface_common.exceptions import (
     FacadeAIError,
     FacadeChatError,
 )
+from src.interface_common.models import (
+    GraphNode,
+    GraphEdge,
+    HoverPayload,
+    TopicHoverPayload,
+    SkillHoverPayload,
+    EventHoverPayload,
+    EventSnippet,
+    HoverStatistics,
+    ChatMessage,
+    CommandResult,
+)
 
 __all__ = [
     "AppFacade",
@@ -24,5 +36,15 @@ __all__ = [
     "FacadeIndexError",
     "FacadeAIError",
     "FacadeChatError",
+    "GraphNode",
+    "GraphEdge",
+    "HoverPayload",
+    "TopicHoverPayload",
+    "SkillHoverPayload",
+    "EventHoverPayload",
+    "EventSnippet",
+    "HoverStatistics",
+    "ChatMessage",
+    "CommandResult",
 ]
 

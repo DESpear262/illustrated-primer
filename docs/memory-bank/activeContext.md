@@ -2,9 +2,24 @@
 
 ## Current Work Focus
 
-**Block A (Interface): Backend Integration Layer - PR #2: Graph + Hover Providers** ✅ **COMPLETED**
+**Block A (Interface): Backend Integration Layer - PR #3: UI Model Definitions** ✅ **COMPLETED**
 
 ## Recent Changes
+
+### Completed (PR #3 - Interface Block A)
+1. ✅ Created `src/interface_common/models.py` with shared Pydantic models:
+   - `GraphNode` - Graph node model for knowledge tree visualization (topic, skill, event)
+   - `GraphEdge` - Graph edge model for relationships between nodes
+   - `HoverPayload` - Discriminated union for hover payloads (TopicHoverPayload, SkillHoverPayload, EventHoverPayload)
+   - `ChatMessage` - Chat message model for tutor chat interface
+   - `CommandResult` - Command result model for facade operations
+   - Supporting models: `EventSnippet`, `HoverStatistics`
+2. ✅ Updated `src/interface_common/__init__.py` to export all new models
+3. ✅ Created comprehensive unit tests (`tests/test_interface_models.py`) - 30 tests, all passing:
+   - Model validation (creation, serialization, deserialization, round-trip)
+   - Validation error handling (invalid types, invalid values)
+   - Facade output validation (graph_provider, hover_provider, facade outputs match models)
+4. ✅ Updated file index documentation
 
 ### Completed (PR #2 - Interface Block A)
 1. ✅ Created `src/context/graph_provider.py` with DAG JSON generation from database
@@ -156,7 +171,7 @@
 
 ## Next Steps
 
-### Block A (Interface): PR #3 - Context Inspector API
+### Block A (Interface): PR #4 - Context Inspector API
 1. Implement context inspector API endpoints
 2. Add query parameters for filtering and pagination
 3. Integrate with graph and hover providers
@@ -198,6 +213,7 @@ None - Block C PR #8 complete; proceeding to Block D PR #10
 ### Block A (Interface): Backend Integration Layer
 - ✅ PR #1: Unified GUI–Backend Facade (COMPLETED)
 - ✅ PR #2: Graph + Hover Providers (COMPLETED)
+- ✅ PR #3: UI Model Definitions (COMPLETED)
 
 ## Notes
 

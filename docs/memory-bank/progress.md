@@ -93,6 +93,56 @@
 5. **Documentation**
    - Updated `docs/index/index.md` with new graph and hover provider files
 
+### ✅ Block A (Interface), PR #3: UI Model Definitions (COMPLETED)
+
+1. **UI Models** (`src/interface_common/models.py`)
+   - `GraphNode` - Graph node model for knowledge tree visualization
+     - Supports topic, skill, and event node types
+     - Type-specific fields (summary, mastery, content, etc.)
+     - Validation for node types and mastery values (0.0-1.0)
+   - `GraphEdge` - Graph edge model for relationships between nodes
+     - Source, target, type, and label fields
+   - `HoverPayload` - Discriminated union for hover payloads
+     - `TopicHoverPayload` - Topic hover payload with summary, event_count, open_questions, event_snippet, statistics
+     - `SkillHoverPayload` - Skill hover payload with mastery, evidence_count, topic_id, event_snippet, statistics
+     - `EventHoverPayload` - Event hover payload with content, event_type, actor, topics, skills, timestamps, statistics
+   - `ChatMessage` - Chat message model for tutor chat interface
+     - Role (student/tutor/system), content, timestamp, session_id, event_id
+   - `CommandResult` - Command result model for facade operations
+     - Success status, result data, error information, duration
+     - `from_facade_response()` class method for creating from facade responses
+   - Supporting models: `EventSnippet`, `HoverStatistics`
+
+2. **Interface Common Module Updates** (`src/interface_common/__init__.py`)
+   - Exported all new models for use by GUI front-ends
+
+3. **Testing** (`tests/test_interface_models.py`)
+   - Unit tests for GraphNode (8 tests)
+     - Topic, skill, and event node creation
+     - Serialization, deserialization, round-trip
+     - Validation error handling (invalid types, invalid mastery values)
+   - Unit tests for GraphEdge (3 tests)
+     - Edge creation, serialization, round-trip
+   - Unit tests for HoverPayload (6 tests)
+     - Topic, skill, and event hover payload creation
+     - Serialization, round-trip
+     - Validation error handling (invalid mastery values)
+   - Unit tests for ChatMessage (3 tests)
+     - Message creation, serialization, round-trip
+   - Unit tests for CommandResult (6 tests)
+     - Success and failure result creation
+     - `from_facade_response()` method testing
+     - Serialization, round-trip
+   - Model validation tests (4 tests)
+     - Graph provider output matches GraphNode
+     - Graph provider output matches GraphEdge
+     - Hover provider output matches HoverPayload
+     - Facade output matches CommandResult
+   - All 30 tests passing
+
+4. **Documentation**
+   - Updated `docs/index/index.md` with new models file
+
 ### ✅ Block D, PR #10: Performance Tracking (COMPLETED)
 
 1. **Performance Analysis** (`src/analysis/performance.py`)

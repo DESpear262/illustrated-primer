@@ -58,6 +58,7 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **src/interface_common/__init__.py** - Package initialization for interface_common module
 - **src/interface_common/exceptions.py** - Custom exception classes for GUI–backend facade operations (FacadeError, FacadeTimeoutError, FacadeDatabaseError, FacadeIndexError, FacadeAIError, FacadeChatError)
 - **src/interface_common/app_facade.py** - Unified GUI–backend facade with async wrappers for all CLI commands, error handling, timeout guards, logging hooks, and run_command dispatcher
+- **src/interface_common/models.py** - Shared Pydantic models for consistent data structures between CLI outputs and GUI responses (GraphNode, GraphEdge, HoverPayload, ChatMessage, CommandResult)
 
 ### Ingestion Module (`src/ingestion/`)
 - **src/ingestion/__init__.py** - Package initialization for ingestion module
@@ -107,6 +108,7 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **tests/test_summarizers.py** - Unit and integration tests for summarization (audit logging, versioning, batch processing, scheduler, refresh functions)
 - **tests/test_integration.py** - Integration tests for database operations, topic hierarchy, and FTS search
 - **tests/test_facade.py** - Unit and integration tests for GUI–backend facade (async wrappers, error handling, timeout guards, command dispatcher)
+- **tests/test_interface_models.py** - Unit tests for interface common models (validation, serialization, round-trip safety, facade output validation)
 - **tests/test_graph_provider.py** - Unit tests for graph provider (JSON format validation, depth filtering, scope filtering, relation filtering)
 - **tests/test_hover_provider.py** - Unit tests for hover provider (payload structure validation, caching, performance, error handling)
 - **tests/test_graph_hover_integration.py** - Integration tests for graph and hover providers (combined FAISS + SQLite queries, performance requirements, large dataset testing)
