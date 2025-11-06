@@ -18,6 +18,7 @@ import numpy as np
 
 from src.config import (
     DB_PATH,
+    FAISS_INDEX_PATH,
     OPENAI_EMBEDDING_MODEL,
     USE_TIKTOKEN,
     CHUNK_TOKENS,

@@ -98,6 +98,12 @@ CONTEXT_MIN_SCORE_THRESHOLD: float = float(os.getenv("AI_TUTOR_CONTEXT_MIN_SCORE
 CONTEXT_RERANK: bool = os.getenv("AI_TUTOR_RERANK", "0") not in ("0", "false", "False")
 CONTEXT_REDACT: bool = os.getenv("AI_TUTOR_REDACT", "0") not in ("0", "false", "False")
 
+# Summarization configuration
+SUMMARIZATION_BATCH_SIZE: int = int(os.getenv("AI_TUTOR_SUMMARIZATION_BATCH_SIZE", "10"))
+SUMMARIZATION_INTERVAL_SECONDS: int = int(os.getenv("AI_TUTOR_SUMMARIZATION_INTERVAL_SECONDS", "300"))
+SUMMARIZATION_MAX_CONCURRENT_TOPICS: int = int(os.getenv("AI_TUTOR_SUMMARIZATION_MAX_CONCURRENT_TOPICS", "3"))
+SUMMARIZATION_ENABLED: bool = os.getenv("AI_TUTOR_SUMMARIZATION_ENABLED", "1") not in ("0", "false", "False")
+
 # Review scheduler configuration
 REVIEW_DECAY_TAU_DAYS: float = float(os.getenv("AI_TUTOR_REVIEW_DECAY_TAU_DAYS", "30.0"))
 REVIEW_GRACE_PERIOD_DAYS: float = float(os.getenv("AI_TUTOR_REVIEW_GRACE_PERIOD_DAYS", "7.0"))

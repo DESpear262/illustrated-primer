@@ -7,5 +7,6 @@ typer
 rich
 apscheduler
 pytest
+pytest-asyncio
 tiktoken
 

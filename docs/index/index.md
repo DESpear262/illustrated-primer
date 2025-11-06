@@ -54,6 +54,11 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **src/interface/utils.py** - Chat utilities for history building and token budgeting
 - **src/interface/tutor_chat.py** - TUI engine for chat sessions, upload handling, and summarization
 
+### Interface Common Module (`src/interface_common/`)
+- **src/interface_common/__init__.py** - Package initialization for interface_common module
+- **src/interface_common/exceptions.py** - Custom exception classes for GUI–backend facade operations (FacadeError, FacadeTimeoutError, FacadeDatabaseError, FacadeIndexError, FacadeAIError, FacadeChatError)
+- **src/interface_common/app_facade.py** - Unified GUI–backend facade with async wrappers for all CLI commands, error handling, timeout guards, logging hooks, and run_command dispatcher
+
 ### Ingestion Module (`src/ingestion/`)
 - **src/ingestion/__init__.py** - Package initialization for ingestion module
 - **src/ingestion/transcripts.py** - Transcript importer for .txt, .md, and .json formats with AI classification, summarization, embedding, and topic/skill state updates
