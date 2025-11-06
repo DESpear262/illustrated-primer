@@ -186,3 +186,26 @@ CREATE INDEX IF NOT EXISTS idx_event_chunks_chunk_index ON event_chunks(chunk_in
 CREATE INDEX IF NOT EXISTS idx_event_chunks_embedding_id ON event_chunks(embedding_id);
 CREATE INDEX IF NOT EXISTS idx_event_chunks_topics ON event_chunks(topics);
 
+-- Audit logs table: tracks summarization operations
+CREATE TABLE IF NOT EXISTS audit_logs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    log_type TEXT NOT NULL CHECK(log_type IN ('summarization', 'skill_update', 'topic_update')),
+    topic_id TEXT,
+    skill_id TEXT,
+    event_ids TEXT NOT NULL DEFAULT '[]',  -- JSON array of event IDs processed
+    summary_version INTEGER,
+    model_version TEXT,
+    tokens_used INTEGER,
+    status TEXT NOT NULL CHECK(status IN ('success', 'failed', 'partial')),
+    error_message TEXT,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    metadata TEXT NOT NULL DEFAULT '{}'  -- JSON metadata
+);
+
+-- Indexes for audit_logs
+CREATE INDEX IF NOT EXISTS idx_audit_logs_log_type ON audit_logs(log_type);
+CREATE INDEX IF NOT EXISTS idx_audit_logs_topic_id ON audit_logs(topic_id);
+CREATE INDEX IF NOT EXISTS idx_audit_logs_skill_id ON audit_logs(skill_id);
+CREATE INDEX IF NOT EXISTS idx_audit_logs_status ON audit_logs(status);
+CREATE INDEX IF NOT EXISTS idx_audit_logs_created_at ON audit_logs(created_at);
+

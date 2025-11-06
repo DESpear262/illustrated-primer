@@ -209,7 +209,22 @@ class Database:
         row_id = self._execute_insert("events", data)
         
         # Return event with ID populated
-        return Event(**{**event.model_dump(), "id": row_id})
+        inserted_event = Event(**{**event.model_dump(), "id": row_id})
+        
+        # Queue summarization job if enabled (non-blocking)
+        try:
+            from src.summarizers.hooks import on_event_created
+            on_event_created(inserted_event, db_path=self.db_path)
+        except Exception as e:
+            # Don't fail event insertion if summarization hook fails
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.debug(f"Summarization hook failed (non-critical): {e}")
+        except ImportError:
+            # Summarizers module may not be available in all contexts
+            pass
+        
+        return inserted_event
     
     def update_event(self, event: Event) -> Event:
         """
