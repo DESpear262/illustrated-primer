@@ -15,6 +15,7 @@ Interface Layer → AI Layer → Retrieval Layer → Data Layer
 ### Interface Layer
 - **Tutor Chat TUI**: Conversational LLM interface for study sessions
 - **Command Chat TUI**: Structured command input for administrative operations
+- **GUI-Backend Facade**: Unified async API layer between GUI and all backend services
 
 ### AI Layer
 - **AI Orchestration**: Coordinates LLM calls and context management
@@ -113,4 +114,5 @@ Skill States → Mastery Decay Calculation → Priority Ranking → Review List 
 - Validation at model boundaries (Pydantic schemas)
 - Transaction safety for database operations
 - Graceful fallbacks for AI failures
+- Facade pattern for GUI-backend communication with timeout guards and error serialization
 

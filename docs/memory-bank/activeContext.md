@@ -2,9 +2,25 @@
 
 ## Current Work Focus
 
-**Block C: Transcript Ingestion Pipeline - PR #8: Update Propagation & Summarization** ✅ **COMPLETED**
+**Interface Development - Block A: Backend Integration Layer - PR #1: Unified GUI–Backend Facade** ✅ **COMPLETED**
 
 ## Recent Changes
+
+### Completed (Interface Development - PR #1)
+1. ✅ Created `interface_common` module with unified GUI-backend facade
+2. ✅ Implemented `AppFacade` class with async wrappers for all backend operations
+3. ✅ Created custom exceptions (FacadeError, FacadeTimeoutError, FacadeValidationError)
+4. ✅ Implemented DB wrapper methods (check, init) with timeout guards
+5. ✅ Implemented Index wrapper methods (build, status, search) with timeout guards
+6. ✅ Implemented AI wrapper methods (routes, test summarize/classify/chat) with timeout guards
+7. ✅ Implemented Chat wrapper methods (start, resume, list, chat_turn) with full session management
+8. ✅ Added `run_command(name, args)` dispatcher for generic command execution
+9. ✅ Added timeout guards: LLM (30s), FAISS (10s), DB (5s)
+10. ✅ Added error handling and exception serialization for UI display
+11. ✅ Added logging hooks for all GUI-initiated operations
+12. ✅ Created comprehensive unit tests (30+ tests) for facade methods
+13. ✅ Created integration tests (8+ tests) for async operations and session persistence
+14. ✅ Updated file index documentation
 
 ### Completed (PR #8)
 1. ✅ Created summarizers module with update.py for batch processing and aggregation
@@ -112,13 +128,18 @@
 
 ## Next Steps
 
-### Block D: PR #10 - Performance Tracking
-1. Implement delta calculator comparing p_mastery between timestamps
-2. Create CLI command: `cli progress summary`
-3. Generate JSON and markdown reports
-4. Add plotting option using rich charts
-5. Link reports to student profile
-6. Create unit and integration tests
+### Interface Development - Block A: Backend Integration Layer
+- ⏳ PR #2: Graph + Hover Providers (12 hours)
+  - Implement graph_provider.py to return DAG JSON from database
+  - Implement hover_provider.py for per-node summaries and statistics
+  - Integrate networkx DAG traversal utilities
+  - Add query filters for scope, depth, and relation
+  - Cache hover payloads to minimize repeated lookups
+
+- ⏳ PR #3: UI Model Definitions (8 hours)
+  - Create shared Pydantic models for GraphNode, GraphEdge, HoverPayload, ChatMessage, CommandResult
+  - Define schema contracts used by both GUI front-ends
+  - Add JSON serialization helpers
 
 ## Active Decisions
 
@@ -131,7 +152,7 @@
 
 ## Current Blockers
 
-None - Block C PR #8 complete; proceeding to Block D PR #10
+None - Interface Development PR #1 complete; proceeding to PR #2: Graph + Hover Providers
 
 ## Implementation Status
 
@@ -151,7 +172,12 @@ None - Block C PR #8 complete; proceeding to Block D PR #10
 
 ### Block D: Spaced Repetition & Mastery Tracking
 - ✅ PR #9: Review Scheduler (COMPLETED)
-- ⏳ PR #10: Performance Tracking
+- ✅ PR #10: Performance Tracking (COMPLETED)
+
+### Interface Development - Block A: Backend Integration Layer
+- ✅ PR #1: Unified GUI–Backend Facade (COMPLETED)
+- ⏳ PR #2: Graph + Hover Providers
+- ⏳ PR #3: UI Model Definitions
 
 ## Notes
 
@@ -161,5 +187,6 @@ None - Block C PR #8 complete; proceeding to Block D PR #10
 - Transcript import fully functional with AI classification, summarization, and state updates
 - Write-time summarization fully functional with APScheduler background jobs and audit logging
 - Review scheduler fully functional with decay-based mastery model and priority computation
-- Ready to proceed with PR #10: Performance Tracking
+- GUI-backend facade complete with async wrappers, error handling, timeout guards, and logging hooks
+- Ready to proceed with Interface Development PR #2: Graph + Hover Providers
 

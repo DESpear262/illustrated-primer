@@ -2,6 +2,30 @@
 
 ## What Works
 
+### ✅ Interface Development - Block A, PR #1: Unified GUI–Backend Facade (COMPLETED)
+
+1. **GUI-Backend Facade** (`src/interface_common/app_facade.py`)
+   - AppFacade class with async wrappers for all backend operations
+   - Database operations: db_check(), db_init() with timeout guards
+   - Index operations: index_build(), index_status(), index_search() with timeout guards
+   - AI operations: ai_routes(), ai_test_summarize(), ai_test_classify(), ai_test_chat() with timeout guards
+   - Chat operations: chat_start(), chat_resume(), chat_list(), chat_turn() with full session management
+   - Generic command dispatcher: run_command(name, args) for all operations
+   - Timeout guards: LLM (30s), FAISS (10s), DB (5s)
+   - Error handling with custom exceptions (FacadeError, FacadeTimeoutError, FacadeValidationError)
+   - Logging hooks for all GUI-initiated operations
+
+2. **Custom Exceptions** (`src/interface_common/exceptions.py`)
+   - FacadeError: Base exception for all facade errors
+   - FacadeTimeoutError: Raised when operations exceed timeout
+   - FacadeValidationError: Raised when input validation fails
+
+3. **Testing** (`tests/test_app_facade.py`, `tests/test_app_facade_integration.py`)
+   - Unit tests for all facade methods (30+ tests)
+   - Integration tests for async operations and session persistence (8+ tests)
+   - Tests for error handling, timeout guards, and validation
+   - All tests passing
+
 ### ✅ Block D, PR #10: Performance Tracking (COMPLETED)
 
 1. **Performance Analysis** (`src/analysis/performance.py`)

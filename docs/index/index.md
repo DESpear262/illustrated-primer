@@ -54,6 +54,11 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **src/interface/utils.py** - Chat utilities for history building and token budgeting
 - **src/interface/tutor_chat.py** - TUI engine for chat sessions, upload handling, and summarization
 
+### Interface Common Module (`src/interface_common/`)
+- **src/interface_common/__init__.py** - Package initialization for interface_common module
+- **src/interface_common/app_facade.py** - Unified GUI-backend facade with async wrappers for all backend operations, error handling, timeout guards, and logging hooks
+- **src/interface_common/exceptions.py** - Custom exceptions for facade operations (FacadeError, FacadeTimeoutError, FacadeValidationError)
+
 ### Ingestion Module (`src/ingestion/`)
 - **src/ingestion/__init__.py** - Package initialization for ingestion module
 - **src/ingestion/transcripts.py** - Transcript importer for .txt, .md, and .json formats with AI classification, summarization, embedding, and topic/skill state updates
@@ -99,6 +104,8 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **tests/test_transcript_import.py** - Unit and integration tests for transcript import (parsing, actor inference, timestamp parsing, AI classification, event creation, summarization, embedding, topic/skill updates)
 - **tests/test_summarizers.py** - Unit and integration tests for summarization (audit logging, versioning, batch processing, scheduler, refresh functions)
 - **tests/test_integration.py** - Integration tests for database operations, topic hierarchy, and FTS search
+- **tests/test_app_facade.py** - Unit tests for GUI-backend facade (async wrappers, error handling, timeout guards, logging hooks)
+- **tests/test_app_facade_integration.py** - Integration tests for facade with real backend components (async operations, session persistence, error serialization)
 
 ## Documentation (`docs/`)
 
