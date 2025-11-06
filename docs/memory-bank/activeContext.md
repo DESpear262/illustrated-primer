@@ -2,9 +2,47 @@
 
 ## Current Work Focus
 
-**Block B: AI Tutor Chat System - PR #6: Context Composition Engine** ✅ **COMPLETED**
+**Block C: Transcript Ingestion Pipeline - PR #8: Update Propagation & Summarization** ✅ **COMPLETED**
 
 ## Recent Changes
+
+### Completed (PR #8)
+1. ✅ Created summarizers module with update.py for batch processing and aggregation
+2. ✅ Refactored update_topic_summary and update_skill_states from transcripts.py to summarizers/update.py
+3. ✅ Implemented batch summarization with aggregation logic (aggregates unprocessed events per topic)
+4. ✅ Created audit logging system with audit_logs table tracking all summarization operations
+5. ✅ Implemented APScheduler background job for write-time summarization (process_summarization_job)
+6. ✅ Added summarization configuration constants (SUMMARIZATION_BATCH_SIZE, SUMMARIZATION_INTERVAL_SECONDS, SUMMARIZATION_MAX_CONCURRENT_TOPICS, SUMMARIZATION_ENABLED)
+7. ✅ Created CLI commands: `refresh summaries` (with --topic, --since, --force options) and `refresh status`
+8. ✅ Integrated write-time summarization into event creation flow via hooks (non-blocking, optional)
+9. ✅ Implemented versioning system with summary_version counter and last_summarized_at timestamp
+10. ✅ Created comprehensive unit and integration tests (test_summarizers.py)
+11. ✅ Updated file index documentation
+
+### Completed (PR #9)
+1. ✅ Created ReviewItem class for review items with priority scores
+2. ✅ Implemented decay-based mastery model with exponential decay (tau = 30 days, grace period = 7 days)
+3. ✅ Implemented review priority computation combining p_mastery and days_since_review
+4. ✅ Created get_next_reviews function to retrieve and prioritize skills for review
+5. ✅ Created record_review_outcome function to record outcomes as assessment Events and update skill state
+6. ✅ Added review scheduler configuration constants (REVIEW_DECAY_TAU_DAYS, REVIEW_GRACE_PERIOD_DAYS, REVIEW_DEFAULT_LIMIT)
+7. ✅ Created CLI command: `review next` with rich table output showing skill ID, topic, mastery, decayed mastery, days since review, and priority
+8. ✅ Added filtering options (topic, mastery range, limit)
+9. ✅ Created comprehensive unit and integration tests (22 tests, all passing)
+10. ✅ Updated file index documentation
+
+### Completed (PR #7)
+1. ✅ Created transcript parsers for .txt, .md, and .json formats (`src/ingestion/transcripts.py`)
+2. ✅ Implemented actor/speaker inference from transcript labels (Tutor/Student patterns)
+3. ✅ Implemented timestamp parsing (ISO format, date strings, file modification time fallback)
+4. ✅ Created OpenAI embedding function with fallback to stub embeddings
+5. ✅ Implemented AI-based topic/skill classification using gpt-4o-mini
+6. ✅ Created functions to update topic summaries and skill states after event import
+7. ✅ Implemented main import_transcript function with AI classification, summarization, embedding, and state updates
+8. ✅ Added comprehensive provenance tracking (source_file_path, import_timestamp, import_method, import_model_version, classification_confidence)
+9. ✅ Created CLI commands: `import transcript` (single file) and `import batch` (multiple files)
+10. ✅ Created comprehensive unit and integration tests (test_transcript_import.py)
+11. ✅ Updated file index documentation
 
 ### Completed (PR #6)
 1. ✅ Created ContextAssembler with dynamic token allocation (new chat: all to memory; grows to 60% history cap)
@@ -74,13 +112,13 @@
 
 ## Next Steps
 
-### Completed (PR #5)
-1. ✅ Implemented text-based TUI using typer + rich (`src/cli/chat.py`, `src/interface/tutor_chat.py`)
-2. ✅ Added conversational history buffer with token budgeting (`src/interface/utils.py`)
-3. ✅ Logged each turn as `Event` with `metadata.session_id` and `turn_index`
-4. ✅ Displayed loading indicators and summaries; summarize on exit and on upload
-5. ✅ Implemented session list and resume
-6. ✅ LLM-suggested session title based on first interaction
+### Block D: PR #10 - Performance Tracking
+1. Implement delta calculator comparing p_mastery between timestamps
+2. Create CLI command: `cli progress summary`
+3. Generate JSON and markdown reports
+4. Add plotting option using rich charts
+5. Link reports to student profile
+6. Create unit and integration tests
 
 ## Active Decisions
 
@@ -93,7 +131,7 @@
 
 ## Current Blockers
 
-None - Block A complete; proceeding to Block B
+None - Block C PR #8 complete; proceeding to Block D PR #10
 
 ## Implementation Status
 
@@ -108,17 +146,20 @@ None - Block A complete; proceeding to Block B
 - ✅ PR #6: Context Composition Engine (COMPLETED)
 
 ### Block C: Transcript Ingestion Pipeline
-- ⏳ PR #7: Transcript Importer
-- ⏳ PR #8: Update Propagation & Summarization
+- ✅ PR #7: Transcript Importer (COMPLETED)
+- ✅ PR #8: Update Propagation & Summarization (COMPLETED)
 
 ### Block D: Spaced Repetition & Mastery Tracking
-- ⏳ PR #9: Review Scheduler
+- ✅ PR #9: Review Scheduler (COMPLETED)
 - ⏳ PR #10: Performance Tracking
 
 ## Notes
 
 - All tests passing
-- No linter errors
+- No linter errors (only import warnings for installed dependencies)
 - Database schema supports hierarchical topics
-- Ready to proceed with database I/O layer implementation
+- Transcript import fully functional with AI classification, summarization, and state updates
+- Write-time summarization fully functional with APScheduler background jobs and audit logging
+- Review scheduler fully functional with decay-based mastery model and priority computation
+- Ready to proceed with PR #10: Performance Tracking
 

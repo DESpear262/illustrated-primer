@@ -10,6 +10,11 @@ from rich.console import Console
 from src.cli import db as db_cli
 from src.cli import index as index_cli
 from src.cli import ai as ai_cli
+from src.cli import chat as chat_cli
+from src.cli import review as review_cli
+from src.cli import import_cmd as import_cli_module
+from src.cli import refresh as refresh_cli
+from src.cli import progress as progress_cli
 
 app = typer.Typer(help="AI Tutor Proof of Concept CLI")
 console = Console()
@@ -18,6 +23,11 @@ console = Console()
 app.add_typer(db_cli.app, name="db", help="Database management commands")
 app.add_typer(index_cli.app, name="index", help="Index management commands")
 app.add_typer(ai_cli.app, name="ai", help="AI service commands")
+app.add_typer(chat_cli.app, name="chat", help="Tutor chat interface commands")
+app.add_typer(review_cli.app, name="review", help="Review scheduler commands")
+app.add_typer(import_cli_module.app, name="import", help="Import commands")
+app.add_typer(refresh_cli.app, name="refresh", help="Refresh commands")
+app.add_typer(progress_cli.app, name="progress", help="Progress tracking commands")
 
 
 @app.command()

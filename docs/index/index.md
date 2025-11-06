@@ -17,11 +17,14 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 
 ### CLI Module (`src/cli/`)
 - **src/cli/__init__.py** - Package initialization for CLI module
-- **src/cli/main.py** - Main CLI entry point providing top-level commands (version, db, index, ai, chat subcommands)
+- **src/cli/main.py** - Main CLI entry point providing top-level commands (version, db, index, ai, chat, review, import subcommands)
 - **src/cli/db.py** - Database CLI commands for health checks and database initialization
 - **src/cli/index.py** - FAISS index CLI commands for building, checking status, and searching
 - **src/cli/ai.py** - AI service CLI commands for testing AI functionality and viewing routing configuration
 - **src/cli/chat.py** - Tutor chat CLI commands (start, resume, list)
+- **src/cli/review.py** - Review scheduler CLI commands (next: get prioritized review list)
+- **src/cli/import_cmd.py** - Transcript import CLI commands (transcript: import single file, batch: import multiple files)
+- **src/cli/refresh.py** - Summarization refresh CLI commands (summaries: refresh topic summaries, status: show topics needing refresh)
 
 ### Models Module (`src/models/`)
 - **src/models/__init__.py** - Package initialization for models module
@@ -51,10 +54,24 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **src/interface/utils.py** - Chat utilities for history building and token budgeting
 - **src/interface/tutor_chat.py** - TUI engine for chat sessions, upload handling, and summarization
 
+### Ingestion Module (`src/ingestion/`)
+- **src/ingestion/__init__.py** - Package initialization for ingestion module
+- **src/ingestion/transcripts.py** - Transcript importer for .txt, .md, and .json formats with AI classification, summarization, embedding, and topic/skill state updates
+
+### Summarizers Module (`src/summarizers/`)
+- **src/summarizers/__init__.py** - Package initialization for summarizers module
+- **src/summarizers/update.py** - Summarization update functions with batch processing, aggregation, audit logging, and versioning
+- **src/summarizers/scheduler.py** - APScheduler background job for write-time summarization
+- **src/summarizers/hooks.py** - Hooks to trigger summarization after event creation
+
 ### Context Module (`src/context/`)
 - **src/context/__init__.py** - Package initialization for context module
 - **src/context/filters.py** - Hybrid scoring, recency decay, and filtering utilities
 - **src/context/assembler.py** - Context assembler with dynamic token allocation, hybrid retrieval, and MMR diversity
+
+### Scheduler Module (`src/scheduler/`)
+- **src/scheduler/__init__.py** - Package initialization for scheduler module
+- **src/scheduler/review.py** - Review scheduler with decay-based mastery model, priority computation, and outcome recording
 
 ## Scripts (`scripts/`)
 
@@ -78,6 +95,9 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **tests/test_chat_interface.py** - Integration tests for chat interface with mocked API responses
 - **tests/test_context_filters.py** - Unit tests for context filters (hybrid scoring, recency decay, filtering)
 - **tests/test_context_assembler.py** - Unit tests for context assembler (token allocation, composition)
+- **tests/test_scheduler.py** - Unit and integration tests for review scheduler (decay model, priority computation, outcome recording)
+- **tests/test_transcript_import.py** - Unit and integration tests for transcript import (parsing, actor inference, timestamp parsing, AI classification, event creation, summarization, embedding, topic/skill updates)
+- **tests/test_summarizers.py** - Unit and integration tests for summarization (audit logging, versioning, batch processing, scheduler, refresh functions)
 - **tests/test_integration.py** - Integration tests for database operations, topic hierarchy, and FTS search
 
 ## Documentation (`docs/`)
