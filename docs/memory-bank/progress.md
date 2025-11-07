@@ -143,6 +143,56 @@
 4. **Documentation**
    - Updated `docs/index/index.md` with new models file
 
+### ✅ Block C (GUI Framework), PR #11: Tutor Chat & Command Console (Web) (COMPLETED)
+
+1. **Chat Interface** (`frontend/src/pages/Chat.tsx`)
+   - Message display with student/tutor distinction
+   - Session list sidebar with resume functionality
+   - Message input with Enter to send
+   - Loading states with typing indicators
+   - Context chunks display on hover for AI messages
+   - Export/delete session functionality
+   - Persistent logs per session (localStorage)
+
+2. **Command Console** (`frontend/src/pages/Console.tsx`)
+   - Tabbed interface (DB, Index, AI, Chat)
+   - Form-based UI for all CLI commands:
+     - Database: Check, Init
+     - Index: Build, Status, Search
+     - AI: Routes, Test
+     - Chat: Start, Resume, List
+   - Persistent logs panel with command history
+   - Structured output display (JSON/tables)
+
+3. **Hooks** (`frontend/src/hooks/`)
+   - `useWebSocket.ts` - WebSocket hook for live updates with auto-reconnect
+   - `useLocalStorage.ts` - LocalStorage hook for persistent data storage
+
+4. **API Client Extensions** (`frontend/src/lib/api.ts`)
+   - Extended with chat endpoints (start, resume, list, turn)
+   - Extended with database endpoints (check, init)
+   - Extended with index endpoints (build, status, search)
+   - Extended with AI endpoints (routes, test)
+
+5. **Toast Notifications**
+   - Integrated react-hot-toast for success/error notifications
+   - Added Toaster to App component
+
+6. **Error Handling**
+   - Error toasts for failed requests
+   - Manual retry for chat turns
+   - Error display in console logs
+
+7. **Testing** (`frontend/src/test/`)
+   - Tests for Chat component (3 tests)
+   - Tests for Console component (3 tests)
+   - Updated test setup with scrollIntoView mock
+   - All 13 tests passing
+
+8. **Documentation**
+   - Updated `docs/index/index.md` with all new files
+   - Inline documentation in all components
+
 ### ✅ Block C (GUI Framework), PR #10: Frontend Scaffolding (COMPLETED)
 
 1. **React + TypeScript + Vite Project** (`frontend/`)
@@ -648,8 +698,8 @@
 - **Block C**: 2/2 PRs complete (100%)
 - **Block D**: 2/2 PRs complete (100%)
 - **Block A (Interface)**: 3/3 PRs complete (100%)
-- **Block C (GUI Framework)**: 2/4 PRs complete (50%)
-- **Total**: 13/17 PRs complete (76%)
+- **Block C (GUI Framework)**: 3/4 PRs complete (75%)
+- **Total**: 14/17 PRs complete (82%)
 
 ### Timeline
 - **Block A**: ~30/30 hours complete (100%)

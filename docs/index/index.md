@@ -168,15 +168,19 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **frontend/src/components/Sidebar.tsx** - Sidebar component with collapsible navigation shortcuts
 - **frontend/src/components/StatusFooter.tsx** - Status footer component displaying API health, database path, and index state
 - **frontend/src/pages/Home.tsx** - Home page component that redirects to Chat
-- **frontend/src/pages/Chat.tsx** - Chat page placeholder (to be implemented in PR #11)
-- **frontend/src/pages/Console.tsx** - Console page placeholder (to be implemented in PR #11)
+- **frontend/src/pages/Chat.tsx** - Chat page with session management, message display, and context awareness
+- **frontend/src/pages/Console.tsx** - Console page with form-based UI for all CLI commands
 - **frontend/src/pages/Review.tsx** - Review page placeholder
 - **frontend/src/pages/Context.tsx** - Context page placeholder
 - **frontend/src/pages/KnowledgeTree.tsx** - Knowledge Tree page placeholder (to be implemented in PR #12)
+- **frontend/src/hooks/useWebSocket.ts** - WebSocket hook for live updates
+- **frontend/src/hooks/useLocalStorage.ts** - LocalStorage hook for persistent data storage
 - **frontend/src/test/setup.ts** - Vitest test setup file with React Testing Library configuration
 - **frontend/src/test/App.test.tsx** - Tests for App component
 - **frontend/src/test/api.test.ts** - Tests for API client
 - **frontend/src/test/Layout.test.tsx** - Tests for Layout component
+- **frontend/src/test/Chat.test.tsx** - Tests for Chat component
+- **frontend/src/test/Console.test.tsx** - Tests for Console component
 
 ## Data Directory (`data/`)
 

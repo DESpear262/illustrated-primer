@@ -2,9 +2,51 @@
 
 ## Current Work Focus
 
-**Block C (GUI Framework): PR #10 - Frontend Scaffolding** ✅ **COMPLETED**
+**Block C (GUI Framework): PR #11 - Tutor Chat & Command Console (Web)** ✅ **COMPLETED**
 
 ## Recent Changes
+
+### Completed (PR #11 - Block C)
+1. ✅ Implemented Chat interface with session management:
+   - Message display with student/tutor distinction
+   - Session list sidebar with resume functionality
+   - Message input with Enter to send
+   - Loading states with typing indicators
+   - Context chunks display on hover for AI messages
+   - Export/delete session functionality
+   - Persistent logs per session (localStorage)
+2. ✅ Implemented Command Console with form-based UI:
+   - Tabbed interface (DB, Index, AI, Chat)
+   - Form-based commands for all CLI actions:
+     - Database: Check, Init
+     - Index: Build, Status, Search
+     - AI: Routes, Test
+     - Chat: Start, Resume, List
+   - Persistent logs panel with command history
+   - Structured output display (JSON/tables)
+3. ✅ Added toast notifications using react-hot-toast:
+   - Success/error notifications
+   - Integrated into App component
+4. ✅ Created WebSocket hook for live updates:
+   - Connection management with auto-reconnect
+   - Message handling and subscription support
+5. ✅ Created LocalStorage hook for persistent data:
+   - Typed localStorage access with JSON serialization
+   - Used for chat logs and console logs
+6. ✅ Extended API client with chat and console methods:
+   - Chat endpoints (start, resume, list, turn)
+   - Database endpoints (check, init)
+   - Index endpoints (build, status, search)
+   - AI endpoints (routes, test)
+7. ✅ Added error handling and retry logic:
+   - Error toasts for failed requests
+   - Manual retry for chat turns
+   - Error display in console logs
+8. ✅ Created comprehensive test suite:
+   - Tests for Chat component (3 tests)
+   - Tests for Console component (3 tests)
+   - All 13 tests passing
+9. ✅ Updated file index documentation
 
 ### Completed (PR #10 - Block C)
 1. ✅ Initialized React + TypeScript + Vite project structure
@@ -233,11 +275,11 @@
 
 ## Next Steps
 
-### Block C (GUI Framework): PR #11 - Tutor Chat & Command Console (Web)
-1. Implement Chat interface with streaming AI responses
-2. Implement Command Console replicating all CLI actions
-3. Add persistent logs per session
-4. Add toast notifications for success/error
+### Block C (GUI Framework): PR #12 - Knowledge Tree Visualization (Web)
+1. Integrate Cytoscape.js with ELK layout
+2. Fetch `/graph` and `/hover/{node_id}` from backend
+3. Implement hover tooltips, zoom, pan, and focus transitions
+4. Add search and collapse features
 
 ## Active Decisions
 
@@ -250,7 +292,7 @@
 
 ## Current Blockers
 
-None - Block C PR #10 complete; proceeding to PR #11
+None - Block C PR #11 complete; proceeding to PR #12
 
 ## Implementation Status
 
@@ -280,6 +322,7 @@ None - Block C PR #10 complete; proceeding to PR #11
 ### Block C (GUI Framework): GUI Framework
 - ✅ PR #9: FastAPI Backend for Tauri (COMPLETED)
 - ✅ PR #10: Frontend Scaffolding (COMPLETED)
+- ✅ PR #11: Tutor Chat & Command Console (Web) (COMPLETED)
 
 ## Notes
 
@@ -290,5 +333,6 @@ None - Block C PR #10 complete; proceeding to PR #11
 - Write-time summarization fully functional with APScheduler background jobs and audit logging
 - Review scheduler fully functional with decay-based mastery model and priority computation
 - Frontend scaffolding complete with routing, layout, and testing infrastructure
-- Ready to proceed with PR #11: Tutor Chat & Command Console (Web)
+- Chat and Console interfaces complete with full CLI parity
+- Ready to proceed with PR #12: Knowledge Tree Visualization (Web)
 
