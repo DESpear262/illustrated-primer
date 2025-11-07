@@ -253,12 +253,9 @@ class MainWindow(QMainWindow):
         self.tab_widget.addTab(self.command_view, "Command Console")
         
         # Review Queue tab
-        self.review_queue_tab = QWidget()
-        review_queue_layout = QVBoxLayout(self.review_queue_tab)
-        review_queue_label = QLabel("Review Queue - Coming in PR #7")
-        review_queue_label.setAlignment(Qt.AlignCenter)
-        review_queue_layout.addWidget(review_queue_label)
-        self.tab_widget.addTab(self.review_queue_tab, "Review Queue")
+        from src.interface_gui.views.review_queue_view import ReviewQueueView
+        self.review_queue_view = ReviewQueueView(self.facade)
+        self.tab_widget.addTab(self.review_queue_view, "Review Queue")
         
         # Knowledge Tree tab
         self.knowledge_tree_tab = QWidget()
@@ -269,12 +266,9 @@ class MainWindow(QMainWindow):
         self.tab_widget.addTab(self.knowledge_tree_tab, "Knowledge Tree")
         
         # Context Inspector tab
-        self.context_inspector_tab = QWidget()
-        context_inspector_layout = QVBoxLayout(self.context_inspector_tab)
-        context_inspector_label = QLabel("Context Inspector - Coming in PR #7")
-        context_inspector_label.setAlignment(Qt.AlignCenter)
-        context_inspector_layout.addWidget(context_inspector_label)
-        self.tab_widget.addTab(self.context_inspector_tab, "Context Inspector")
+        from src.interface_gui.views.context_inspector_view import ContextInspectorView
+        self.context_inspector_view = ContextInspectorView(self.facade)
+        self.tab_widget.addTab(self.context_inspector_view, "Context Inspector")
         
     def _setup_loading_overlay(self):
         """Setup global loading overlay for async operations."""

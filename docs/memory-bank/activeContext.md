@@ -2,9 +2,19 @@
 
 ## Current Work Focus
 
-**Interface Development - Block B: GUI Framework - PR #6: Command Console View** ✅ **COMPLETED**
+**Interface Development - Block B: GUI Framework - PR #7: Review Queue & Context Inspector** ✅ **COMPLETED**
 
 ## Recent Changes
+
+### Completed (Interface Development - PR #7)
+1. ✅ Added facade methods for review operations (review.next, review.record)
+2. ✅ Added facade methods for context operations (context.hierarchy, context.hover, context.expand, context.summarize, context.recompute)
+3. ✅ Created ReviewQueueView with table display, filtering, and mark complete dialog
+4. ✅ Created ContextInspectorView with tree view, expand/collapse, and node details
+5. ✅ Integrated ReviewQueueView and ContextInspectorView into MainWindow tabs
+6. ✅ Created integration tests for ReviewQueueView (test_review_queue_view.py)
+7. ✅ Created integration tests for ContextInspectorView (test_context_inspector_view.py)
+8. ✅ Updated file index documentation
 
 ### Completed (Interface Development - PR #6)
 1. ✅ Created CommandView with grouped sections (Database, Index, AI, Chat, Review, Import, Refresh, Progress)
@@ -191,11 +201,11 @@
 ## Next Steps
 
 ### Interface Development - Block B: GUI Framework
-- ⏳ PR #7: Review Queue & Context Inspector (12 hours)
-  - ReviewQueueView: table of topics sorted by review priority
-  - ContextInspector: tree view with expand/collapse and summaries
-  - Integrate with scheduler and summarizer modules
-  - Support manual recomputation triggers
+- ⏳ PR #8: Knowledge Tree View (12 hours)
+  - KnowledgeTreeView: interactive DAG visualization
+  - Cytoscape.js integration for graph rendering
+  - Node hover details and navigation
+  - Filtering and search capabilities
 
 ## Active Decisions
 
@@ -239,6 +249,7 @@ None - Interface Development Block A complete; proceeding to Block B: GUI Framew
 - ✅ PR #4: GUI Skeleton and Navigation (COMPLETED)
 - ✅ PR #5: Tutor Chat View (COMPLETED)
 - ✅ PR #6: Command Console View (COMPLETED)
+- ✅ PR #7: Review Queue & Context Inspector (COMPLETED)
 
 ## Notes
 
@@ -254,5 +265,7 @@ None - Interface Development Block A complete; proceeding to Block B: GUI Framew
 - GUI skeleton complete with multi-tab layout, menu bar, status bar, health checks, and loading overlay
 - Tutor chat view complete with message display, input, context sidebar, and session management
 - Command console view complete with visual interface for all CLI operations, form inputs, results display, and command history
-- Ready to proceed with Interface Development Block B: GUI Framework - PR #7: Review Queue & Context Inspector
+- Review queue view complete with table of topics sorted by review priority, filtering, mark complete dialog, and refresh functionality
+- Context inspector view complete with tree view of topics/skills, expand/collapse, node details, and actions (summarize, recompute)
+- Ready to proceed with Interface Development Block B: GUI Framework - PR #8: Knowledge Tree View
 

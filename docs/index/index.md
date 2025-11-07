@@ -61,12 +61,14 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **src/interface_gui/views/main_window.py** - Main window with multi-tab layout, menu bar, status bar, and all CLI command equivalents
 - **src/interface_gui/views/tutor_chat_view.py** - Tutor chat view with message display, input, context sidebar, and session management
 - **src/interface_gui/views/command_view.py** - Command console view with visual interface for all CLI operations, form inputs, results display, and command history
+- **src/interface_gui/views/review_queue_view.py** - Review queue view with table of topics sorted by review priority, filtering, mark complete dialog, and refresh functionality
+- **src/interface_gui/views/context_inspector_view.py** - Context inspector view with tree view of topics/skills, expand/collapse, node details, and actions (summarize, recompute)
 - **src/interface_gui/widgets/__init__.py** - Package initialization for widgets module
 - **src/interface_gui/widgets/message_list.py** - Message list widget with styled message bubbles and context indicators
 
 ### Interface Common Module (`src/interface_common/`)
 - **src/interface_common/__init__.py** - Package initialization for interface_common module
-- **src/interface_common/app_facade.py** - Unified GUI-backend facade with async wrappers for all backend operations, error handling, timeout guards, and logging hooks
+- **src/interface_common/app_facade.py** - Unified GUI-backend facade with async wrappers for all backend operations (database, index, AI, chat, review, context), error handling, timeout guards, and logging hooks
 - **src/interface_common/exceptions.py** - Custom exceptions for facade operations (FacadeError, FacadeTimeoutError, FacadeValidationError)
 - **src/interface_common/models.py** - Shared Pydantic models for GUI interfaces (GraphNode, GraphEdge, HoverPayload, ChatMessage, CommandResult) with JSON serialization helpers
 
@@ -126,6 +128,8 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **tests/test_gui_app.py** - Integration tests for GUI application (app launch, menu actions, basic functionality)
 - **tests/test_tutor_chat_view.py** - Unit and integration tests for tutor chat view (chat session logging, context retrieval, session persistence)
 - **tests/test_command_view.py** - Integration tests for command console view (command execution, results display, history)
+- **tests/test_review_queue_view.py** - Integration tests for review queue view (review list display, filtering, mark complete functionality)
+- **tests/test_context_inspector_view.py** - Integration tests for context inspector view (tree view, node details, expand/summarize/recompute actions)
 
 ## Documentation (`docs/`)
 

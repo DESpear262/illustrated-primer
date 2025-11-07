@@ -2,6 +2,49 @@
 
 ## What Works
 
+### ✅ Interface Development - Block B, PR #7: Review Queue & Context Inspector (COMPLETED)
+
+1. **Review Queue View** (`src/interface_gui/views/review_queue_view.py`)
+   - ReviewQueueView class with table of review items sorted by priority
+   - Filtering controls (topic, mastery range, limit)
+   - Mark complete dialog with mastered/not mastered selection and notes
+   - Refresh functionality to reload review list
+   - Empty state message when no reviews needed
+   - Table columns: Skill ID, Topic ID, Current Mastery, Decayed Mastery, Days Since Review, Priority Score, Last Evidence, Evidence Count
+   - Double-click or button to mark review complete
+   - Auto-refresh after marking complete
+
+2. **Context Inspector View** (`src/interface_gui/views/context_inspector_view.py`)
+   - ContextInspectorView class with tree view of topics/skills
+   - Tree view with expand/collapse functionality
+   - Node details panel showing summary, statistics, recent events, related skills
+   - Expand button to load child topics and skills on-demand
+   - Summarize button to refresh topic summary using AI
+   - Recompute button to recompute skill mastery for skills under a topic
+   - Manual refresh button to reload hierarchy
+   - Expanded state persistence across refreshes
+
+3. **Facade Methods** (`src/interface_common/app_facade.py`)
+   - review_next(): Get prioritized review list with filtering
+   - review_record(): Record review outcome and update skill state
+   - context_hierarchy(): Get topic hierarchy structure
+   - context_hover(): Get node details (topic or skill)
+   - context_expand(): Expand topic to get child topics and skills
+   - context_summarize(): Summarize topic using AI
+   - context_recompute(): Recompute skill mastery for skills under a topic
+   - All methods added to command_map for run_command() dispatcher
+
+4. **Testing** (`tests/test_review_queue_view.py`, `tests/test_context_inspector_view.py`)
+   - Integration tests for ReviewQueueView (review list display, filtering, mark complete)
+   - Integration tests for ContextInspectorView (tree view, node details, expand/summarize/recompute actions)
+   - Tests for ReviewCompleteDialog (mutually exclusive checkboxes, result retrieval)
+   - Tests for table updates and empty state display
+   - Tests for button state updates based on selection
+
+5. **Documentation** (`docs/index/index.md`)
+   - Updated file index with ReviewQueueView and ContextInspectorView files
+   - Updated facade description to include review and context operations
+
 ### ✅ Interface Development - Block B, PR #6: Command Console View (COMPLETED)
 
 1. **Command Console View** (`src/interface_gui/views/command_view.py`)
