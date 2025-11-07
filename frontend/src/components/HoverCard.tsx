@@ -4,7 +4,7 @@
  * Displays hover tooltips for graph nodes with summary information.
  */
 
-import { HoverPayload } from '../lib/api';
+import type { HoverPayload } from '../lib/api';
 
 /**
  * Hover card component props.
@@ -21,10 +21,10 @@ interface HoverCardProps {
  */
 export function HoverCard({ payload, x, y, onClose }: HoverCardProps) {
   const getMasteryColor = (mastery?: number) => {
-    if (mastery === undefined) return 'text-gray-600';
-    if (mastery < 0.3) return 'text-red-600';
-    if (mastery < 0.7) return 'text-yellow-600';
-    return 'text-green-600';
+    if (mastery === undefined) return 'text-ink-900 opacity-60';
+    if (mastery < 0.4) return 'text-garnet-600';
+    if (mastery < 0.7) return 'text-brass-600';
+    return 'text-verdigris-500';
   };
 
   const getMasteryLabel = (mastery?: number) => {
@@ -34,7 +34,7 @@ export function HoverCard({ payload, x, y, onClose }: HoverCardProps) {
 
   return (
     <div
-      className="absolute bg-white border border-gray-300 rounded-lg shadow-lg p-4 max-w-sm z-50 pointer-events-auto"
+      className="card absolute max-w-sm z-50 pointer-events-auto"
       style={{
         left: `${x}px`,
         top: `${y}px`,
@@ -45,7 +45,7 @@ export function HoverCard({ payload, x, y, onClose }: HoverCardProps) {
       {onClose && (
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
+          className="absolute top-2 right-2 text-ink-900 opacity-60 hover:opacity-100 transition-opacity duration-120"
         >
           ✕
         </button>
@@ -53,8 +53,8 @@ export function HoverCard({ payload, x, y, onClose }: HoverCardProps) {
       
       <div className="space-y-2">
         <div className="flex items-center justify-between">
-          <h3 className="font-bold text-lg">{payload.title}</h3>
-          <span className="text-xs px-2 py-1 bg-gray-200 rounded">
+          <h3 className="font-headline font-semibold text-lg text-ink-900">{payload.title}</h3>
+          <span className="text-xs px-2 py-1 bg-parchment-50 border border-brass-600 rounded-xl text-ink-900">
             {payload.type}
           </span>
         </div>
@@ -62,9 +62,9 @@ export function HoverCard({ payload, x, y, onClose }: HoverCardProps) {
         {payload.type === 'topic' && (
           <>
             {payload.summary && (
-              <p className="text-sm text-gray-700">{payload.summary}</p>
+              <p className="text-sm text-ink-900">{payload.summary}</p>
             )}
-            <div className="text-xs text-gray-600 space-y-1">
+            <div className="text-xs text-ink-900 opacity-70 space-y-1">
               <div>Events: {payload.event_count || 0}</div>
               {payload.last_event_at && (
                 <div>
@@ -83,12 +83,12 @@ export function HoverCard({ payload, x, y, onClose }: HoverCardProps) {
         {payload.type === 'skill' && (
           <>
             <div className="flex items-center space-x-2">
-              <span className="text-sm font-semibold">Mastery:</span>
+              <span className="text-sm font-semibold text-ink-900">Mastery:</span>
               <span className={`text-sm font-bold ${getMasteryColor(payload.mastery)}`}>
                 {getMasteryLabel(payload.mastery)}
               </span>
             </div>
-            <div className="text-xs text-gray-600 space-y-1">
+            <div className="text-xs text-ink-900 opacity-70 space-y-1">
               <div>Evidence: {payload.evidence_count || 0}</div>
               {payload.last_evidence_at && (
                 <div>
@@ -105,9 +105,9 @@ export function HoverCard({ payload, x, y, onClose }: HoverCardProps) {
         {payload.type === 'event' && (
           <>
             {payload.content && (
-              <p className="text-sm text-gray-700 line-clamp-3">{payload.content}</p>
+              <p className="text-sm text-ink-900 line-clamp-3">{payload.content}</p>
             )}
-            <div className="text-xs text-gray-600 space-y-1">
+            <div className="text-xs text-ink-900 opacity-70 space-y-1">
               <div>Type: {payload.event_type}</div>
               <div>Actor: {payload.actor}</div>
               {payload.created_at && (
@@ -126,11 +126,11 @@ export function HoverCard({ payload, x, y, onClose }: HoverCardProps) {
         )}
 
         {payload.event_snippet && (
-          <div className="mt-2 pt-2 border-t border-gray-200">
-            <p className="text-xs text-gray-500 italic">
+          <div className="mt-2 pt-2 border-t border-brass-600">
+            <p className="text-xs text-ink-900 opacity-70 italic">
               "{payload.event_snippet.content.substring(0, 100)}..."
             </p>
-            <p className="text-xs text-gray-400 mt-1">
+            <p className="text-xs text-ink-900 opacity-60 mt-1">
               {new Date(payload.event_snippet.created_at).toLocaleDateString()}
             </p>
           </div>

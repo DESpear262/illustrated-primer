@@ -22,13 +22,13 @@ export function Context() {
   }, []);
 
   return (
-    <div className="space-y-4">
-      <h1 className="text-3xl font-bold">Context Inspector</h1>
-      <p className="text-gray-600">
+    <div className="space-y-4 p-6 bg-parchment-50">
+      <h1 className="text-3xl font-headline font-semibold text-ink-900">Context Inspector</h1>
+      <p className="text-ink-900 opacity-70">
         This is a placeholder for the Context Inspector interface.
       </p>
-      <div className="p-4 bg-gray-100 rounded">
-        <p className="text-sm">
+      <div className="card">
+        <p className="text-sm text-ink-900">
           <strong>Status:</strong> {apiStatus}
         </p>
       </div>

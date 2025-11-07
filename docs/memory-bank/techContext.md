@@ -11,11 +11,17 @@
 | **Model Integration** | OpenAI API | LLM + embeddings |
 | **Validation** | Pydantic | Schema enforcement |
 | **Interface** | typer + rich | CLI / TUI command pages |
+| **Web Frontend** | React + TypeScript + Vite | Tauri web interface |
+| **Styling** | Tailwind CSS | Utility-first CSS framework |
+| **Graph Visualization** | Cytoscape.js + ELK | Knowledge tree visualization |
+| **State Management** | React Hooks | Component state and localStorage |
+| **API Client** | Fetch API | HTTP client for backend communication |
 | **Scheduling** | APScheduler | Spaced repetition + maintenance tasks |
 | **Testing** | pytest | Unit and integration testing |
 
 ## Dependencies
 
+### Backend (Python)
 All dependencies are specified in `requirements.txt` without version pins:
 - `pydantic` - Data validation and models
 - `openai` - OpenAI API integration
@@ -25,6 +31,21 @@ All dependencies are specified in `requirements.txt` without version pins:
 - `rich` - Rich text and UI components
 - `apscheduler` - Task scheduling
 - `pytest` - Testing framework
+- `fastapi` - Web framework for API
+- `uvicorn` - ASGI server
+- `websockets` - WebSocket support
+
+### Frontend (Node.js)
+Dependencies specified in `frontend/package.json`:
+- `react` + `react-dom` - UI framework
+- `react-router-dom` - Client-side routing
+- `typescript` - Type safety
+- `vite` - Build tool and dev server
+- `tailwindcss` - Utility-first CSS framework
+- `cytoscape` - Graph visualization
+- `cytoscape-elk` - ELK layout algorithm
+- `react-hot-toast` - Toast notifications
+- `vitest` + `@testing-library/react` - Testing framework
 
 ## Configuration
 

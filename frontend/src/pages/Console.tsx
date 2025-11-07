@@ -6,7 +6,8 @@
  */
 
 import { useState, useEffect } from 'react';
-import { apiClient, CommandResult } from '../lib/api';
+import { apiClient } from '../lib/api';
+import type { CommandResult } from '../lib/api';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import toast from 'react-hot-toast';
 
@@ -267,20 +268,20 @@ export function Console() {
   return (
     <div className="flex h-full">
       {/* Command Forms */}
-      <div className="flex-1 p-6 overflow-y-auto">
-        <h1 className="text-3xl font-bold mb-6">Command Console</h1>
+      <div className="flex-1 p-6 overflow-y-auto bg-parchment-50">
+        <h1 className="text-3xl font-headline font-semibold mb-6 text-ink-900">Command Console</h1>
 
         {/* Tabs */}
-        <div className="mb-6 border-b border-gray-300">
+        <div className="mb-6 border-b border-brass-600">
           <div className="flex space-x-4">
             {(['db', 'index', 'ai', 'chat'] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 font-semibold ${
+                className={`px-4 py-2 font-semibold transition-all duration-120 ${
                   activeTab === tab
-                    ? 'border-b-2 border-blue-500 text-blue-500'
-                    : 'text-gray-600 hover:text-gray-800'
+                    ? 'border-b-2 border-brass-600 text-ink-900'
+                    : 'text-ink-900 opacity-70 hover:opacity-100 hover:text-verdigris-500'
                 }`}
               >
                 {tab.toUpperCase()}
@@ -292,46 +293,46 @@ export function Console() {
         {/* Database Commands */}
         {activeTab === 'db' && (
           <div className="space-y-6">
-            <div className="bg-white p-6 rounded-lg shadow">
-              <h2 className="text-xl font-bold mb-4">Database Check</h2>
+            <div className="card">
+              <h2 className="text-xl font-headline font-semibold mb-4 text-ink-900">Database Check</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Database Path (optional)</label>
+                  <label className="block text-sm font-medium mb-2 text-ink-900">Database Path (optional)</label>
                   <input
                     type="text"
                     value={dbPath}
                     onChange={(e) => setDbPath(e.target.value)}
                     placeholder="Leave empty for default"
-                    className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="input w-full"
                   />
                 </div>
                 <button
                   onClick={handleDbCheck}
                   disabled={isLoading}
-                  className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
+                  className="button button--primary disabled:opacity-50"
                 >
                   Check Database
                 </button>
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow">
-              <h2 className="text-xl font-bold mb-4">Database Init</h2>
+            <div className="card">
+              <h2 className="text-xl font-headline font-semibold mb-4 text-ink-900">Database Init</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Database Path (optional)</label>
+                  <label className="block text-sm font-medium mb-2 text-ink-900">Database Path (optional)</label>
                   <input
                     type="text"
                     value={dbPath}
                     onChange={(e) => setDbPath(e.target.value)}
                     placeholder="Leave empty for default"
-                    className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="input w-full"
                   />
                 </div>
                 <button
                   onClick={handleDbInit}
                   disabled={isLoading}
-                  className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
+                  className="button button--primary disabled:opacity-50"
                 >
                   Initialize Database
                 </button>
@@ -343,17 +344,17 @@ export function Console() {
         {/* Index Commands */}
         {activeTab === 'index' && (
           <div className="space-y-6">
-            <div className="bg-white p-6 rounded-lg shadow">
-              <h2 className="text-xl font-bold mb-4">Index Build</h2>
+            <div className="card">
+              <h2 className="text-xl font-headline font-semibold mb-4 text-ink-900">Index Build</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Event ID (optional)</label>
+                  <label className="block text-sm font-medium mb-2 text-ink-900">Event ID (optional)</label>
                   <input
                     type="text"
                     value={indexEventId}
                     onChange={(e) => setIndexEventId(e.target.value)}
                     placeholder="Leave empty for all events"
-                    className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="input w-full"
                   />
                 </div>
                 <div className="flex items-center">
@@ -363,20 +364,20 @@ export function Console() {
                     onChange={(e) => setIndexUseStub(e.target.checked)}
                     className="mr-2"
                   />
-                  <label className="text-sm">Use stub embeddings</label>
+                  <label className="text-sm text-ink-900">Use stub embeddings</label>
                 </div>
                 <button
                   onClick={handleIndexBuild}
                   disabled={isLoading}
-                  className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
+                  className="button button--primary disabled:opacity-50"
                 >
                   Build Index
                 </button>
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow">
-              <h2 className="text-xl font-bold mb-4">Index Status</h2>
+            <div className="card">
+              <h2 className="text-xl font-headline font-semibold mb-4 text-ink-900">Index Status</h2>
               <button
                 onClick={handleIndexStatus}
                 disabled={isLoading}
@@ -386,28 +387,28 @@ export function Console() {
               </button>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow">
-              <h2 className="text-xl font-bold mb-4">Index Search</h2>
+            <div className="card">
+              <h2 className="text-xl font-headline font-semibold mb-4 text-ink-900">Index Search</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Query</label>
+                  <label className="block text-sm font-medium mb-2 text-ink-900">Query</label>
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Enter search query"
-                    className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="input w-full"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">Top K</label>
+                  <label className="block text-sm font-medium mb-2 text-ink-900">Top K</label>
                   <input
                     type="number"
                     value={searchTopk}
                     onChange={(e) => setSearchTopk(parseInt(e.target.value) || 5)}
                     min={1}
                     max={100}
-                    className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="input w-full"
                   />
                 </div>
                 <div className="flex items-center">
@@ -417,12 +418,12 @@ export function Console() {
                     onChange={(e) => setSearchUseStub(e.target.checked)}
                     className="mr-2"
                   />
-                  <label className="text-sm">Use stub embeddings</label>
+                  <label className="text-sm text-ink-900">Use stub embeddings</label>
                 </div>
                 <button
                   onClick={handleIndexSearch}
                   disabled={isLoading}
-                  className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
+                  className="button button--primary disabled:opacity-50"
                 >
                   Search
                 </button>
@@ -434,8 +435,8 @@ export function Console() {
         {/* AI Commands */}
         {activeTab === 'ai' && (
           <div className="space-y-6">
-            <div className="bg-white p-6 rounded-lg shadow">
-              <h2 className="text-xl font-bold mb-4">AI Routes</h2>
+            <div className="card">
+              <h2 className="text-xl font-headline font-semibold mb-4 text-ink-900">AI Routes</h2>
               <button
                 onClick={handleAiRoutes}
                 disabled={isLoading}
@@ -445,15 +446,15 @@ export function Console() {
               </button>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow">
-              <h2 className="text-xl font-bold mb-4">AI Test</h2>
+            <div className="card">
+              <h2 className="text-xl font-headline font-semibold mb-4 text-ink-900">AI Test</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Task</label>
+                  <label className="block text-sm font-medium mb-2 text-ink-900">Task</label>
                   <select
                     value={aiTask}
                     onChange={(e) => setAiTask(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="input w-full"
                   >
                     <option value="summarize">Summarize</option>
                     <option value="classify">Classify</option>
@@ -461,19 +462,19 @@ export function Console() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">Input</label>
+                  <label className="block text-sm font-medium mb-2 text-ink-900">Input</label>
                   <textarea
                     value={aiInput}
                     onChange={(e) => setAiInput(e.target.value)}
                     placeholder="Enter test input"
                     rows={5}
-                    className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="input w-full"
                   />
                 </div>
                 <button
                   onClick={handleAiTest}
                   disabled={isLoading}
-                  className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
+                  className="button button--primary disabled:opacity-50"
                 >
                   Test
                 </button>
@@ -485,54 +486,54 @@ export function Console() {
         {/* Chat Commands */}
         {activeTab === 'chat' && (
           <div className="space-y-6">
-            <div className="bg-white p-6 rounded-lg shadow">
-              <h2 className="text-xl font-bold mb-4">Chat Start</h2>
+            <div className="card">
+              <h2 className="text-xl font-headline font-semibold mb-4 text-ink-900">Chat Start</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Title (optional)</label>
+                  <label className="block text-sm font-medium mb-2 text-ink-900">Title (optional)</label>
                   <input
                     type="text"
                     value={chatTitle}
                     onChange={(e) => setChatTitle(e.target.value)}
                     placeholder="Enter session title"
-                    className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="input w-full"
                   />
                 </div>
                 <button
                   onClick={handleChatStart}
                   disabled={isLoading}
-                  className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
+                  className="button button--primary disabled:opacity-50"
                 >
                   Start Session
                 </button>
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow">
-              <h2 className="text-xl font-bold mb-4">Chat Resume</h2>
+            <div className="card">
+              <h2 className="text-xl font-headline font-semibold mb-4 text-ink-900">Chat Resume</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Session ID</label>
+                  <label className="block text-sm font-medium mb-2 text-ink-900">Session ID</label>
                   <input
                     type="text"
                     value={chatSessionId}
                     onChange={(e) => setChatSessionId(e.target.value)}
                     placeholder="Enter session ID"
-                    className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="input w-full"
                   />
                 </div>
                 <button
                   onClick={handleChatResume}
                   disabled={isLoading}
-                  className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
+                  className="button button--primary disabled:opacity-50"
                 >
                   Resume Session
                 </button>
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow">
-              <h2 className="text-xl font-bold mb-4">Chat List</h2>
+            <div className="card">
+              <h2 className="text-xl font-headline font-semibold mb-4 text-ink-900">Chat List</h2>
               <button
                 onClick={handleChatList}
                 disabled={isLoading}
@@ -546,43 +547,43 @@ export function Console() {
       </div>
 
       {/* Logs Panel */}
-      <div className="w-96 bg-gray-100 border-l border-gray-300 p-4 overflow-y-auto">
+      <div className="w-96 bg-parchment-100 border-l border-brass-600 p-4 overflow-y-auto">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-bold">Logs</h2>
+          <h2 className="text-lg font-headline font-semibold text-ink-900">Logs</h2>
           <button
             onClick={clearLogs}
-            className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 text-sm"
+            className="button button--danger px-3 py-1 text-sm"
           >
             Clear
           </button>
         </div>
         <div className="space-y-2">
           {logs.length === 0 && (
-            <div className="text-gray-500 text-sm">No logs yet</div>
+            <div className="text-ink-900 opacity-60 text-sm">No logs yet</div>
           )}
           {logs.map((log) => (
             <div
               key={log.id}
-              className={`p-3 rounded text-sm ${
-                log.result.success ? 'bg-green-100' : 'bg-red-100'
+              className={`card text-sm ${
+                log.result.success ? 'border-verdigris-500' : 'border-garnet-600'
               }`}
             >
-              <div className="font-semibold">{log.command}</div>
-              <div className="text-xs text-gray-600">
+              <div className="font-semibold text-ink-900">{log.command}</div>
+              <div className="text-xs text-ink-900 opacity-70">
                 {new Date(log.timestamp).toLocaleString()}
               </div>
               <div className="mt-2 text-xs">
                 {log.result.success ? (
-                  <pre className="whitespace-pre-wrap text-xs">
+                  <pre className="whitespace-pre-wrap text-xs font-mono text-ink-900 opacity-80">
                     {JSON.stringify(log.result.result, null, 2)}
                   </pre>
                 ) : (
-                  <div className="text-red-600">
+                  <div className="text-garnet-600">
                     {log.result.error?.message || 'Unknown error'}
                   </div>
                 )}
               </div>
-              <div className="text-xs text-gray-500 mt-1">
+              <div className="text-xs text-ink-900 opacity-60 mt-1">
                 Duration: {log.result.duration_seconds.toFixed(2)}s
               </div>
             </div>

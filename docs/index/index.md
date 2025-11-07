@@ -8,6 +8,10 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **README.md** - Project overview, setup instructions, and documentation
 - **requirements.txt** - Python package dependencies
 - **pytest.ini** - Pytest configuration for test execution
+- **config.example** - Example configuration file template
+
+### Style Guide
+- **style/ui-style-guide.md** - Comprehensive UI style and theming guide defining "neo-Victorian minimalism" aesthetic with color system (ink, parchment, brass, verdigris, navy, garnet, smoke), typography (Spectral SC, Source Serif 4, JetBrains Mono), component patterns, and design tokens
 
 ## Source Code (`src/`)
 
@@ -153,28 +157,29 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 ### Frontend Module (`frontend/`)
 - **frontend/package.json** - Frontend package configuration with dependencies and scripts
 - **frontend/vite.config.ts** - Vite build configuration with React plugin and Vitest test setup
-- **frontend/tailwind.config.js** - Tailwind CSS configuration
+- **frontend/tailwind.config.js** - Tailwind CSS configuration with custom color palette, typography, spacing, and shadows matching style guide
 - **frontend/postcss.config.js** - PostCSS configuration for Tailwind CSS
+- **frontend/eslint.config.js** - ESLint configuration for code quality
 - **frontend/tsconfig.json** - TypeScript configuration for the frontend
 - **frontend/tsconfig.app.json** - TypeScript configuration for application code
 - **frontend/tsconfig.node.json** - TypeScript configuration for Node.js tooling
-- **frontend/index.html** - HTML entry point for the React application
+- **frontend/index.html** - HTML entry point for the React application with Google Fonts links (Spectral SC, Source Serif 4, JetBrains Mono)
 - **frontend/src/main.tsx** - React application entry point
 - **frontend/src/App.tsx** - Main App component with React Router setup
-- **frontend/src/index.css** - Global CSS with Tailwind directives
+- **frontend/src/index.css** - Global CSS with Tailwind directives, CSS variables for light/dark themes, and component classes (.card, .button, .input, .chat-ai, .chat-user) matching style guide
 - **frontend/src/lib/api.ts** - API client for backend communication with base URL configuration
-- **frontend/src/components/Layout.tsx** - Main layout component with header, sidebar, content area, and footer
-- **frontend/src/components/Header.tsx** - Header component with top menu bar and navigation
-- **frontend/src/components/Sidebar.tsx** - Sidebar component with collapsible navigation shortcuts
-- **frontend/src/components/StatusFooter.tsx** - Status footer component displaying API health, database path, and index state
-- **frontend/src/components/GraphView.tsx** - Graph view component using Cytoscape.js with ELK layout for knowledge tree visualization
-- **frontend/src/components/HoverCard.tsx** - Hover card component displaying node summary information in tooltips
+- **frontend/src/components/Layout.tsx** - Main layout component with header, sidebar, content area, and footer; styled with parchment backgrounds and brass accents
+- **frontend/src/components/Header.tsx** - Header component with top menu bar and navigation; styled with parchment background, brass borders, and verdigris hover states
+- **frontend/src/components/Sidebar.tsx** - Sidebar component with collapsible navigation shortcuts; styled with parchment background and verdigris active states
+- **frontend/src/components/StatusFooter.tsx** - Status footer component displaying API health, database path, and index state; styled with parchment background and updated status badge colors
+- **frontend/src/components/GraphView.tsx** - Graph view component using Cytoscape.js with ELK layout for knowledge tree visualization; styled per style guide (topics: parchment with brass borders, skills: mastery rings, artifacts: navy hexagons)
+- **frontend/src/components/HoverCard.tsx** - Hover card component displaying node summary information in tooltips; styled with card component matching style guide
 - **frontend/src/pages/Home.tsx** - Home page component that redirects to Chat
-- **frontend/src/pages/Chat.tsx** - Chat page with session management, message display, and context awareness
-- **frontend/src/pages/Console.tsx** - Console page with form-based UI for all CLI commands
-- **frontend/src/pages/Review.tsx** - Review page placeholder
-- **frontend/src/pages/Context.tsx** - Context page placeholder
-- **frontend/src/pages/KnowledgeTree.tsx** - Knowledge Tree page with graph visualization, search, collapse, zoom, and navigation
+- **frontend/src/pages/Chat.tsx** - Chat page with session management, message display, and context awareness; layout: chat window in center (flex-1), sessions sidebar on right (192px fixed width); styled with parchment/brass/navy chat bubbles
+- **frontend/src/pages/Console.tsx** - Console page with form-based UI for all CLI commands; styled with card components, buttons, and inputs matching style guide
+- **frontend/src/pages/Review.tsx** - Review page placeholder; styled with parchment background and card components
+- **frontend/src/pages/Context.tsx** - Context page placeholder; styled with parchment background and card components
+- **frontend/src/pages/KnowledgeTree.tsx** - Knowledge Tree page with graph visualization, search, collapse, zoom, and navigation; styled with parchment backgrounds, brass borders, and updated controls/filters
 - **frontend/src/hooks/useWebSocket.ts** - WebSocket hook for live updates
 - **frontend/src/hooks/useLocalStorage.ts** - LocalStorage hook for persistent data storage
 - **frontend/src/test/setup.ts** - Vitest test setup file with React Testing Library configuration
@@ -195,9 +200,15 @@ Currently empty. Used for storing:
 
 ## Commits Directory (`commits/`)
 
-### Commit Metadata (`commits/A/`)
-- **commits/A/add.txt** - List of files staged for commit
-- **commits/A/commit.txt** - Commit message
+### Commit Metadata (`commits/`)
+- **commits/A/add.txt** - List of files staged for commit A
+- **commits/A/commit.txt** - Commit message for commit A
+- **commits/B/add.txt** - List of files staged for commit B
+- **commits/B/commit.txt** - Commit message for commit B
+- **commits/C/add.txt** - List of files staged for commit C
+- **commits/C/commit.txt** - Commit message for commit C
+- **commits/D/add.txt** - List of files staged for commit D
+- **commits/D/commit.txt** - Commit message for commit D
 
 ## Generated/Virtual Directories (Not Indexed)
 

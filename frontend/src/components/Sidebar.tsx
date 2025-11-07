@@ -24,14 +24,14 @@ export function Sidebar() {
 
   return (
     <aside
-      className={`bg-gray-100 border-r border-gray-300 transition-all duration-300 ${
+      className={`bg-parchment-100 border-r border-brass-600 transition-all duration-300 ${
         isCollapsed ? 'w-16' : 'w-64'
       }`}
     >
       <div className="p-4">
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="w-full mb-4 px-3 py-2 bg-gray-200 hover:bg-gray-300 rounded text-sm"
+          className="w-full mb-4 px-3 py-2 bg-parchment-50 hover:bg-brass-600 hover:text-white rounded-xl text-sm transition-all duration-120 border border-brass-600"
         >
           {isCollapsed ? '▶' : '◀'}
         </button>
@@ -40,10 +40,10 @@ export function Sidebar() {
             <Link
               key={item.path}
               to={item.path}
-              className={`flex items-center space-x-3 px-3 py-2 rounded ${
+              className={`flex items-center space-x-3 px-3 py-2 rounded-xl transition-all duration-120 ${
                 location.pathname === item.path
-                  ? 'bg-blue-500 text-white'
-                  : 'hover:bg-gray-200'
+                  ? 'bg-verdigris-500 text-white'
+                  : 'text-ink-900 hover:bg-parchment-50 hover:text-verdigris-500'
               }`}
             >
               <span className="text-xl">{item.icon}</span>

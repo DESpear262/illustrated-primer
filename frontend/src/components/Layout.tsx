@@ -15,14 +15,12 @@ import { StatusFooter } from './StatusFooter';
  */
 export function Layout() {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen bg-parchment-50">
       <Header />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar />
-        <main className="flex-1 overflow-y-auto bg-white">
-          <div className="container mx-auto px-4 py-6">
-            <Outlet />
-          </div>
+        <main className="flex-1 overflow-hidden bg-parchment-50">
+          <Outlet />
         </main>
       </div>
       <StatusFooter />

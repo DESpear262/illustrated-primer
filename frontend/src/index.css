@@ -2,14 +2,139 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Color System - Light Theme */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  --ink-900: #111216;
+  --parchment-50: #F8F5EC;
+  --parchment-100: #F1EAD5;
+  --brass-600: #B08D57;
+  --verdigris-500: #2A8F8A;
+  --navy-700: #1F2C44;
+  --garnet-600: #8F1D2C;
+  --smoke-300: #D8D5CC;
+  --shadow: 0 6px 18px rgba(20,18,16,.18);
+  
+  font-family: "Source Serif 4", Georgia, serif;
+  line-height: 1.6;
   font-weight: 400;
+  font-size: 16px;
+  color: var(--ink-900);
+  background-color: var(--parchment-50);
 }
 
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
+/* Color System - Dark Theme */
+[data-theme="dark"] {
+  --ink-900: #F5F6F8;
+  --parchment-50: #0F0F0D;
+  --parchment-100: #151512;
+  --brass-600: #DBB976;
+  --verdigris-500: #63C0B9;
+  --navy-700: #A7B7D3;
+  --garnet-600: #D46570;
+  --smoke-300: #49453F;
+  --shadow: 0 8px 22px rgba(0,0,0,.35);
+}
+
+@layer base {
+  body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    background-color: var(--parchment-50);
+    color: var(--ink-900);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Spectral SC", "IM Fell English SC", Georgia, serif;
+    font-weight: 600;
+  }
+  
+  code, pre {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+  }
+}
+
+@layer components {
+  /* Card component */
+  .card {
+    background: var(--parchment-100);
+    border: 1px solid var(--brass-600);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 16px;
+  }
+  
+  .card--subtle {
+    background: color-mix(in srgb, var(--parchment-100) 80%, white);
+  }
+  
+  /* Button component */
+  .button {
+    border: 1px solid var(--brass-600);
+    border-radius: 12px;
+    padding: 8px 14px;
+    background: var(--parchment-100);
+    color: var(--ink-900);
+    transition: transform 120ms ease, box-shadow 200ms ease;
+    font-family: "Source Serif 4", Georgia, serif;
+  }
+  
+  .button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(176,141,87,.25);
+  }
+  
+  .button:active {
+    transform: translateY(0);
+  }
+  
+  .button--primary {
+    background: var(--verdigris-500);
+    color: white;
+    border-color: transparent;
+  }
+  
+  .button--primary:hover {
+    box-shadow: 0 4px 10px rgba(42,143,138,.35);
+  }
+  
+  .button--danger {
+    background: color-mix(in srgb, var(--garnet-600) 92%, black);
+    color: white;
+    border-color: transparent;
+  }
+  
+  /* Input component */
+  .input {
+    background: var(--parchment-100);
+    border: 1px solid var(--smoke-300);
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-family: "Source Serif 4", Georgia, serif;
+  }
+  
+  .input:focus {
+    outline: 2px solid var(--verdigris-500);
+    outline-offset: 0;
+    border-color: var(--brass-600);
+  }
+  
+  /* Chat bubbles */
+  .chat-ai {
+    background: var(--parchment-100);
+    border: 1px solid var(--brass-600);
+    border-left: 3px solid rgba(176,141,87,.45);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 16px;
+  }
+  
+  .chat-user {
+    background: var(--navy-700);
+    color: rgba(255,255,255,0.92);
+    border-color: var(--navy-700);
+    border-radius: 12px;
+    padding: 16px;
+  }
 }
