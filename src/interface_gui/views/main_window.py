@@ -248,12 +248,9 @@ class MainWindow(QMainWindow):
         self.tab_widget.addTab(self.tutor_chat_view, "Tutor Chat")
         
         # Command Console tab
-        self.command_console_tab = QWidget()
-        command_console_layout = QVBoxLayout(self.command_console_tab)
-        command_console_label = QLabel("Command Console - Coming in PR #6")
-        command_console_label.setAlignment(Qt.AlignCenter)
-        command_console_layout.addWidget(command_console_label)
-        self.tab_widget.addTab(self.command_console_tab, "Command Console")
+        from src.interface_gui.views.command_view import CommandView
+        self.command_view = CommandView(self.facade)
+        self.tab_widget.addTab(self.command_view, "Command Console")
         
         # Review Queue tab
         self.review_queue_tab = QWidget()

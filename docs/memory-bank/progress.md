@@ -2,6 +2,60 @@
 
 ## What Works
 
+### ✅ Interface Development - Block B, PR #6: Command Console View (COMPLETED)
+
+1. **Command Console View** (`src/interface_gui/views/command_view.py`)
+   - CommandView class with grouped command sections
+   - Command groups: Database, Index, AI, Chat, Review, Import, Refresh, Progress
+   - Form fields for command parameters with validation
+   - Results display with tabs (Table/JSON/Text)
+   - Command history panel with timestamps and re-execution support
+   - Export functionality (JSON/CSV/Text)
+   - Progress indicators for long operations
+   - Parameter validation and default values
+   - Error handling with user-friendly messages
+
+2. **Testing** (`tests/test_command_view.py`)
+   - Integration tests for command execution
+   - Tests for results display in different formats
+   - Tests for command history tracking
+   - Tests for error handling
+   - Tests for table updates with different result types
+
+3. **Documentation** (`docs/index/index.md`)
+   - Updated file index with CommandView files
+
+### ✅ Interface Development - Block B, PR #5: Tutor Chat View (COMPLETED)
+
+1. **Tutor Chat View** (`src/interface_gui/views/tutor_chat_view.py`)
+   - TutorChatView class with chat interface
+   - Multi-line input with Enter to send, Shift+Enter for newlines
+   - Message display with styled bubbles (user/tutor)
+   - Context sidebar showing last-used context chunks
+   - Session list sidebar with recent sessions
+   - Session title editing with AI suggestion
+   - Upload functionality (file dialog + drag-and-drop)
+   - Auto-save after each turn using facade.chat_turn()
+   - Loading indicators (typing indicator per message)
+   - Error handling with retry option
+
+2. **Message List Widget** (`src/interface_gui/widgets/message_list.py`)
+   - MessageList widget with styled message bubbles
+   - MessageItemWidget for individual messages
+   - User messages: right-aligned, blue bubbles
+   - Tutor messages: left-aligned, gray bubbles with context indicators
+   - Typing indicator for loading states
+   - Timestamp display
+
+3. **Testing** (`tests/test_tutor_chat_view.py`)
+   - Unit tests for MessageList and MessageItemWidget
+   - Integration tests for TutorChatView
+   - Tests for session management, message sending, error handling
+   - Tests for file upload functionality
+
+4. **Documentation** (`docs/index/index.md`)
+   - Updated file index with TutorChatView and MessageList files
+
 ### ✅ Interface Development - Block B, PR #4: GUI Skeleton and Navigation (COMPLETED)
 
 1. **GUI Application** (`src/interface_gui/app.py`)
@@ -465,6 +519,28 @@
 - [x] Create basic tab structures (layouts and placeholder widgets)
 - [x] Implement global loading overlay for async operations
 - [x] Create integration tests for app launch and menu actions
+
+#### PR #5: Tutor Chat View ✅
+- [x] Implement chat input, output display, and context sidebar
+- [x] Record sessions to DB and trigger summarization
+- [x] Add loading spinner during LLM calls
+- [x] Display last-used context snippets
+- [x] Create MessageList widget with styled message bubbles
+- [x] Implement session list sidebar with recent sessions
+- [x] Add upload functionality (file dialog + drag-and-drop)
+- [x] Implement session title editing with AI suggestion
+- [x] Add error handling with retry option
+- [x] Create unit and integration tests
+
+#### PR #6: Command Console View ✅
+- [x] Implement dropdowns and buttons for each CLI command group
+- [x] Display results in scrollable table or JSON panel
+- [x] Log all executed commands
+- [x] Allow export of results
+- [x] Create form fields for command parameters with validation
+- [x] Implement command history panel with re-execution
+- [x] Add progress indicators for long operations
+- [x] Create integration tests for command execution
 
 ### 🔵 Block C: Transcript Ingestion Pipeline
 

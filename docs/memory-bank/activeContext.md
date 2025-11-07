@@ -2,9 +2,36 @@
 
 ## Current Work Focus
 
-**Interface Development - Block B: GUI Framework - PR #4: GUI Skeleton and Navigation** ✅ **COMPLETED**
+**Interface Development - Block B: GUI Framework - PR #6: Command Console View** ✅ **COMPLETED**
 
 ## Recent Changes
+
+### Completed (Interface Development - PR #6)
+1. ✅ Created CommandView with grouped sections (Database, Index, AI, Chat, Review, Import, Refresh, Progress)
+2. ✅ Implemented form fields for command parameters with validation
+3. ✅ Created results display with tabs (Table/JSON/Text)
+4. ✅ Implemented command history panel with timestamps and re-execution support
+5. ✅ Added export functionality (JSON/CSV/Text)
+6. ✅ Added progress indicators for long operations
+7. ✅ Implemented all command groups with form inputs
+8. ✅ Added parameter validation and default values
+9. ✅ Integrated CommandView into MainWindow tab
+10. ✅ Created integration tests for command execution (test_command_view.py)
+11. ✅ Updated file index documentation
+
+### Completed (Interface Development - PR #5)
+1. ✅ Created MessageList widget with styled message bubbles
+2. ✅ Created TutorChatView with chat input, message display, and context sidebar
+3. ✅ Implemented session list sidebar with recent sessions
+4. ✅ Implemented context sidebar with last-used chunks
+5. ✅ Added upload functionality (file dialog + drag-and-drop)
+6. ✅ Implemented auto-save after each turn using facade.chat_turn()
+7. ✅ Added loading indicators (global overlay + per-message typing indicator)
+8. ✅ Implemented session title editing with AI suggestion
+9. ✅ Added error handling with retry option
+10. ✅ Integrated TutorChatView into MainWindow tab
+11. ✅ Created unit and integration tests (test_tutor_chat_view.py)
+12. ✅ Updated file index documentation
 
 ### Completed (Interface Development - PR #4)
 1. ✅ Added PySide6 and qasync to requirements.txt
@@ -164,11 +191,11 @@
 ## Next Steps
 
 ### Interface Development - Block B: GUI Framework
-- ⏳ PR #5: Tutor Chat View (10 hours)
-  - Implement chat input, output display, and context sidebar
-  - Record sessions to DB and trigger summarization
-  - Add loading spinner during LLM calls
-  - Display last-used context snippets
+- ⏳ PR #7: Review Queue & Context Inspector (12 hours)
+  - ReviewQueueView: table of topics sorted by review priority
+  - ContextInspector: tree view with expand/collapse and summaries
+  - Integrate with scheduler and summarizer modules
+  - Support manual recomputation triggers
 
 ## Active Decisions
 
@@ -210,6 +237,8 @@ None - Interface Development Block A complete; proceeding to Block B: GUI Framew
 
 ### Interface Development - Block B: GUI Framework
 - ✅ PR #4: GUI Skeleton and Navigation (COMPLETED)
+- ✅ PR #5: Tutor Chat View (COMPLETED)
+- ✅ PR #6: Command Console View (COMPLETED)
 
 ## Notes
 
@@ -223,5 +252,7 @@ None - Interface Development Block A complete; proceeding to Block B: GUI Framew
 - Graph and hover providers complete with networkx DAG traversal, filtering, and caching
 - UI model definitions complete with shared Pydantic models and JSON serialization helpers
 - GUI skeleton complete with multi-tab layout, menu bar, status bar, health checks, and loading overlay
-- Ready to proceed with Interface Development Block B: GUI Framework - PR #5: Tutor Chat View
+- Tutor chat view complete with message display, input, context sidebar, and session management
+- Command console view complete with visual interface for all CLI operations, form inputs, results display, and command history
+- Ready to proceed with Interface Development Block B: GUI Framework - PR #7: Review Queue & Context Inspector
 
