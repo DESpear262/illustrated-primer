@@ -60,6 +60,24 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **src/interface_common/app_facade.py** - Unified GUI–backend facade with async wrappers for all CLI commands, error handling, timeout guards, logging hooks, and run_command dispatcher
 - **src/interface_common/models.py** - Shared Pydantic models for consistent data structures between CLI outputs and GUI responses (GraphNode, GraphEdge, HoverPayload, ChatMessage, CommandResult)
 
+### Backend API Module (`backend/api/`)
+- **backend/__init__.py** - Package initialization for backend module
+- **backend/api/__init__.py** - Package initialization for API module
+- **backend/api/main.py** - FastAPI application with CORS middleware, WebSocket support, and lifespan management
+- **backend/api/facade.py** - Facade instance access module to avoid circular imports
+- **backend/api/routes/__init__.py** - Package initialization for routes module
+- **backend/api/routes/db.py** - Database API routes (check, init)
+- **backend/api/routes/index.py** - Index API routes (build, status, search)
+- **backend/api/routes/ai.py** - AI API routes (routes, test)
+- **backend/api/routes/chat.py** - Chat API routes (start, resume, list, turn)
+- **backend/api/routes/graph.py** - Graph API routes (get graph JSON)
+- **backend/api/routes/hover.py** - Hover API routes (get hover payload)
+- **backend/api/routes/review.py** - Review API routes (next)
+- **backend/api/routes/import_route.py** - Import API routes (transcript import, file upload)
+- **backend/api/routes/refresh.py** - Refresh API routes (summaries refresh)
+- **backend/api/routes/progress.py** - Progress API routes (summary)
+- **backend/api/routes/websocket.py** - WebSocket API routes (live updates)
+
 ### Ingestion Module (`src/ingestion/`)
 - **src/ingestion/__init__.py** - Package initialization for ingestion module
 - **src/ingestion/transcripts.py** - Transcript importer for .txt, .md, and .json formats with AI classification, summarization, embedding, and topic/skill state updates
@@ -109,6 +127,7 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **tests/test_integration.py** - Integration tests for database operations, topic hierarchy, and FTS search
 - **tests/test_facade.py** - Unit and integration tests for GUI–backend facade (async wrappers, error handling, timeout guards, command dispatcher)
 - **tests/test_interface_models.py** - Unit tests for interface common models (validation, serialization, round-trip safety, facade output validation)
+- **tests/test_api.py** - Unit and integration tests for FastAPI endpoints (all routes, WebSocket, error handling, CORS)
 - **tests/test_graph_provider.py** - Unit tests for graph provider (JSON format validation, depth filtering, scope filtering, relation filtering)
 - **tests/test_hover_provider.py** - Unit tests for hover provider (payload structure validation, caching, performance, error handling)
 - **tests/test_graph_hover_integration.py** - Integration tests for graph and hover providers (combined FAISS + SQLite queries, performance requirements, large dataset testing)
@@ -130,6 +149,34 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 
 ### Index (`docs/index/`)
 - **docs/index/index.md** - This file: comprehensive index of all project files
+
+### Frontend Module (`frontend/`)
+- **frontend/package.json** - Frontend package configuration with dependencies and scripts
+- **frontend/vite.config.ts** - Vite build configuration with React plugin and Vitest test setup
+- **frontend/tailwind.config.js** - Tailwind CSS configuration
+- **frontend/postcss.config.js** - PostCSS configuration for Tailwind CSS
+- **frontend/tsconfig.json** - TypeScript configuration for the frontend
+- **frontend/tsconfig.app.json** - TypeScript configuration for application code
+- **frontend/tsconfig.node.json** - TypeScript configuration for Node.js tooling
+- **frontend/index.html** - HTML entry point for the React application
+- **frontend/src/main.tsx** - React application entry point
+- **frontend/src/App.tsx** - Main App component with React Router setup
+- **frontend/src/index.css** - Global CSS with Tailwind directives
+- **frontend/src/lib/api.ts** - API client for backend communication with base URL configuration
+- **frontend/src/components/Layout.tsx** - Main layout component with header, sidebar, content area, and footer
+- **frontend/src/components/Header.tsx** - Header component with top menu bar and navigation
+- **frontend/src/components/Sidebar.tsx** - Sidebar component with collapsible navigation shortcuts
+- **frontend/src/components/StatusFooter.tsx** - Status footer component displaying API health, database path, and index state
+- **frontend/src/pages/Home.tsx** - Home page component that redirects to Chat
+- **frontend/src/pages/Chat.tsx** - Chat page placeholder (to be implemented in PR #11)
+- **frontend/src/pages/Console.tsx** - Console page placeholder (to be implemented in PR #11)
+- **frontend/src/pages/Review.tsx** - Review page placeholder
+- **frontend/src/pages/Context.tsx** - Context page placeholder
+- **frontend/src/pages/KnowledgeTree.tsx** - Knowledge Tree page placeholder (to be implemented in PR #12)
+- **frontend/src/test/setup.ts** - Vitest test setup file with React Testing Library configuration
+- **frontend/src/test/App.test.tsx** - Tests for App component
+- **frontend/src/test/api.test.ts** - Tests for API client
+- **frontend/src/test/Layout.test.tsx** - Tests for Layout component
 
 ## Data Directory (`data/`)
 

@@ -2,9 +2,71 @@
 
 ## Current Work Focus
 
-**Block A (Interface): Backend Integration Layer - PR #3: UI Model Definitions** ✅ **COMPLETED**
+**Block C (GUI Framework): PR #10 - Frontend Scaffolding** ✅ **COMPLETED**
 
 ## Recent Changes
+
+### Completed (PR #10 - Block C)
+1. ✅ Initialized React + TypeScript + Vite project structure
+2. ✅ Set up Tailwind CSS with PostCSS configuration
+3. ✅ Created React Router setup with routes for Chat, Console, Review, Context, KnowledgeTree
+4. ✅ Created Layout component with header, sidebar, and status footer:
+   - `Header.tsx` - Top menu bar with navigation links
+   - `Sidebar.tsx` - Collapsible navigation shortcuts
+   - `StatusFooter.tsx` - API health, database path, and index state
+   - `Layout.tsx` - Main layout wrapper
+5. ✅ Created placeholder page components for all routes:
+   - `Home.tsx` - Redirects to Chat
+   - `Chat.tsx` - Placeholder for Tutor Chat (PR #11)
+   - `Console.tsx` - Placeholder for Command Console (PR #11)
+   - `Review.tsx` - Placeholder for Review Queue
+   - `Context.tsx` - Placeholder for Context Inspector
+   - `KnowledgeTree.tsx` - Placeholder for Knowledge Tree (PR #12)
+6. ✅ Set up API client (`lib/api.ts`) with base URL configuration and environment variable support
+7. ✅ Set up testing infrastructure:
+   - Vitest + React Testing Library
+   - Test setup file with jest-dom matchers
+   - Tests for App, Layout, and API client (7 tests, all passing)
+8. ✅ Updated file index documentation
+
+### Completed (PR #9 - Block C)
+1. ✅ Added FastAPI dependencies to `requirements.txt` (fastapi, uvicorn[standard], websockets, python-multipart)
+2. ✅ Created `backend/api/main.py` with FastAPI application:
+   - Lifespan management for facade initialization
+   - CORS middleware configured for localhost-only policy
+   - WebSocket support
+   - Router registration for all endpoints
+3. ✅ Created `backend/api/facade.py` for facade instance access (avoids circular imports)
+4. ✅ Created route modules in `backend/api/routes/`:
+   - `db.py` - Database endpoints (check, init)
+   - `index.py` - Index endpoints (build, status, search)
+   - `ai.py` - AI endpoints (routes, test)
+   - `chat.py` - Chat endpoints (start, resume, list, turn)
+   - `graph.py` - Graph endpoint (get graph JSON)
+   - `hover.py` - Hover endpoint (get hover payload)
+   - `review.py` - Review endpoint (next)
+   - `import_route.py` - Import endpoints (transcript import, file upload)
+   - `refresh.py` - Refresh endpoint (summaries refresh)
+   - `progress.py` - Progress endpoint (summary)
+   - `websocket.py` - WebSocket endpoint (live updates)
+5. ✅ All endpoints return Pydantic models (CommandResult, HoverPayload, etc.)
+6. ✅ Error handling with proper HTTP status codes (400 for validation, 500 for server errors)
+7. ✅ WebSocket endpoint supports ping/pong, subscribe, and error handling
+8. ✅ Created comprehensive test suite (`tests/test_api.py`) - 23 tests, all passing:
+   - Root endpoints (root, health)
+   - Database endpoints (check, init)
+   - Index endpoints (status, build)
+   - AI endpoints (routes, test)
+   - Chat endpoints (start, list)
+   - Graph endpoints (get, with filters)
+   - Hover endpoints (topic, invalid node ID)
+   - Review endpoints (next)
+   - Import endpoints (invalid path)
+   - Refresh endpoints (summaries)
+   - Progress endpoints (summary)
+   - WebSocket endpoints (connection, subscribe, invalid message)
+   - Error handling (invalid endpoint, CORS)
+9. ✅ Updated file index documentation
 
 ### Completed (PR #3 - Interface Block A)
 1. ✅ Created `src/interface_common/models.py` with shared Pydantic models:
@@ -171,11 +233,11 @@
 
 ## Next Steps
 
-### Block A (Interface): PR #4 - Context Inspector API
-1. Implement context inspector API endpoints
-2. Add query parameters for filtering and pagination
-3. Integrate with graph and hover providers
-4. Create unit and integration tests
+### Block C (GUI Framework): PR #11 - Tutor Chat & Command Console (Web)
+1. Implement Chat interface with streaming AI responses
+2. Implement Command Console replicating all CLI actions
+3. Add persistent logs per session
+4. Add toast notifications for success/error
 
 ## Active Decisions
 
@@ -188,7 +250,7 @@
 
 ## Current Blockers
 
-None - Block C PR #8 complete; proceeding to Block D PR #10
+None - Block C PR #10 complete; proceeding to PR #11
 
 ## Implementation Status
 
@@ -215,6 +277,10 @@ None - Block C PR #8 complete; proceeding to Block D PR #10
 - ✅ PR #2: Graph + Hover Providers (COMPLETED)
 - ✅ PR #3: UI Model Definitions (COMPLETED)
 
+### Block C (GUI Framework): GUI Framework
+- ✅ PR #9: FastAPI Backend for Tauri (COMPLETED)
+- ✅ PR #10: Frontend Scaffolding (COMPLETED)
+
 ## Notes
 
 - All tests passing
@@ -223,5 +289,6 @@ None - Block C PR #8 complete; proceeding to Block D PR #10
 - Transcript import fully functional with AI classification, summarization, and state updates
 - Write-time summarization fully functional with APScheduler background jobs and audit logging
 - Review scheduler fully functional with decay-based mastery model and priority computation
-- Ready to proceed with PR #10: Performance Tracking
+- Frontend scaffolding complete with routing, layout, and testing infrastructure
+- Ready to proceed with PR #11: Tutor Chat & Command Console (Web)
 

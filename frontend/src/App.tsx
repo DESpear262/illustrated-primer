@@ -1,0 +1,37 @@
+/**
+ * Main App component for AI Tutor application.
+ * 
+ * Sets up React Router and provides the main routing structure.
+ */
+
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { Layout } from './components/Layout';
+import { Chat } from './pages/Chat';
+import { Console } from './pages/Console';
+import { Review } from './pages/Review';
+import { Context } from './pages/Context';
+import { KnowledgeTree } from './pages/KnowledgeTree';
+import { Home } from './pages/Home';
+
+/**
+ * Main App component.
+ */
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="chat" element={<Chat />} />
+          <Route path="console" element={<Console />} />
+          <Route path="review" element={<Review />} />
+          <Route path="context" element={<Context />} />
+          <Route path="knowledge-tree" element={<KnowledgeTree />} />
+          <Route path="*" element={<Navigate to="/chat" replace />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;

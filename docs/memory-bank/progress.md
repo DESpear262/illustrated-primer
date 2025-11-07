@@ -143,6 +143,109 @@
 4. **Documentation**
    - Updated `docs/index/index.md` with new models file
 
+### ✅ Block C (GUI Framework), PR #10: Frontend Scaffolding (COMPLETED)
+
+1. **React + TypeScript + Vite Project** (`frontend/`)
+   - Initialized React + TypeScript + Vite project structure
+   - Configured build tooling with Vite
+   - Set up TypeScript configuration files
+
+2. **Tailwind CSS Configuration**
+   - Set up Tailwind CSS with PostCSS
+   - Updated global CSS with Tailwind directives
+   - Configured Tailwind for React components
+
+3. **React Router Setup**
+   - Configured React Router with routes for Chat, Console, Review, Context, KnowledgeTree
+   - Default redirect from `/` to `/chat`
+   - Navigation preserves app state
+
+4. **Layout Components** (`frontend/src/components/`)
+   - `Layout.tsx` - Main layout wrapper with header, sidebar, content area, and footer
+   - `Header.tsx` - Top menu bar with navigation links
+   - `Sidebar.tsx` - Collapsible navigation shortcuts
+   - `StatusFooter.tsx` - API health, database path, and index state
+
+5. **Placeholder Pages** (`frontend/src/pages/`)
+   - `Home.tsx` - Redirects to Chat
+   - `Chat.tsx` - Placeholder for Tutor Chat (PR #11)
+   - `Console.tsx` - Placeholder for Command Console (PR #11)
+   - `Review.tsx` - Placeholder for Review Queue
+   - `Context.tsx` - Placeholder for Context Inspector
+   - `KnowledgeTree.tsx` - Placeholder for Knowledge Tree (PR #12)
+   - Each page includes minimal API calls for validation
+
+6. **API Client** (`frontend/src/lib/api.ts`)
+   - Centralized API client with base URL configuration
+   - Environment variable support (`VITE_API_BASE_URL`)
+   - Defaults to `http://localhost:8000/api`
+   - Error handling for API requests
+
+7. **Testing Infrastructure** (`frontend/src/test/`)
+   - Vitest + React Testing Library setup
+   - Test setup file with jest-dom matchers
+   - Tests for App component (2 tests)
+   - Tests for Layout component (1 test)
+   - Tests for API client (4 tests)
+   - All 7 tests passing
+
+8. **Documentation**
+   - Updated `docs/index/index.md` with all frontend files
+   - Inline documentation in all components
+
+### ✅ Block C (GUI Framework), PR #9: FastAPI Backend for Tauri (COMPLETED)
+
+1. **FastAPI Application** (`backend/api/main.py`)
+   - FastAPI app with lifespan management for facade initialization
+   - CORS middleware configured for localhost-only policy (localhost, 127.0.0.1)
+   - WebSocket support for live updates
+   - Router registration for all endpoints
+   - Root and health check endpoints
+
+2. **Facade Access** (`backend/api/facade.py`)
+   - Facade instance access module to avoid circular imports
+   - `set_facade()` and `get_facade()` functions for facade management
+
+3. **API Routes** (`backend/api/routes/`)
+   - `db.py` - Database endpoints: GET `/api/db/check`, POST `/api/db/init`
+   - `index.py` - Index endpoints: POST `/api/index/build`, GET `/api/index/status`, POST `/api/index/search`
+   - `ai.py` - AI endpoints: GET `/api/ai/routes`, POST `/api/ai/test`
+   - `chat.py` - Chat endpoints: POST `/api/chat/start`, POST `/api/chat/resume`, GET `/api/chat/list`, POST `/api/chat/turn`
+   - `graph.py` - Graph endpoint: GET `/api/graph` (with scope, depth, relation, include_events filters)
+   - `hover.py` - Hover endpoint: GET `/api/hover/{node_id}`
+   - `review.py` - Review endpoint: GET `/api/review/next` (with limit, topic, mastery filters)
+   - `import_route.py` - Import endpoints: POST `/api/import/transcript`, POST `/api/import/transcript/upload`
+   - `refresh.py` - Refresh endpoint: POST `/api/refresh/summaries` (with topic, since, force filters)
+   - `progress.py` - Progress endpoint: GET `/api/progress/summary` (with start, end, days, topic, format filters)
+   - `websocket.py` - WebSocket endpoint: `/ws` (supports ping/pong, subscribe, error handling)
+
+4. **Response Models**
+   - All endpoints return Pydantic models (CommandResult, HoverPayload, etc.)
+   - Error handling with proper HTTP status codes (400 for validation, 500 for server errors)
+   - Facade exceptions caught and converted to HTTP exceptions
+
+5. **Dependencies** (`requirements.txt`)
+   - Added fastapi, uvicorn[standard], websockets, python-multipart
+
+6. **Testing** (`tests/test_api.py`)
+   - Unit and integration tests for all endpoints (23 tests, all passing)
+   - Tests for root endpoints (root, health)
+   - Tests for database endpoints (check, init)
+   - Tests for index endpoints (status, build)
+   - Tests for AI endpoints (routes, test)
+   - Tests for chat endpoints (start, list)
+   - Tests for graph endpoints (get, with filters)
+   - Tests for hover endpoints (topic, invalid node ID)
+   - Tests for review endpoints (next)
+   - Tests for import endpoints (invalid path)
+   - Tests for refresh endpoints (summaries)
+   - Tests for progress endpoints (summary)
+   - Tests for WebSocket endpoints (connection, subscribe, invalid message)
+   - Tests for error handling (invalid endpoint, CORS)
+
+7. **Documentation**
+   - Updated `docs/index/index.md` with all new backend API files
+
 ### ✅ Block D, PR #10: Performance Tracking (COMPLETED)
 
 1. **Performance Analysis** (`src/analysis/performance.py`)
@@ -544,8 +647,9 @@
 - **Block B**: 3/3 PRs complete (100%)
 - **Block C**: 2/2 PRs complete (100%)
 - **Block D**: 2/2 PRs complete (100%)
-- **Block A (Interface)**: 1/3 PRs complete (33%)
-- **Total**: 11/13 PRs complete (85%)
+- **Block A (Interface)**: 3/3 PRs complete (100%)
+- **Block C (GUI Framework)**: 2/4 PRs complete (50%)
+- **Total**: 13/17 PRs complete (76%)
 
 ### Timeline
 - **Block A**: ~30/30 hours complete (100%)
