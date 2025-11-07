@@ -9,6 +9,7 @@ from src.interface_gui.views.tutor_chat_view import TutorChatView
 from src.interface_gui.views.command_view import CommandView
 from src.interface_gui.views.review_queue_view import ReviewQueueView
 from src.interface_gui.views.context_inspector_view import ContextInspectorView
+from src.interface_gui.views.knowledge_tree_view import KnowledgeTreeView
 
 __all__ = [
     "MainWindow",
@@ -16,5 +17,6 @@ __all__ = [
     "CommandView",
     "ReviewQueueView",
     "ContextInspectorView",
+    "KnowledgeTreeView",
 ]
 

@@ -63,12 +63,16 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **src/interface_gui/views/command_view.py** - Command console view with visual interface for all CLI operations, form inputs, results display, and command history
 - **src/interface_gui/views/review_queue_view.py** - Review queue view with table of topics sorted by review priority, filtering, mark complete dialog, and refresh functionality
 - **src/interface_gui/views/context_inspector_view.py** - Context inspector view with tree view of topics/skills, expand/collapse, node details, and actions (summarize, recompute)
+- **src/interface_gui/views/knowledge_tree_view.py** - Knowledge tree view with interactive DAG visualization using Cytoscape.js, QWebEngineView, and QtWebChannel for Python↔JS communication
+- **src/interface_gui/web/knowledge_tree/index.html** - HTML file for knowledge tree visualization with Cytoscape.js integration
+- **src/interface_gui/web/knowledge_tree/app.js** - JavaScript application for graph rendering, zoom, pan, hover, and node focus
+- **src/interface_gui/web/knowledge_tree/styles.css** - CSS styles for knowledge tree visualization with color coding and hover popup
 - **src/interface_gui/widgets/__init__.py** - Package initialization for widgets module
 - **src/interface_gui/widgets/message_list.py** - Message list widget with styled message bubbles and context indicators
 
 ### Interface Common Module (`src/interface_common/`)
 - **src/interface_common/__init__.py** - Package initialization for interface_common module
-- **src/interface_common/app_facade.py** - Unified GUI-backend facade with async wrappers for all backend operations (database, index, AI, chat, review, context), error handling, timeout guards, and logging hooks
+- **src/interface_common/app_facade.py** - Unified GUI-backend facade with async wrappers for all backend operations (database, index, AI, chat, review, context, graph), error handling, timeout guards, and logging hooks
 - **src/interface_common/exceptions.py** - Custom exceptions for facade operations (FacadeError, FacadeTimeoutError, FacadeValidationError)
 - **src/interface_common/models.py** - Shared Pydantic models for GUI interfaces (GraphNode, GraphEdge, HoverPayload, ChatMessage, CommandResult) with JSON serialization helpers
 
@@ -130,6 +134,7 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **tests/test_command_view.py** - Integration tests for command console view (command execution, results display, history)
 - **tests/test_review_queue_view.py** - Integration tests for review queue view (review list display, filtering, mark complete functionality)
 - **tests/test_context_inspector_view.py** - Integration tests for context inspector view (tree view, node details, expand/summarize/recompute actions)
+- **tests/test_knowledge_tree_view.py** - Integration tests for knowledge tree view (graph rendering, WebChannel communication, node interactions)
 
 ## Documentation (`docs/`)
 

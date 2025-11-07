@@ -1320,6 +1320,65 @@ class AppFacade:
             logger.exception(f"{operation} unexpected error")
             raise FacadeError(f"Unexpected error in {operation}: {e}", {"operation": operation})
 
+    # ==================== Graph Operations ====================
+
+    async def graph_get(
+        self,
+        scope: str = "root",
+        depth: Optional[int] = 2,
+        relation: str = "all",
+    ) -> Dict[str, Any]:
+        """
+        Get DAG JSON from database in Cytoscape.js format.
+        
+        Args:
+            scope: Graph scope - "all" (all nodes), "root" (root topics only), "topic:<id>" (subtree from topic)
+            depth: Maximum depth from scope root (None for unlimited)
+            relation: Edge types to include - "all", "parent-child" (topic→topic), "topic-skill" (topic→skill)
+            
+        Returns:
+            Dictionary with "nodes" and "edges" lists in Cytoscape.js format
+            
+        Raises:
+            FacadeValidationError: If scope or relation is invalid
+            FacadeError: If graph retrieval fails
+            FacadeTimeoutError: If operation times out
+        """
+        operation = "graph.get"
+        logger.info(f"Starting {operation} (scope={scope}, depth={depth}, relation={relation})")
+        start_time = datetime.utcnow()
+        
+        try:
+            from src.context.graph_provider import get_graph
+            
+            def _get_graph():
+                return get_graph(
+                    scope=scope,
+                    depth=depth,
+                    relation=relation,
+                    db_path=self.db_path,
+                )
+            
+            result = await asyncio.wait_for(
+                asyncio.to_thread(_get_graph),
+                timeout=TIMEOUT_DB,
+            )
+            
+            elapsed = (datetime.utcnow() - start_time).total_seconds()
+            logger.info(f"Completed {operation} in {elapsed:.2f}s")
+            
+            return result
+            
+        except asyncio.TimeoutError:
+            logger.error(f"{operation} timed out after {TIMEOUT_DB}s")
+            raise FacadeTimeoutError(operation, TIMEOUT_DB)
+        except ValueError as e:
+            logger.error(f"{operation} validation error: {e}")
+            raise FacadeValidationError("scope/relation", f"{scope}/{relation}", str(e))
+        except Exception as e:
+            logger.exception(f"{operation} unexpected error")
+            raise FacadeError(f"Unexpected error in {operation}: {e}", {"operation": operation})
+
     # ==================== Command Dispatcher ====================
 
     async def run_command(
@@ -1365,6 +1424,7 @@ class AppFacade:
             "context.expand": self.context_expand,
             "context.summarize": self.context_summarize,
             "context.recompute": self.context_recompute,
+            "graph.get": self.graph_get,
         }
         
         if name not in command_map:

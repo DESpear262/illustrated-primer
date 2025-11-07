@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Tree</title>
+    <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+    <script src="https://unpkg.com/cytoscape@3.26.0/dist/cytoscape.min.js"></script>
+    <script src="https://unpkg.com/cytoscape-dagre@2.5.0/cytoscape-dagre.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="cy"></div>
+    <div id="hover-popup" class="hover-popup hidden">
+        <div class="popup-content">
+            <div class="popup-header">
+                <span id="popup-title"></span>
+                <button id="popup-close" class="popup-close">×</button>
+            </div>
+            <div id="popup-body" class="popup-body"></div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
+

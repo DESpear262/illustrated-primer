@@ -258,12 +258,9 @@ class MainWindow(QMainWindow):
         self.tab_widget.addTab(self.review_queue_view, "Review Queue")
         
         # Knowledge Tree tab
-        self.knowledge_tree_tab = QWidget()
-        knowledge_tree_layout = QVBoxLayout(self.knowledge_tree_tab)
-        knowledge_tree_label = QLabel("Knowledge Tree - Coming in PR #8")
-        knowledge_tree_label.setAlignment(Qt.AlignCenter)
-        knowledge_tree_layout.addWidget(knowledge_tree_label)
-        self.tab_widget.addTab(self.knowledge_tree_tab, "Knowledge Tree")
+        from src.interface_gui.views.knowledge_tree_view import KnowledgeTreeView
+        self.knowledge_tree_view = KnowledgeTreeView(self.facade)
+        self.tab_widget.addTab(self.knowledge_tree_view, "Knowledge Tree")
         
         # Context Inspector tab
         from src.interface_gui.views.context_inspector_view import ContextInspectorView
