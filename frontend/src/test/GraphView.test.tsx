@@ -5,7 +5,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { GraphView } from '../components/GraphView';
-import { GraphData } from '../lib/api';
+import type { GraphData } from '../lib/api';
 
 // Mock Cytoscape
 vi.mock('cytoscape', () => {

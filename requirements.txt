@@ -9,4 +9,8 @@ apscheduler
 pytest
 pytest-asyncio
 tiktoken
+fastapi
+uvicorn[standard]
+websockets
+python-multipart
 

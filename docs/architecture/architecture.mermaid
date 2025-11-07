@@ -1,0 +1,67 @@
+flowchart TD
+
+%% ===== Interface Layer =====
+subgraph Interface
+  UITutor[ Tutor Chat TUI ]
+  UICommand[ Command Chat TUI ]
+end
+
+%% ===== AI Layer =====
+subgraph AI
+  Orchestrator[ AI Orchestration ]
+  Context[ Context Assembler ]
+  Prompts[ Prompt Templates ]
+  Router[ Model Router ]
+end
+
+%% ===== Retrieval Layer =====
+subgraph Retrieval
+  RetMgr[ Retrieval Pipeline ]
+  SQLFTS[ SQLite FTS5 ]
+  FAISS[ FAISS Search ]
+end
+
+%% ===== Data Layer =====
+subgraph Data
+  SQLite[( SQLite DB )]
+  Index[( FAISS Index Files )]
+end
+
+%% ===== Pipelines & Jobs =====
+subgraph Pipelines
+  Ingest[ Transcript Ingestion ]
+  Summarizers[ Write-time Summarizers ]
+  Scheduler[ Spaced Repetition Scheduler ]
+  Analysis[ Performance Reports ]
+end
+
+%% ===== External Services =====
+subgraph External
+  OpenAI[( OpenAI API )]
+end
+
+%% ---- Primary Interaction Flow ----
+UITutor --> Orchestrator
+UICommand --> Orchestrator
+Orchestrator --> Context
+Context --> RetMgr
+RetMgr --> SQLFTS
+RetMgr --> FAISS
+SQLFTS --> SQLite
+FAISS --> Index
+Context --> Prompts
+Prompts --> Router
+Router --> OpenAI
+OpenAI --> Orchestrator
+
+%% ---- Persistence & Updates ----
+Orchestrator --> SQLite
+Ingest --> SQLite
+Ingest --> Router
+Router --> FAISS
+Summarizers --> SQLite
+Summarizers --> FAISS
+
+%% ---- Scheduling & Reporting ----
+Scheduler --> Orchestrator
+Analysis --> SQLite

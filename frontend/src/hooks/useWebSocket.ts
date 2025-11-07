@@ -24,7 +24,22 @@ export function useWebSocket() {
   const wsRef = useRef<WebSocket | null>(null);
   const reconnectTimeoutRef = useRef<number | null>(null);
 
+  const connectRef = useRef<(() => void) | null>(null);
+  const isConnectingRef = useRef(false);
+
   const connect = useCallback(() => {
+    // Prevent multiple simultaneous connection attempts
+    if (isConnectingRef.current || (wsRef.current && wsRef.current.readyState === WebSocket.CONNECTING)) {
+      return;
+    }
+
+    // Close existing connection if any
+    if (wsRef.current) {
+      wsRef.current.close();
+    }
+
+    isConnectingRef.current = true;
+    
     // Get WebSocket URL from API base URL
     const wsUrl = apiConfig.baseUrl.replace('/api', '').replace('http://', 'ws://').replace('https://', 'wss://') + '/ws';
     
@@ -32,6 +47,7 @@ export function useWebSocket() {
       const ws = new WebSocket(wsUrl);
       
       ws.onopen = () => {
+        isConnectingRef.current = false;
         setIsConnected(true);
         console.log('WebSocket connected');
         
@@ -43,6 +59,9 @@ export function useWebSocket() {
             clearInterval(pingInterval);
           }
         }, 30000); // Ping every 30 seconds
+        
+        // Store interval ID for cleanup
+        (ws as unknown as { _pingInterval?: number })._pingInterval = pingInterval;
       };
 
       ws.onmessage = (event) => {
@@ -55,24 +74,40 @@ export function useWebSocket() {
       };
 
       ws.onerror = (error) => {
+        isConnectingRef.current = false;
         console.error('WebSocket error:', error);
       };
 
       ws.onclose = () => {
+        isConnectingRef.current = false;
         setIsConnected(false);
         console.log('WebSocket disconnected');
         
-        // Attempt to reconnect after 3 seconds
-        reconnectTimeoutRef.current = window.setTimeout(() => {
-          connect();
-        }, 3000);
+        // Clean up ping interval
+        const pingInterval = (ws as unknown as { _pingInterval?: number })._pingInterval;
+        if (pingInterval) {
+          clearInterval(pingInterval);
+        }
+        
+        // Attempt to reconnect after 3 seconds (only if not manually disconnected)
+        if (wsRef.current === ws) {
+          reconnectTimeoutRef.current = window.setTimeout(() => {
+            if (connectRef.current) {
+              connectRef.current();
+            }
+          }, 3000);
+        }
       };
 
       wsRef.current = ws;
     } catch (error) {
+      isConnectingRef.current = false;
       console.error('Failed to create WebSocket connection:', error);
     }
   }, []);
+
+  // Store connect function in ref to avoid dependency issues
+  connectRef.current = connect;
 
   const disconnect = useCallback(() => {
     if (reconnectTimeoutRef.current) {
@@ -85,6 +120,7 @@ export function useWebSocket() {
       wsRef.current = null;
     }
     
+    isConnectingRef.current = false;
     setIsConnected(false);
   }, []);
 
@@ -101,7 +137,8 @@ export function useWebSocket() {
     return () => {
       disconnect();
     };
-  }, [connect, disconnect]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty deps - only run on mount/unmount
 
   return {
     isConnected,

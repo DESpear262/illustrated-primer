@@ -1,0 +1,31 @@
+# AI Tutor Proof of Concept - Configuration Template
+# Copy this file to .config and fill in your values
+# The .config file is gitignored and will not be committed
+
+# OpenAI API Configuration
+# Required for embedding and LLM operations
+OPENAI_API_KEY=your_openai_api_key_here
+
+# Data Directory Configuration
+# Override the default data directory location ($PROJECT_ROOT/data)
+# Leave empty to use default
+AI_TUTOR_DATA_DIR=
+
+# Embedding Configuration
+# Embedding dimension (default: 1536 for text-embedding-3-small)
+AI_TUTOR_EMBED_DIM=1536
+
+# Tokenization Configuration
+# Use tiktoken for token-aware chunking (1 = yes, 0 = no, default: 1)
+AI_TUTOR_USE_TIKTOKEN=1
+
+# Chunking Configuration
+# Maximum tokens per chunk (default: 200)
+AI_TUTOR_CHUNK_TOKENS=200
+
+# Chunk overlap in tokens (default: 50)
+AI_TUTOR_CHUNK_OVERLAP=50
+
+# Batch size for embedding API calls (default: 64)
+AI_TUTOR_BATCH_EMBED_SIZE=64
+

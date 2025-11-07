@@ -5,7 +5,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { HoverCard } from '../components/HoverCard';
-import { HoverPayload } from '../lib/api';
+import type { HoverPayload } from '../lib/api';
 
 describe('HoverCard', () => {
   const mockTopicPayload: HoverPayload = {

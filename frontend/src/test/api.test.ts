@@ -21,10 +21,10 @@ describe('ApiClient', () => {
     const client = new ApiClient('http://localhost:8000/api');
     
     // Mock fetch
-    global.fetch = vi.fn().mockResolvedValue({
+    globalThis.fetch = vi.fn().mockResolvedValue({
       ok: true,
       json: async () => ({ status: 'ok' }),
-    });
+    }) as unknown as typeof fetch;
 
     const result = await client.get<{ status: string }>('/health');
     expect(result).toEqual({ status: 'ok' });
@@ -34,10 +34,10 @@ describe('ApiClient', () => {
     const client = new ApiClient('http://localhost:8000/api');
     
     // Mock fetch to return error
-    global.fetch = vi.fn().mockResolvedValue({
+    globalThis.fetch = vi.fn().mockResolvedValue({
       ok: false,
       statusText: 'Not Found',
-    });
+    }) as unknown as typeof fetch;
 
     await expect(client.get('/invalid')).rejects.toThrow('API request failed: Not Found');
   });

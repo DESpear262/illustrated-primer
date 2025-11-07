@@ -29,7 +29,7 @@ const localStorageMock = {
   removeItem: vi.fn(),
   clear: vi.fn(),
 };
-global.localStorage = localStorageMock as unknown as Storage;
+globalThis.localStorage = localStorageMock as unknown as Storage;
 
 describe('Chat', () => {
   beforeEach(() => {
