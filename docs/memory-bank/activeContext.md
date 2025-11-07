@@ -2,9 +2,47 @@
 
 ## Current Work Focus
 
-**Block C (GUI Framework): PR #11 - Tutor Chat & Command Console (Web)** ✅ **COMPLETED**
+**Block C (GUI Framework): PR #12 - Knowledge Tree Visualization (Web)** ✅ **COMPLETED**
 
 ## Recent Changes
+
+### Completed (PR #12 - Block C)
+1. ✅ Installed Cytoscape.js and cytoscape-elk dependencies
+2. ✅ Extended API client with graph and hover endpoints:
+   - `getGraph()` method with filtering parameters (scope, depth, relation, include_events)
+   - `getHover()` method for node hover payloads
+   - TypeScript interfaces for GraphData, GraphNode, GraphEdge, HoverPayload
+3. ✅ Created GraphView component with Cytoscape.js integration:
+   - Node styling (topics: blue, skills: green with mastery intensity, events: gray)
+   - Edge styling (parent-child: solid blue, belongs-to: dashed green, evidence: dotted gray)
+   - ELK layout integration (fallback to breadthfirst if ELK unavailable)
+   - Search filtering with node highlighting
+   - Collapse/expand functionality for hierarchical nodes
+   - Zoom controls (zoom in, zoom out, fit, reset) with zoom level display
+   - Hover tooltips with 200ms debounce
+   - Node click navigation to Context page
+4. ✅ Created HoverCard component for hover tooltips:
+   - Topic payloads (summary, event count, last event)
+   - Skill payloads (mastery percentage, evidence count, last evidence)
+   - Event payloads (content, type, actor, created date)
+   - Smart positioning to avoid viewport edges
+5. ✅ Updated KnowledgeTree page with full implementation:
+   - Graph loading with filters (scope, depth, relation, include_events)
+   - Search functionality with real-time filtering
+   - Collapse/expand controls (expand all, collapse all)
+   - Zoom controls with current zoom display
+   - WebSocket real-time updates for graph refresh
+   - Navigation to Context page on node click
+   - Hover caching for performance
+6. ✅ Added performance optimizations:
+   - Debounced hover requests (200ms delay)
+   - Hover payload caching
+   - Viewport-based rendering (handled by Cytoscape.js)
+7. ✅ Created comprehensive test suite:
+   - Tests for GraphView component (4 tests)
+   - Tests for HoverCard component (4 tests)
+   - All 21 tests passing
+8. ✅ Updated file index documentation
 
 ### Completed (PR #11 - Block C)
 1. ✅ Implemented Chat interface with session management:
@@ -275,11 +313,11 @@
 
 ## Next Steps
 
-### Block C (GUI Framework): PR #12 - Knowledge Tree Visualization (Web)
-1. Integrate Cytoscape.js with ELK layout
-2. Fetch `/graph` and `/hover/{node_id}` from backend
-3. Implement hover tooltips, zoom, pan, and focus transitions
-4. Add search and collapse features
+### Block C (GUI Framework): PR #13 - Review Queue & Context Inspector (Web)
+1. Implement Review Queue interface with spaced repetition
+2. Implement Context Inspector with tree view
+3. Add node focus and navigation from Knowledge Tree
+4. Integrate with review scheduler backend
 
 ## Active Decisions
 
@@ -292,7 +330,7 @@
 
 ## Current Blockers
 
-None - Block C PR #11 complete; proceeding to PR #12
+None - Block C PR #12 complete; proceeding to PR #13
 
 ## Implementation Status
 
@@ -323,6 +361,7 @@ None - Block C PR #11 complete; proceeding to PR #12
 - ✅ PR #9: FastAPI Backend for Tauri (COMPLETED)
 - ✅ PR #10: Frontend Scaffolding (COMPLETED)
 - ✅ PR #11: Tutor Chat & Command Console (Web) (COMPLETED)
+- ✅ PR #12: Knowledge Tree Visualization (Web) (COMPLETED)
 
 ## Notes
 
@@ -334,5 +373,6 @@ None - Block C PR #11 complete; proceeding to PR #12
 - Review scheduler fully functional with decay-based mastery model and priority computation
 - Frontend scaffolding complete with routing, layout, and testing infrastructure
 - Chat and Console interfaces complete with full CLI parity
-- Ready to proceed with PR #12: Knowledge Tree Visualization (Web)
+- Knowledge Tree visualization complete with Cytoscape.js, search, collapse, zoom, and navigation
+- Ready to proceed with PR #13: Review Queue & Context Inspector (Web)
 

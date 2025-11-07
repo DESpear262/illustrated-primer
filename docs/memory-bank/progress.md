@@ -143,6 +143,52 @@
 4. **Documentation**
    - Updated `docs/index/index.md` with new models file
 
+### ✅ Block C (GUI Framework), PR #12: Knowledge Tree Visualization (Web) (COMPLETED)
+
+1. **GraphView Component** (`frontend/src/components/GraphView.tsx`)
+   - Cytoscape.js integration with ELK layout (fallback to breadthfirst)
+   - Node styling (topics: blue, skills: green with mastery intensity, events: gray)
+   - Edge styling (parent-child: solid blue, belongs-to: dashed green, evidence: dotted gray)
+   - Search filtering with node highlighting
+   - Collapse/expand functionality for hierarchical nodes
+   - Zoom controls (zoom in, zoom out, fit, reset) with zoom level display
+   - Hover tooltips with 200ms debounce
+   - Node click navigation to Context page
+
+2. **HoverCard Component** (`frontend/src/components/HoverCard.tsx`)
+   - Topic payloads (summary, event count, last event)
+   - Skill payloads (mastery percentage, evidence count, last evidence)
+   - Event payloads (content, type, actor, created date)
+   - Smart positioning to avoid viewport edges
+
+3. **KnowledgeTree Page** (`frontend/src/pages/KnowledgeTree.tsx`)
+   - Graph loading with filters (scope, depth, relation, include_events)
+   - Search functionality with real-time filtering
+   - Collapse/expand controls (expand all, collapse all)
+   - Zoom controls with current zoom display
+   - WebSocket real-time updates for graph refresh
+   - Navigation to Context page on node click
+   - Hover caching for performance
+
+4. **API Client Extensions** (`frontend/src/lib/api.ts`)
+   - Extended with graph endpoints (getGraph with filtering parameters)
+   - Extended with hover endpoints (getHover for node hover payloads)
+   - TypeScript interfaces for GraphData, GraphNode, GraphEdge, HoverPayload
+
+5. **Performance Optimizations**
+   - Debounced hover requests (200ms delay)
+   - Hover payload caching
+   - Viewport-based rendering (handled by Cytoscape.js)
+
+6. **Testing** (`frontend/src/test/`)
+   - Tests for GraphView component (4 tests)
+   - Tests for HoverCard component (4 tests)
+   - All 21 tests passing
+
+7. **Documentation**
+   - Updated `docs/index/index.md` with all new files
+   - Inline documentation in all components
+
 ### ✅ Block C (GUI Framework), PR #11: Tutor Chat & Command Console (Web) (COMPLETED)
 
 1. **Chat Interface** (`frontend/src/pages/Chat.tsx`)
@@ -698,8 +744,8 @@
 - **Block C**: 2/2 PRs complete (100%)
 - **Block D**: 2/2 PRs complete (100%)
 - **Block A (Interface)**: 3/3 PRs complete (100%)
-- **Block C (GUI Framework)**: 3/4 PRs complete (75%)
-- **Total**: 14/17 PRs complete (82%)
+- **Block C (GUI Framework)**: 4/4 PRs complete (100%)
+- **Total**: 15/17 PRs complete (88%)
 
 ### Timeline
 - **Block A**: ~30/30 hours complete (100%)
