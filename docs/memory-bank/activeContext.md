@@ -2,9 +2,22 @@
 
 ## Current Work Focus
 
-**Interface Development - Block A: Backend Integration Layer - PR #3: UI Model Definitions** ✅ **COMPLETED**
+**Interface Development - Block B: GUI Framework - PR #4: GUI Skeleton and Navigation** ✅ **COMPLETED**
 
 ## Recent Changes
+
+### Completed (Interface Development - PR #4)
+1. ✅ Added PySide6 and qasync to requirements.txt
+2. ✅ Created src/interface_gui directory structure (app.py, views/MainWindow.py)
+3. ✅ Implemented app.py with qasync event loop setup and main() function
+4. ✅ Created MainWindow with 5 tabs (Tutor Chat, Command Console, Review Queue, Knowledge Tree, Context Inspector)
+5. ✅ Implemented status bar with DB, FAISS, and API health indicators with color coding
+6. ✅ Implemented menu bar with all CLI command equivalents (File, Database, Index, AI, Chat, Review, Import, Refresh, Progress, Help)
+7. ✅ Added startup health checks for DB and FAISS with non-blocking warnings and auto-initialization
+8. ✅ Created basic tab structures (layouts and placeholder widgets) for future PRs
+9. ✅ Implemented global loading overlay for async operations
+10. ✅ Created integration tests for app launch and menu actions (test_gui_app.py)
+11. ✅ Updated file index documentation
 
 ### Completed (Interface Development - PR #3)
 1. ✅ Created shared Pydantic models for `GraphNode`, `GraphEdge`, `HoverPayload`, `ChatMessage`, and `CommandResult`
@@ -151,11 +164,11 @@
 ## Next Steps
 
 ### Interface Development - Block B: GUI Framework
-- ⏳ PR #4: GUI Skeleton and Navigation (12 hours)
-  - Create MainWindow with tabs for Tutor Chat, Command Console, Review Queue, Knowledge Tree, Context Inspector
-  - Implement status bar and top menu actions
-  - Integrate qasync for non-blocking tasks
-  - Add startup checks for DB and FAISS health
+- ⏳ PR #5: Tutor Chat View (10 hours)
+  - Implement chat input, output display, and context sidebar
+  - Record sessions to DB and trigger summarization
+  - Add loading spinner during LLM calls
+  - Display last-used context snippets
 
 ## Active Decisions
 
@@ -196,7 +209,7 @@ None - Interface Development Block A complete; proceeding to Block B: GUI Framew
 - ✅ PR #3: UI Model Definitions (COMPLETED)
 
 ### Interface Development - Block B: GUI Framework
-- ⏳ PR #4: GUI Skeleton and Navigation
+- ✅ PR #4: GUI Skeleton and Navigation (COMPLETED)
 
 ## Notes
 
@@ -209,5 +222,6 @@ None - Interface Development Block A complete; proceeding to Block B: GUI Framew
 - GUI-backend facade complete with async wrappers, error handling, timeout guards, and logging hooks
 - Graph and hover providers complete with networkx DAG traversal, filtering, and caching
 - UI model definitions complete with shared Pydantic models and JSON serialization helpers
-- Ready to proceed with Interface Development Block B: GUI Framework
+- GUI skeleton complete with multi-tab layout, menu bar, status bar, health checks, and loading overlay
+- Ready to proceed with Interface Development Block B: GUI Framework - PR #5: Tutor Chat View
 

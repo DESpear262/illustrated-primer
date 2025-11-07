@@ -2,6 +2,50 @@
 
 ## What Works
 
+### ✅ Interface Development - Block B, PR #4: GUI Skeleton and Navigation (COMPLETED)
+
+1. **GUI Application** (`src/interface_gui/app.py`)
+   - Application entry point with qasync event loop setup
+   - create_app() function creates QApplication with QEventLoop
+   - async_main() function creates and shows main window
+   - main() function provides command-line entry point
+   - Proper error handling and logging
+
+2. **Main Window** (`src/interface_gui/views/main_window.py`)
+   - MainWindow class with multi-tab layout
+   - 5 tabs: Tutor Chat, Command Console, Review Queue, Knowledge Tree, Context Inspector
+   - Menu bar with all CLI command equivalents:
+     - File: Import Transcript, Import Batch, Exit
+     - Database: Check, Initialize
+     - Index: Build, Status, Search
+     - AI: Routes, Test Summarize, Test Classify, Test Chat
+     - Chat: Start Session, Resume Session, List Sessions
+     - Review: Next Reviews
+     - Refresh: Summaries, Status
+     - Progress: Summary
+     - Help: About
+   - Status bar with health indicators (DB, FAISS, API) with color coding
+   - Startup health checks with non-blocking warnings and auto-initialization
+   - Global loading overlay for async operations
+   - Periodic health checks (every 30 seconds)
+   - Basic tab structures (placeholders for future PRs)
+
+3. **Dependencies** (`requirements.txt`)
+   - PySide6: Qt Widgets and WebEngine for GUI
+   - qasync: Async event loop integration with Qt
+
+4. **Testing** (`tests/test_gui_app.py`)
+   - Integration tests for app launch
+   - Tests for MainWindow creation
+   - Tests for menu bar existence
+   - Tests for status bar existence
+   - Tests for startup health checks
+   - Tests for loading overlay
+   - Tests for menu action handlers
+
+5. **Documentation** (`docs/index/index.md`)
+   - Updated file index with GUI module files
+
 ### ✅ Interface Development - Block A, PR #1: Unified GUI–Backend Facade (COMPLETED)
 
 1. **GUI-Backend Facade** (`src/interface_common/app_facade.py`)
@@ -388,28 +432,39 @@
 
 ### 🟢 Block B: AI Tutor Chat System
 
-#### PR #4: AI Orchestration Layer
-- [ ] Model routing registry (nano/classifier/4o)
-- [ ] Standardized prompt interface
-- [ ] Retry, rate limiting, error handling
-- [ ] Summarization and classification functions
-- [ ] Unit and integration tests
+#### PR #4: AI Orchestration Layer ✅
+- [x] Model routing registry (nano/classifier/4o)
+- [x] Standardized prompt interface
+- [x] Retry, rate limiting, error handling
+- [x] Summarization and classification functions
+- [x] Unit and integration tests
 
-#### PR #5: Tutor Chat Interface (TUI)
-- [ ] Text-based TUI using typer + rich
-- [ ] Conversational history buffer
-- [ ] Event logging for each turn
-- [ ] Loading indicators and summaries
-- [ ] Session save/resume
-- [ ] Unit and integration tests
+#### PR #5: Tutor Chat Interface (TUI) ✅
+- [x] Text-based TUI using typer + rich
+- [x] Conversational history buffer
+- [x] Event logging for each turn
+- [x] Loading indicators and summaries
+- [x] Session save/resume
+- [x] Unit and integration tests
 
-#### PR #6: Context Composition Engine
-- [ ] Retrieval pipeline (SQL + FAISS)
-- [ ] Relevance scoring and recency decay
-- [ ] Dynamic context slice and prompt assembly
-- [ ] Token budget management
-- [ ] Retrieval decision logging
-- [ ] Unit and integration tests
+#### PR #6: Context Composition Engine ✅
+- [x] Retrieval pipeline (SQL + FAISS)
+- [x] Relevance scoring and recency decay
+- [x] Dynamic context slice and prompt assembly
+- [x] Token budget management
+- [x] Retrieval decision logging
+- [x] Unit and integration tests
+
+### 🟢 Interface Development - Block B: GUI Framework
+
+#### PR #4: GUI Skeleton and Navigation ✅
+- [x] Create MainWindow with tabs for Tutor Chat, Command Console, Review Queue, Knowledge Tree, Context Inspector
+- [x] Implement status bar and top menu actions
+- [x] Integrate qasync for non-blocking tasks
+- [x] Add startup checks for DB and FAISS health
+- [x] Create basic tab structures (layouts and placeholder widgets)
+- [x] Implement global loading overlay for async operations
+- [x] Create integration tests for app launch and menu actions
 
 ### 🔵 Block C: Transcript Ingestion Pipeline
 

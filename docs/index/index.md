@@ -54,6 +54,15 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **src/interface/utils.py** - Chat utilities for history building and token budgeting
 - **src/interface/tutor_chat.py** - TUI engine for chat sessions, upload handling, and summarization
 
+### Interface GUI Module (`src/interface_gui/`)
+- **src/interface_gui/__init__.py** - Package initialization for interface_gui module
+- **src/interface_gui/app.py** - Application entry point with qasync event loop setup and main() function
+- **src/interface_gui/views/__init__.py** - Package initialization for views module
+- **src/interface_gui/views/main_window.py** - Main window with multi-tab layout, menu bar, status bar, and all CLI command equivalents
+- **src/interface_gui/views/tutor_chat_view.py** - Tutor chat view with message display, input, context sidebar, and session management
+- **src/interface_gui/widgets/__init__.py** - Package initialization for widgets module
+- **src/interface_gui/widgets/message_list.py** - Message list widget with styled message bubbles and context indicators
+
 ### Interface Common Module (`src/interface_common/`)
 - **src/interface_common/__init__.py** - Package initialization for interface_common module
 - **src/interface_common/app_facade.py** - Unified GUI-backend facade with async wrappers for all backend operations, error handling, timeout guards, and logging hooks
@@ -113,6 +122,8 @@ This document indexes all files in the AI Tutor Proof of Concept project, organi
 - **tests/test_hover_provider.py** - Unit tests for hover provider (per-node summaries, statistics, caching)
 - **tests/test_graph_hover_integration.py** - Integration tests for graph and hover providers (FAISS + SQLite queries, hover latency, performance)
 - **tests/test_interface_models.py** - Unit tests for interface common models (GraphNode, GraphEdge, HoverPayload, ChatMessage, CommandResult) with serialization round-trip tests
+- **tests/test_gui_app.py** - Integration tests for GUI application (app launch, menu actions, basic functionality)
+- **tests/test_tutor_chat_view.py** - Unit and integration tests for tutor chat view (chat session logging, context retrieval, session persistence)
 
 ## Documentation (`docs/`)
 

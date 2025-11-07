@@ -8,4 +8,6 @@ rich
 apscheduler
 pytest
 tiktoken
+PySide6
+qasync
 
