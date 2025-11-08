@@ -2,6 +2,21 @@
 
 ## What Works
 
+### ✅ Desktop Packaging & Tauri Distribution (COMPLETED)
+
+1. **Backend Bundling**
+   - PyInstaller spec (`scripts/build_backend.spec`) includes FastAPI, Rich, Typer, Multipart, and bundled data folders.
+   - `scripts/build_python_backend.ps1` cleans prior artifacts, rebuilds `backend.exe`, and copies it into `frontend/src-tauri/resources`.
+2. **Integrated Build Orchestration**
+   - `scripts/build_all.ps1` runs backend build, Vite build, refreshes `tauri.conf.json` resources, and invokes `npm run tauri:build`.
+   - Produces `ai-tutor.exe` plus MSI/NSIS installers under `frontend/src-tauri/target/release/bundle/`.
+3. **Runtime Hardening**
+   - `backend/api/main.py` auto-creates `%APPDATA%\AI Tutor\data`, initialises the DB, and injects custom CORS handling for `tauri://` origins.
+   - `frontend/src-tauri/src/commands.rs` launches the bundled backend with explicit environment variables and structured stdout/stderr capture.
+4. **Desktop Logging**
+   - `frontend/src-tauri/src/lib.rs` configures `tauri-plugin-log` targets for stdout, webview console, and `%APPDATA%\AI Tutor\logs\app.log`.
+   - Log directory is created automatically; startup messages confirm path resolution.
+
 ### ✅ Block A (Interface), PR #1: Unified GUI–Backend Facade (COMPLETED)
 
 1. **Interface Common Module** (`src/interface_common/`)

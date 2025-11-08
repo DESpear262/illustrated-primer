@@ -22,7 +22,7 @@ export function Chat() {
   const [isLoading, setIsLoading] = useState(false);
   const [hoveredMessage, setHoveredMessage] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const [logs, setLogs] = useLocalStorage<Record<string, ChatMessage[]>>('chat_logs', {});
+  const [, setLogs] = useLocalStorage<Record<string, ChatMessage[]>>('chat_logs', {});
 
   // Load sessions on mount
   useEffect(() => {

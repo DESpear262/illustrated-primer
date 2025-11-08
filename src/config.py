@@ -3,16 +3,65 @@ Configuration module for AI Tutor Proof of Concept.
 
 Handles environment variables, database paths, and global constants.
 All configuration is local-first with environment variable overrides.
+Supports both development and Tauri bundled modes.
 """
 
 import os
+import sys
 from pathlib import Path
 from typing import Optional
 
 
+def is_tauri_bundle() -> bool:
+    """
+    Detect if running in a Tauri bundle.
+    
+    Checks for Tauri environment variables and executable path.
+    """
+    # Tauri sets TAURI_FAMILY environment variable
+    if os.getenv("TAURI_FAMILY"):
+        return True
+    
+    # Check if running from a bundled executable
+    if getattr(sys, 'frozen', False):
+        # PyInstaller sets this
+        return True
+    
+    return False
+
+
+def get_tauri_data_dir() -> Path:
+    """
+    Get the Tauri app data directory.
+    
+    Uses Tauri's app data directory API if available, otherwise
+    falls back to standard OS app data directories.
+    """
+    # Try Tauri environment variable first
+    tauri_data_dir = os.getenv("TAURI_APP_DATA_DIR")
+    if tauri_data_dir:
+        return Path(tauri_data_dir)
+    
+    # Fallback to standard OS app data directories
+    if sys.platform == "win32":
+        app_data = os.getenv("APPDATA", os.path.expanduser("~"))
+        return Path(app_data) / "AI Tutor" / "data"
+    elif sys.platform == "darwin":
+        return Path.home() / "Library" / "Application Support" / "AI Tutor" / "data"
+    else:  # Linux
+        return Path.home() / ".local" / "share" / "AI Tutor" / "data"
+
+
 def get_project_root() -> Path:
     """Get the project root directory."""
-    # Assume config.py is in src/, so project root is parent
+    if is_tauri_bundle():
+        # In bundled mode, use the executable's directory
+        if getattr(sys, 'frozen', False):
+            return Path(sys.executable).parent
+        # Otherwise, use Tauri resource path
+        return Path(os.getenv("TAURI_RESOURCE_DIR", "."))
+    
+    # Development mode: assume config.py is in src/, so project root is parent
     return Path(__file__).parent.parent
 
 
@@ -20,12 +69,17 @@ def get_data_dir() -> Path:
     """
     Get the data directory path.
     
-    Defaults to $PROJECT_ROOT/data, but can be overridden via
-    AI_TUTOR_DATA_DIR environment variable.
+    In Tauri bundle mode, uses app data directory.
+    In development mode, defaults to $PROJECT_ROOT/data.
+    Can be overridden via AI_TUTOR_DATA_DIR environment variable.
     """
     env_data_dir = os.getenv("AI_TUTOR_DATA_DIR")
     if env_data_dir:
         return Path(env_data_dir)
+    
+    if is_tauri_bundle():
+        return get_tauri_data_dir()
+    
     return get_project_root() / "data"
 
 

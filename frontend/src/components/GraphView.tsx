@@ -118,7 +118,7 @@ export function GraphView({
                 'font-family': '"Source Serif 4","Georgia",serif',
                 'font-size': 14,
                 'text-wrap': 'wrap',
-                'text-max-width': 120,
+                'text-max-width': '120px',
                 'text-valign': 'center',
                 'text-halign': 'center',
                 'color': '#111216',
@@ -421,9 +421,9 @@ export function GraphView({
       const target = edge.target();
       
       if (collapsedNodes.has(source.id()) || collapsedNodes.has(target.id())) {
-        edge.hide();
+        edge.style('display', 'none');
       } else {
-        edge.show();
+        edge.style('display', 'element');
       }
     });
 
@@ -431,10 +431,10 @@ export function GraphView({
     cy.nodes().forEach((node) => {
       if (collapsedNodes.has(node.id())) {
         // Hide node and its outgoing edges
-        node.hide();
-        node.outgoers().hide();
+        node.style('display', 'none');
+        node.outgoers().style('display', 'none');
       } else {
-        node.show();
+        node.style('display', 'element');
       }
     });
   }, [collapsedNodes, onToggleCollapse]);

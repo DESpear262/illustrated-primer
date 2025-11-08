@@ -4,7 +4,7 @@
  * Provides typed localStorage access with JSON serialization.
  */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 /**
  * LocalStorage hook.

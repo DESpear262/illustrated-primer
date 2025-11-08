@@ -12,8 +12,8 @@ import { apiClient } from '../lib/api';
  */
 export function StatusFooter() {
   const [apiHealth, setApiHealth] = useState<'ok' | 'error' | 'checking'>('checking');
-  const [dbPath, setDbPath] = useState<string>('Unknown');
-  const [indexState, setIndexState] = useState<string>('Unknown');
+  const [dbPath] = useState<string>('Unknown');
+  const [indexState] = useState<string>('Unknown');
 
   useEffect(() => {
     // Check API health

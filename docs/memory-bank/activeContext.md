@@ -2,6 +2,21 @@
 
 ## Current Work Focus
 
+### Completed (Desktop Packaging & Distribution)
+1. ✅ Established repeatable desktop build pipeline:
+   - `scripts/build_backend.spec` revised to include FastAPI, Rich, Typer, and other runtime deps.
+   - `scripts/build_python_backend.ps1` and `scripts/build_all.ps1` now clean previous artifacts, rebuild the backend, copy it into `frontend/src-tauri/resources`, and run `npm run tauri:build`.
+2. ✅ Hardened backend bundle startup:
+   - `backend/api/main.py` auto-initializes the SQLite/FAISS data directory, adds custom CORS handling for `tauri://` origins, and keeps the FastAPI facade wiring intact.
+   - `frontend/src-tauri/src/commands.rs` launches the bundled backend with `AI_TUTOR_DATA_DIR` + logging-friendly stdout/stderr capture.
+3. ✅ Added desktop logging + config awareness:
+   - `frontend/src-tauri/src/lib.rs` configures `tauri-plugin-log` to mirror output to `%APPDATA%\AI Tutor\logs\app.log`, stdout, and the webview console.
+   - `src/config.py` detects bundled execution and points data paths to `%APPDATA%\AI Tutor\data`.
+4. ✅ Verified end-to-end build artifacts:
+   - `frontend\src-tauri\target\release\ai-tutor.exe`
+   - `frontend\src-tauri\target\release\bundle\nsis\AI Tutor_0.1.0_x64-setup.exe`
+   - `frontend\src-tauri\target\release\bundle\msi\AI Tutor_0.1.0_x64_en-US.msi`
+
 **Block C (GUI Framework): UI Style Guide Implementation** ✅ **COMPLETED**
 
 ## Recent Changes

@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 import { apiClient } from '../lib/api';
 import type { GraphData, HoverPayload } from '../lib/api';
 import { GraphView } from '../components/GraphView';
-import type { GraphViewControls } from '../components/GraphView';
 import { useWebSocket } from '../hooks/useWebSocket';
 import toast from 'react-hot-toast';
 

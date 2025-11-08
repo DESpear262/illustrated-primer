@@ -5,14 +5,17 @@ Provides REST API endpoints for all facade methods and WebSocket support
 for live updates. Designed for Tauri integration with localhost-only CORS policy.
 """
 
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Request
+from fastapi.responses import Response
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Dict, Any
 import logging
+import os
+import sys
 
 from src.config import DB_PATH, FAISS_INDEX_PATH
+from src.storage.db import initialize_database
 from src.interface_common.app_facade import AppFacade
 from backend.api.facade import set_facade, get_facade as _get_facade
 from backend.api.routes import (
@@ -44,6 +47,12 @@ async def lifespan(app: FastAPI):
     
     # Startup
     logger.info("Initializing FastAPI application...")
+    # Ensure data directory and database are initialized
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+    FAISS_INDEX_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    initialize_database(DB_PATH)
+
     facade_instance = AppFacade(db_path=DB_PATH, index_path=FAISS_INDEX_PATH)
     set_facade(facade_instance)
     logger.info("Facade initialized successfully")
@@ -63,24 +72,78 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Configure CORS - localhost only
-# Include common development ports for Vite and other dev servers
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",  # Vite default port
-        "http://localhost:3000",  # Common React dev port
-        "http://localhost:8080",  # Common dev port
-        "http://127.0.0.1:5173",
-        "http://127.0.0.1:3000",
-        "http://127.0.0.1:8080",
-        "http://localhost",       # Fallback for port 80
-        "http://127.0.0.1",       # Fallback for port 80
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+# Determine runtime environment (Tauri bundle vs development)
+def is_tauri_bundle() -> bool:
+    return os.getenv("TAURI_FAMILY") is not None or getattr(sys, "frozen", False)
+
+
+DEV_ORIGINS = [
+    "http://localhost:5173",  # Vite default port
+    "http://localhost:3000",  # Common React dev port
+    "http://localhost:8080",  # Common dev port
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:8080",
+    "http://localhost",       # Fallback for port 80
+    "http://127.0.0.1",       # Fallback for port 80
+]
+
+BUNDLE_ORIGINS = [
+    "tauri://localhost",
+    "app://localhost",
+    "http://localhost",
+    "http://127.0.0.1",
+]
+
+allowed_origins = DEV_ORIGINS.copy()
+
+if is_tauri_bundle():
+    allowed_origins.extend(BUNDLE_ORIGINS)
+
+ALLOWED_ORIGINS = set(allowed_origins)
+ALLOWED_ORIGIN_PREFIXES = (
+    "app://localhost",
+    "tauri://localhost",
 )
+
+
+def is_allowed_origin(origin: str | None) -> bool:
+    if not origin:
+        return False
+    if origin in ALLOWED_ORIGINS:
+        return True
+    return any(origin.startswith(prefix) for prefix in ALLOWED_ORIGIN_PREFIXES)
+
+
+@app.middleware("http")
+async def cors_middleware(request: Request, call_next):
+    """
+    Custom CORS middleware that supports Tauri-specific origins.
+    """
+    origin = request.headers.get("Origin")
+    is_preflight = request.method == "OPTIONS"
+
+    if is_preflight:
+        response = Response(status_code=204)
+    else:
+        response = await call_next(request)
+
+    if is_allowed_origin(origin):
+        response.headers["Access-Control-Allow-Origin"] = origin
+        vary_header = response.headers.get("Vary")
+        response.headers["Vary"] = "Origin" if not vary_header else f"{vary_header}, Origin"
+        response.headers["Access-Control-Allow-Credentials"] = "true"
+    else:
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        response.headers["Access-Control-Allow-Credentials"] = "false"
+
+    response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,PATCH,DELETE,OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = request.headers.get(
+        "Access-Control-Request-Headers", "*"
+    )
+    response.headers["Access-Control-Max-Age"] = "86400"
+
+    return response
 
 # Include routers
 app.include_router(db.router, prefix="/api/db", tags=["database"])

@@ -5,7 +5,7 @@
  * for all CLI commands.
  */
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { apiClient } from '../lib/api';
 import type { CommandResult } from '../lib/api';
 import { useLocalStorage } from '../hooks/useLocalStorage';
